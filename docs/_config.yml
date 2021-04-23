@@ -1,0 +1,23 @@
+# Site settings
+title: Start
+description: >
+  Start 不是一个完整的项目而是作为模板项目、代码基线而存在，在我未来的工作和私有项目都将以此项目作为基线版本，在此之上增加各自的业务代码
+
+baseurl: "" # the subpath of your site, e.g. /blog/
+url: "https://start.renfei.net" # the base hostname & protocol for your site
+
+author:
+  fullname: Renfei
+  github: renfei
+  linkedin: renfeii
+  email: i@renfei.net
+
+
+# Syntax highlighting
+highlightstyle: 'agate'
+styles: [agate, androidstudio, arta, asceti, atelier-cave.dark, atelier-cave.light, atelier-dune.dark, atelier-dune.light, atelier-estuary.dark, atelier-estuary.light, atelier-forest.dark, atelier-forest.light, atelier-heath.dark, atelier-heath.light, atelier-lakeside.dark, atelier-lakeside.light, atelier-plateau.dark, atelier-plateau.light, atelier-savanna.dark, atelier-savanna.light, atelier-seaside.dark, atelier-seaside.light, atelier-sulphurpool.dark, atelier-sulphurpool.light, brown_paper, codepen-embed, color-brewer, dark, darkula, default, docco, far, foundation, github, github-gist, googlecode, grayscale, hopscotch, hybrid, idea, ir_black, kimbie.dark, kimbie.light, magula, mono-blue, monokai, monokai_sublime, obsidian, paraiso.dark, paraiso.light, pojoaque, railscast, rainbow, school_book, solarized_dark, solarized_light, styles_list.txt, sunburst, tomorrow, tomorrow-night-blue, tomorrow-night-bright, tomorrow-night, tomorrow-night-eightie, v, xcode, zenburn]
+
+
+# Build settings
+highlighter: null
+markdown: kramdown
