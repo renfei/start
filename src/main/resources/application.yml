@@ -1,0 +1,39 @@
+#############################################
+#               应用配置文件                  #
+#    https://www.renfei.net 极速版           #
+#    author: RenFei(i@renfei.net)           #
+#    Copyright © 2021 RENFEI.NET            #
+#############################################
+# Server ####################################
+server:
+  port: 8081
+  servlet:
+    session:
+      cookie:
+        max-age: P7D
+# Spring ####################################
+spring:
+  profiles:
+    ## 运行环境配置
+    active: @activatedProperties@
+  servlet:
+    multipart:
+      max-file-size: 32MB
+      max-request-size: 64MB
+  messages:
+    basename: i18n/messages
+  druid:
+    ## 连接池配置
+    initial-size: 10
+    max-active: 100
+    min-idle: 10
+    max-wait: 60000
+    pool-prepared-statements: true
+    max-pool-prepared-statement-per-connection-size: 20
+    validation-query: SELECT 1 FROM DUAL
+    validation-query-timeout:
+    test-on-borrow: false
+    test-on-return: false
+    test-while-idle: true
+    time-between-eviction-runs-millis: 60000
+    min-evictable-idle-time-millis: 300000
