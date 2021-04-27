@@ -78,7 +78,6 @@
         <mybatis.version>2.1.4</mybatis.version>
         <aliyun.core.version>4.5.20</aliyun.core.version>
         <aliyun.oss.version>3.12.0</aliyun.oss.version>
-        <dozer.version>6.5.2</dozer.version>
         <jjwt.version>0.11.2</jjwt.version>
         <maven.build.timestamp.format>yyyyMMddHHmmss</maven.build.timestamp.format>
         <buildtimestamp>${maven.build.timestamp}</buildtimestamp>
@@ -191,11 +190,6 @@
             <groupId>com.github.whvcse</groupId>
             <artifactId>easy-captcha</artifactId>
             <version>1.6.2</version>
-        </dependency>
-        <dependency>
-            <groupId>com.github.dozermapper</groupId>
-            <artifactId>dozer-spring-boot-starter</artifactId>
-            <version>${dozer.version}</version>
         </dependency>
         <dependency>
             <groupId>io.jsonwebtoken</groupId>

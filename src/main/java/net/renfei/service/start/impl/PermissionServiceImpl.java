@@ -13,7 +13,6 @@ import net.renfei.service.start.dto.PermissionDTO;
 import net.renfei.service.start.dto.RoleDTO;
 import net.renfei.service.start.dto.UserDTO;
 import net.renfei.service.start.type.ResourceTypeEnum;
-import net.renfei.util.GeneralConvertor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Service;
 
@@ -33,12 +32,11 @@ public class PermissionServiceImpl extends BaseService implements PermissionServ
     private final TStartRolePermissionMapper rolePermissionMapper;
 
     protected PermissionServiceImpl(RenFeiConfig renFeiConfig,
-                                    GeneralConvertor convertor,
                                     TStartRoleMapper roleMapper,
                                     TStartUserRoleMapper userRoleMapper,
                                     TStartPermissionMapper permissionMapper,
                                     TStartRolePermissionMapper rolePermissionMapper) {
-        super(renFeiConfig, convertor);
+        super(renFeiConfig);
         this.roleMapper = roleMapper;
         this.userRoleMapper = userRoleMapper;
         this.permissionMapper = permissionMapper;
@@ -103,7 +101,9 @@ public class PermissionServiceImpl extends BaseService implements PermissionServ
                 .andUuidIn(roleUuid);
         List<TStartRole> roles = roleMapper.selectByExample(roleExample);
         this.getChildRole(roles);
-        return convertor.convertor(roles, RoleDTO.class);
+        List<RoleDTO> roleDTOS = new Vector<>();
+        org.springframework.beans.BeanUtils.copyProperties(roles, roleDTOS);
+        return roleDTOS;
     }
 
     /**
@@ -134,7 +134,10 @@ public class PermissionServiceImpl extends BaseService implements PermissionServ
                 .andIsDeletedEqualTo(false)
                 .andResourceTypeEqualTo(resourceTypeEnum.toString())
                 .andUuidIn(permissionUuid);
-        return convertor.convertor(permissionMapper.selectByExample(permissionExample), PermissionDTO.class);
+        List<TStartPermission> permissionList = permissionMapper.selectByExample(permissionExample);
+        List<PermissionDTO> permissions = new Vector<>();
+        org.springframework.beans.BeanUtils.copyProperties(permissionList, permissions);
+        return permissions;
     }
 
     /**

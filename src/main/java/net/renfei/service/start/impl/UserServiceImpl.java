@@ -9,9 +9,9 @@ import net.renfei.repository.dao.start.model.TStartUser;
 import net.renfei.repository.dao.start.model.TStartUserExample;
 import net.renfei.sdk.utils.*;
 import net.renfei.service.BaseService;
+import net.renfei.service.start.PermissionService;
 import net.renfei.service.start.UserService;
 import net.renfei.service.start.dto.UserDTO;
-import net.renfei.util.GeneralConvertor;
 import net.renfei.web.api.start.ao.SignInAO;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -28,12 +28,14 @@ import java.util.Date;
 @Service
 public class UserServiceImpl extends BaseService implements UserService, UserDetailsService {
     private final TStartUserMapper userMapper;
+    private final PermissionService permissionService;
 
     protected UserServiceImpl(RenFeiConfig renFeiConfig,
-                              GeneralConvertor convertor,
-                              TStartUserMapper userMapper) {
-        super(renFeiConfig, convertor);
+                              TStartUserMapper userMapper,
+                              PermissionService permissionService) {
+        super(renFeiConfig);
         this.userMapper = userMapper;
+        this.permissionService = permissionService;
     }
 
 
@@ -56,7 +58,9 @@ public class UserServiceImpl extends BaseService implements UserService, UserDet
             criteria.andUserNameEqualTo(userName);
         }
         TStartUser user = ListUtils.getOne(userMapper.selectByExample(example));
-        return convertor.convertor(user, UserDTO.class);
+        UserDTO userDTO = new UserDTO(permissionService);
+        org.springframework.beans.BeanUtils.copyProperties(user, UserDTO.class);
+        return userDTO;
     }
 
     @Override

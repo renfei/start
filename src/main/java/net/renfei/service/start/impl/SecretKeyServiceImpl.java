@@ -11,7 +11,6 @@ import net.renfei.sdk.utils.*;
 import net.renfei.service.BaseService;
 import net.renfei.service.start.SecretKeyService;
 import net.renfei.service.start.dto.SecretKeyDTO;
-import net.renfei.util.GeneralConvertor;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -32,9 +31,8 @@ public class SecretKeyServiceImpl extends BaseService implements SecretKeyServic
     private final TStartSecretKeyMapper secretKeyMapper;
 
     protected SecretKeyServiceImpl(RenFeiConfig renFeiConfig,
-                                   GeneralConvertor convertor,
                                    TStartSecretKeyMapper secretKeyMapper) {
-        super(renFeiConfig, convertor);
+        super(renFeiConfig);
         this.secretKeyMapper = secretKeyMapper;
     }
 
@@ -71,7 +69,9 @@ public class SecretKeyServiceImpl extends BaseService implements SecretKeyServic
         if (secretKeyDO == null) {
             throw new BusinessException("secretKeyId不正确");
         }
-        return convertor.convertor(secretKeyDO, SecretKeyDTO.class);
+        SecretKeyDTO secretKeyDTO = new SecretKeyDTO();
+        org.springframework.beans.BeanUtils.copyProperties(secretKeyDO, secretKeyDTO);
+        return secretKeyDTO;
     }
 
     @Override

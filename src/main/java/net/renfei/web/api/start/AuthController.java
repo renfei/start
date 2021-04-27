@@ -10,7 +10,6 @@ import net.renfei.sdk.utils.BeanUtils;
 import net.renfei.service.start.SecretKeyService;
 import net.renfei.service.start.UserService;
 import net.renfei.service.start.dto.UserDTO;
-import net.renfei.util.GeneralConvertor;
 import net.renfei.util.JwtTokenUtil;
 import net.renfei.web.BaseController;
 import net.renfei.web.api.start.ao.ReportPublicKeyAO;
@@ -35,11 +34,10 @@ public class AuthController extends BaseController {
     private final SecretKeyService secretKeyService;
 
     public AuthController(RenFeiConfig renFeiConfig,
-                          GeneralConvertor convertor,
                           UserService userService,
                           JwtTokenUtil jwtTokenUtil,
                           SecretKeyService secretKeyService) {
-        super(renFeiConfig, convertor);
+        super(renFeiConfig);
         this.userService = userService;
         this.jwtTokenUtil = jwtTokenUtil;
         this.secretKeyService = secretKeyService;

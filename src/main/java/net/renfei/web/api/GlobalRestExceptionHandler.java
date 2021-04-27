@@ -4,7 +4,6 @@ import lombok.extern.slf4j.Slf4j;
 import net.renfei.config.RenFeiConfig;
 import net.renfei.sdk.comm.StateCode;
 import net.renfei.sdk.entity.APIResult;
-import net.renfei.util.GeneralConvertor;
 import net.renfei.web.BaseController;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -18,9 +17,8 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice(basePackages = "net.renfei.web.api")
 public class GlobalRestExceptionHandler extends BaseController {
 
-    protected GlobalRestExceptionHandler(RenFeiConfig renFeiConfig,
-                                         GeneralConvertor convertor) {
-        super(renFeiConfig, convertor);
+    protected GlobalRestExceptionHandler(RenFeiConfig renFeiConfig) {
+        super(renFeiConfig);
     }
 
     @ExceptionHandler(Exception.class)

@@ -8,7 +8,6 @@ import lombok.extern.slf4j.Slf4j;
 import net.renfei.config.RenFeiConfig;
 import net.renfei.service.start.SmsService;
 import net.renfei.service.start.dto.SmsDTO;
-import net.renfei.util.GeneralConvertor;
 import org.springframework.stereotype.Service;
 
 /**
@@ -19,8 +18,8 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @Service
 public class AliyunSMS extends AliyunService implements SmsService {
-    protected AliyunSMS(GeneralConvertor convertor, RenFeiConfig renFeiConfig) {
-        super(convertor, renFeiConfig, null);
+    protected AliyunSMS(RenFeiConfig renFeiConfig) {
+        super(renFeiConfig, null);
     }
 
     @Override

@@ -6,7 +6,6 @@ import net.renfei.exception.BusinessException;
 import net.renfei.sdk.utils.BeanUtils;
 import net.renfei.service.BaseService;
 import net.renfei.service.start.FileUploadService;
-import net.renfei.util.GeneralConvertor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -28,8 +27,8 @@ import java.util.UUID;
 @Service
 public class FileUploadLocationImpl extends BaseService implements FileUploadService {
 
-    protected FileUploadLocationImpl(RenFeiConfig renFeiConfig, GeneralConvertor convertor) {
-        super(renFeiConfig, convertor);
+    protected FileUploadLocationImpl(RenFeiConfig renFeiConfig) {
+        super(renFeiConfig);
     }
 
     @Override

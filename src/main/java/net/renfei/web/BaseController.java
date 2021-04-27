@@ -2,7 +2,6 @@ package net.renfei.web;
 
 import net.renfei.config.RenFeiConfig;
 import net.renfei.sdk.utils.IpUtils;
-import net.renfei.util.GeneralConvertor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.servlet.ModelAndView;
@@ -17,14 +16,11 @@ import javax.servlet.http.HttpServletRequest;
 public abstract class BaseController {
     public static final String SESSION_KEY = "signedUserSession";
     protected final RenFeiConfig renFeiConfig;
-    protected final GeneralConvertor convertor;
     @Autowired
     protected HttpServletRequest request;
 
-    protected BaseController(RenFeiConfig renFeiConfig,
-                             GeneralConvertor convertor) {
+    protected BaseController(RenFeiConfig renFeiConfig) {
         this.renFeiConfig = renFeiConfig;
-        this.convertor = convertor;
     }
 
     /**

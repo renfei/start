@@ -5,7 +5,6 @@ import net.renfei.config.RenFeiConfig;
 import net.renfei.sdk.entity.APIResult;
 import net.renfei.service.start.StorageService;
 import net.renfei.service.start.StorageServiceFactory;
-import net.renfei.util.GeneralConvertor;
 import net.renfei.web.BaseController;
 import net.renfei.web.api.start.vo.CaptchaVO;
 import org.springframework.stereotype.Controller;
@@ -28,9 +27,8 @@ public class CommonController extends BaseController {
     private final StorageServiceFactory storageServiceFactory;
 
     public CommonController(RenFeiConfig renFeiConfig,
-                            GeneralConvertor convertor,
                             StorageServiceFactory storageServiceFactory) {
-        super(renFeiConfig, convertor);
+        super(renFeiConfig);
         this.storageServiceFactory = storageServiceFactory;
     }
 

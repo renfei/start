@@ -11,7 +11,6 @@ import net.renfei.sdk.utils.StringUtils;
 import net.renfei.service.BaseService;
 import net.renfei.service.start.IPService;
 import net.renfei.service.start.dto.IpInfoDTO;
-import net.renfei.util.GeneralConvertor;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -35,9 +34,8 @@ public class IPServiceImpl extends BaseService implements IPService {
     private IP2Location ip2LocationV4;
     private IP2Location ip2LocationV6;
 
-    public IPServiceImpl(GeneralConvertor convertor,
-                         RenFeiConfig renFeiConfig) {
-        super(renFeiConfig, convertor);
+    public IPServiceImpl(RenFeiConfig renFeiConfig) {
+        super(renFeiConfig);
         if (!BeanUtils.isEmpty(renFeiConfig.getIpv4DataPath())) {
             this.ip2LocationV4 = new IP2Location();
             this.ip2LocationV4.IPDatabasePath = renFeiConfig.getIpv4DataPath();

@@ -10,7 +10,6 @@ import net.renfei.exception.BusinessException;
 import net.renfei.sdk.utils.BeanUtils;
 import net.renfei.service.start.FileSignedService;
 import net.renfei.service.start.FileUploadService;
-import net.renfei.util.GeneralConvertor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -30,8 +29,8 @@ import java.util.UUID;
 @Slf4j
 @Service
 public class AliyunOSS extends AliyunService implements FileUploadService, FileSignedService {
-    protected AliyunOSS(GeneralConvertor convertor, RenFeiConfig renFeiConfig) {
-        super(convertor, renFeiConfig, null);
+    protected AliyunOSS(RenFeiConfig renFeiConfig) {
+        super(renFeiConfig, null);
     }
 
     @Override

@@ -1,7 +1,6 @@
 package net.renfei.web.view.cms;
 
 import net.renfei.config.RenFeiConfig;
-import net.renfei.util.GeneralConvertor;
 import net.renfei.web.view.ViewController;
 import org.springframework.stereotype.Controller;
 
@@ -12,8 +11,7 @@ import org.springframework.stereotype.Controller;
  */
 @Controller
 public class CmsController extends ViewController {
-    public CmsController(RenFeiConfig renFeiConfig,
-                         GeneralConvertor convertor) {
-        super(renFeiConfig, convertor);
+    public CmsController(RenFeiConfig renFeiConfig) {
+        super(renFeiConfig);
     }
 }
