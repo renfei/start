@@ -39,9 +39,9 @@ spring:
     min-evictable-idle-time-millis: 300000
 # MyBatis ###################################
 mybatis:
-  mapper-locations: classpath:mapper/*.xml
+  mapper-locations: classpath:mapper/mysql/*.xml
   configuration:
     ## 开启驼峰命名
     map-underscore-to-camel-case: true
     ## 打印SQL
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    #log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
