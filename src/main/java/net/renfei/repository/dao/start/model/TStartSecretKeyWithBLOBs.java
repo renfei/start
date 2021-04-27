@@ -3,9 +3,11 @@ package net.renfei.repository.dao.start.model;
 import java.io.Serializable;
 
 public class TStartSecretKeyWithBLOBs extends TStartSecretKey implements Serializable {
-    private static final long serialVersionUID = 1L;
     private String publicKey;
+
     private String privateKey;
+
+    private static final long serialVersionUID = 1L;
 
     public String getPublicKey() {
         return publicKey;

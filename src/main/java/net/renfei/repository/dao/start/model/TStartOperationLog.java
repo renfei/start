@@ -4,16 +4,25 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class TStartOperationLog implements Serializable {
-    private static final long serialVersionUID = 1L;
     private Long id;
+
     private Date operDate;
+
     private String operUserUuid;
+
     private String operUserName;
+
     private String operType;
+
     private String operModel;
+
     private String operIp;
+
     private String className;
+
     private String methodName;
+
+    private static final long serialVersionUID = 1L;
 
     public Long getId() {
         return id;

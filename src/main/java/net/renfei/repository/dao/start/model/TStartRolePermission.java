@@ -4,14 +4,21 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class TStartRolePermission implements Serializable {
-    private static final long serialVersionUID = 1L;
     private Long id;
+
     private Date createTime;
+
     private Date updateTime;
+
     private Boolean isDeleted;
+
     private String uuid;
+
     private String roleUuid;
+
     private String permissionUuid;
+
+    private static final long serialVersionUID = 1L;
 
     public Long getId() {
         return id;

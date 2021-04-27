@@ -3,10 +3,13 @@ package net.renfei.repository.dao.start.model;
 import java.io.Serializable;
 
 public class TStartOperationLogWithBLOBs extends TStartOperationLog implements Serializable {
-    private static final long serialVersionUID = 1L;
     private String operDescribe;
+
     private String params;
+
     private String returning;
+
+    private static final long serialVersionUID = 1L;
 
     public String getOperDescribe() {
         return operDescribe;

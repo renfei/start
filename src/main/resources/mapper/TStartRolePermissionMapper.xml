@@ -71,8 +71,8 @@
         </where>
     </sql>
     <sql id="Base_Column_List">
-        "id"
-        , "create_time", "update_time", "is_deleted", "uuid", "role_uuid", "permission_uuid"
+        `id`
+        , `create_time`, `update_time`, `is_deleted`, `uuid`, `role_uuid`, `permission_uuid`
     </sql>
     <select id="selectByExample" parameterType="net.renfei.repository.dao.start.model.TStartRolePermissionExample"
             resultMap="BaseResultMap">
@@ -93,12 +93,12 @@
         select
         <include refid="Base_Column_List"/>
         from t_start_role_permission
-        where "id" = #{id,jdbcType=BIGINT}
+        where `id` = #{id,jdbcType=BIGINT}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
         delete
         from t_start_role_permission
-        where "id" = #{id,jdbcType=BIGINT}
+        where `id` = #{id,jdbcType=BIGINT}
     </delete>
     <delete id="deleteByExample" parameterType="net.renfei.repository.dao.start.model.TStartRolePermissionExample">
         delete from t_start_role_permission
@@ -107,9 +107,9 @@
         </if>
     </delete>
     <insert id="insert" parameterType="net.renfei.repository.dao.start.model.TStartRolePermission">
-        insert into t_start_role_permission ("id", "create_time", "update_time",
-                                             "is_deleted", "uuid", "role_uuid",
-                                             "permission_uuid")
+        insert into t_start_role_permission (`id`, `create_time`, `update_time`,
+                                             `is_deleted`, `uuid`, `role_uuid`,
+                                             `permission_uuid`)
         values (#{id,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP},
                 #{isDeleted,jdbcType=BIT}, #{uuid,jdbcType=VARCHAR}, #{roleUuid,jdbcType=VARCHAR},
                 #{permissionUuid,jdbcType=VARCHAR})
@@ -118,25 +118,25 @@
         insert into t_start_role_permission
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
-                "id",
+                `id`,
             </if>
             <if test="createTime != null">
-                "create_time",
+                `create_time`,
             </if>
             <if test="updateTime != null">
-                "update_time",
+                `update_time`,
             </if>
             <if test="isDeleted != null">
-                "is_deleted",
+                `is_deleted`,
             </if>
             <if test="uuid != null">
-                "uuid",
+                `uuid`,
             </if>
             <if test="roleUuid != null">
-                "role_uuid",
+                `role_uuid`,
             </if>
             <if test="permissionUuid != null">
-                "permission_uuid",
+                `permission_uuid`,
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -174,25 +174,25 @@
         update t_start_role_permission
         <set>
             <if test="record.id != null">
-                "id" = #{record.id,jdbcType=BIGINT},
+                `id` = #{record.id,jdbcType=BIGINT},
             </if>
             <if test="record.createTime != null">
-                "create_time" = #{record.createTime,jdbcType=TIMESTAMP},
+                `create_time` = #{record.createTime,jdbcType=TIMESTAMP},
             </if>
             <if test="record.updateTime != null">
-                "update_time" = #{record.updateTime,jdbcType=TIMESTAMP},
+                `update_time` = #{record.updateTime,jdbcType=TIMESTAMP},
             </if>
             <if test="record.isDeleted != null">
-                "is_deleted" = #{record.isDeleted,jdbcType=BIT},
+                `is_deleted` = #{record.isDeleted,jdbcType=BIT},
             </if>
             <if test="record.uuid != null">
-                "uuid" = #{record.uuid,jdbcType=VARCHAR},
+                `uuid` = #{record.uuid,jdbcType=VARCHAR},
             </if>
             <if test="record.roleUuid != null">
-                "role_uuid" = #{record.roleUuid,jdbcType=VARCHAR},
+                `role_uuid` = #{record.roleUuid,jdbcType=VARCHAR},
             </if>
             <if test="record.permissionUuid != null">
-                "permission_uuid" = #{record.permissionUuid,jdbcType=VARCHAR},
+                `permission_uuid` = #{record.permissionUuid,jdbcType=VARCHAR},
             </if>
         </set>
         <if test="_parameter != null">
@@ -201,13 +201,13 @@
     </update>
     <update id="updateByExample" parameterType="map">
         update t_start_role_permission
-        set "id" = #{record.id,jdbcType=BIGINT},
-        "create_time" = #{record.createTime,jdbcType=TIMESTAMP},
-        "update_time" = #{record.updateTime,jdbcType=TIMESTAMP},
-        "is_deleted" = #{record.isDeleted,jdbcType=BIT},
-        "uuid" = #{record.uuid,jdbcType=VARCHAR},
-        "role_uuid" = #{record.roleUuid,jdbcType=VARCHAR},
-        "permission_uuid" = #{record.permissionUuid,jdbcType=VARCHAR}
+        set `id` = #{record.id,jdbcType=BIGINT},
+        `create_time` = #{record.createTime,jdbcType=TIMESTAMP},
+        `update_time` = #{record.updateTime,jdbcType=TIMESTAMP},
+        `is_deleted` = #{record.isDeleted,jdbcType=BIT},
+        `uuid` = #{record.uuid,jdbcType=VARCHAR},
+        `role_uuid` = #{record.roleUuid,jdbcType=VARCHAR},
+        `permission_uuid` = #{record.permissionUuid,jdbcType=VARCHAR}
         <if test="_parameter != null">
             <include refid="Update_By_Example_Where_Clause"/>
         </if>
@@ -216,34 +216,34 @@
         update t_start_role_permission
         <set>
             <if test="createTime != null">
-                "create_time" = #{createTime,jdbcType=TIMESTAMP},
+                `create_time` = #{createTime,jdbcType=TIMESTAMP},
             </if>
             <if test="updateTime != null">
-                "update_time" = #{updateTime,jdbcType=TIMESTAMP},
+                `update_time` = #{updateTime,jdbcType=TIMESTAMP},
             </if>
             <if test="isDeleted != null">
-                "is_deleted" = #{isDeleted,jdbcType=BIT},
+                `is_deleted` = #{isDeleted,jdbcType=BIT},
             </if>
             <if test="uuid != null">
-                "uuid" = #{uuid,jdbcType=VARCHAR},
+                `uuid` = #{uuid,jdbcType=VARCHAR},
             </if>
             <if test="roleUuid != null">
-                "role_uuid" = #{roleUuid,jdbcType=VARCHAR},
+                `role_uuid` = #{roleUuid,jdbcType=VARCHAR},
             </if>
             <if test="permissionUuid != null">
-                "permission_uuid" = #{permissionUuid,jdbcType=VARCHAR},
+                `permission_uuid` = #{permissionUuid,jdbcType=VARCHAR},
             </if>
         </set>
-        where "id" = #{id,jdbcType=BIGINT}
+        where `id` = #{id,jdbcType=BIGINT}
     </update>
     <update id="updateByPrimaryKey" parameterType="net.renfei.repository.dao.start.model.TStartRolePermission">
         update t_start_role_permission
-        set "create_time"     = #{createTime,jdbcType=TIMESTAMP},
-            "update_time"     = #{updateTime,jdbcType=TIMESTAMP},
-            "is_deleted"      = #{isDeleted,jdbcType=BIT},
-            "uuid"            = #{uuid,jdbcType=VARCHAR},
-            "role_uuid"       = #{roleUuid,jdbcType=VARCHAR},
-            "permission_uuid" = #{permissionUuid,jdbcType=VARCHAR}
-        where "id" = #{id,jdbcType=BIGINT}
+        set `create_time`     = #{createTime,jdbcType=TIMESTAMP},
+            `update_time`     = #{updateTime,jdbcType=TIMESTAMP},
+            `is_deleted`      = #{isDeleted,jdbcType=BIT},
+            `uuid`            = #{uuid,jdbcType=VARCHAR},
+            `role_uuid`       = #{roleUuid,jdbcType=VARCHAR},
+            `permission_uuid` = #{permissionUuid,jdbcType=VARCHAR}
+        where `id` = #{id,jdbcType=BIGINT}
     </update>
 </mapper>

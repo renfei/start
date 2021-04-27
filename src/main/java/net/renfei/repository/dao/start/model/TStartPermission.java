@@ -4,16 +4,25 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class TStartPermission implements Serializable {
-    private static final long serialVersionUID = 1L;
     private Long id;
+
     private Date createTime;
+
     private Date updateTime;
+
     private Boolean isDeleted;
+
     private String uuid;
+
     private String resourceName;
+
     private String requestMethod;
+
     private String resourceUrl;
+
     private String resourceType;
+
+    private static final long serialVersionUID = 1L;
 
     public Long getId() {
         return id;

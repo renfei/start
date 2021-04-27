@@ -4,25 +4,43 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class TStartUser implements Serializable {
-    private static final long serialVersionUID = 1L;
     private Long id;
+
     private Date createTime;
+
     private Date updateTime;
+
     private Boolean isDeleted;
+
     private String uuid;
+
     private String userName;
+
     private String password;
+
     private String email;
+
     private String phone;
+
     private Date registrationDate;
+
     private String totp;
+
     private String registrationIp;
+
     private Integer trialErrorTimes;
+
     private Date lockTime;
+
     private Integer stateCode;
+
     private String lastName;
+
     private String firstName;
+
     private Date lastLogin;
+
+    private static final long serialVersionUID = 1L;
 
     public Long getId() {
         return id;

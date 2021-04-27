@@ -71,8 +71,8 @@
         </where>
     </sql>
     <sql id="Base_Column_List">
-        "id"
-        , "create_time", "update_time", "is_deleted", "uuid", "role_name", "parent_uuid"
+        `id`
+        , `create_time`, `update_time`, `is_deleted`, `uuid`, `role_name`, `parent_uuid`
     </sql>
     <select id="selectByExample" parameterType="net.renfei.repository.dao.start.model.TStartRoleExample"
             resultMap="BaseResultMap">
@@ -93,12 +93,12 @@
         select
         <include refid="Base_Column_List"/>
         from t_start_role
-        where "id" = #{id,jdbcType=BIGINT}
+        where `id` = #{id,jdbcType=BIGINT}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
         delete
         from t_start_role
-        where "id" = #{id,jdbcType=BIGINT}
+        where `id` = #{id,jdbcType=BIGINT}
     </delete>
     <delete id="deleteByExample" parameterType="net.renfei.repository.dao.start.model.TStartRoleExample">
         delete from t_start_role
@@ -107,9 +107,9 @@
         </if>
     </delete>
     <insert id="insert" parameterType="net.renfei.repository.dao.start.model.TStartRole">
-        insert into t_start_role ("id", "create_time", "update_time",
-                                  "is_deleted", "uuid", "role_name",
-                                  "parent_uuid")
+        insert into t_start_role (`id`, `create_time`, `update_time`,
+                                  `is_deleted`, `uuid`, `role_name`,
+                                  `parent_uuid`)
         values (#{id,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP},
                 #{isDeleted,jdbcType=BIT}, #{uuid,jdbcType=VARCHAR}, #{roleName,jdbcType=VARCHAR},
                 #{parentUuid,jdbcType=VARCHAR})
@@ -118,25 +118,25 @@
         insert into t_start_role
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
-                "id",
+                `id`,
             </if>
             <if test="createTime != null">
-                "create_time",
+                `create_time`,
             </if>
             <if test="updateTime != null">
-                "update_time",
+                `update_time`,
             </if>
             <if test="isDeleted != null">
-                "is_deleted",
+                `is_deleted`,
             </if>
             <if test="uuid != null">
-                "uuid",
+                `uuid`,
             </if>
             <if test="roleName != null">
-                "role_name",
+                `role_name`,
             </if>
             <if test="parentUuid != null">
-                "parent_uuid",
+                `parent_uuid`,
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -174,25 +174,25 @@
         update t_start_role
         <set>
             <if test="record.id != null">
-                "id" = #{record.id,jdbcType=BIGINT},
+                `id` = #{record.id,jdbcType=BIGINT},
             </if>
             <if test="record.createTime != null">
-                "create_time" = #{record.createTime,jdbcType=TIMESTAMP},
+                `create_time` = #{record.createTime,jdbcType=TIMESTAMP},
             </if>
             <if test="record.updateTime != null">
-                "update_time" = #{record.updateTime,jdbcType=TIMESTAMP},
+                `update_time` = #{record.updateTime,jdbcType=TIMESTAMP},
             </if>
             <if test="record.isDeleted != null">
-                "is_deleted" = #{record.isDeleted,jdbcType=BIT},
+                `is_deleted` = #{record.isDeleted,jdbcType=BIT},
             </if>
             <if test="record.uuid != null">
-                "uuid" = #{record.uuid,jdbcType=VARCHAR},
+                `uuid` = #{record.uuid,jdbcType=VARCHAR},
             </if>
             <if test="record.roleName != null">
-                "role_name" = #{record.roleName,jdbcType=VARCHAR},
+                `role_name` = #{record.roleName,jdbcType=VARCHAR},
             </if>
             <if test="record.parentUuid != null">
-                "parent_uuid" = #{record.parentUuid,jdbcType=VARCHAR},
+                `parent_uuid` = #{record.parentUuid,jdbcType=VARCHAR},
             </if>
         </set>
         <if test="_parameter != null">
@@ -201,13 +201,13 @@
     </update>
     <update id="updateByExample" parameterType="map">
         update t_start_role
-        set "id" = #{record.id,jdbcType=BIGINT},
-        "create_time" = #{record.createTime,jdbcType=TIMESTAMP},
-        "update_time" = #{record.updateTime,jdbcType=TIMESTAMP},
-        "is_deleted" = #{record.isDeleted,jdbcType=BIT},
-        "uuid" = #{record.uuid,jdbcType=VARCHAR},
-        "role_name" = #{record.roleName,jdbcType=VARCHAR},
-        "parent_uuid" = #{record.parentUuid,jdbcType=VARCHAR}
+        set `id` = #{record.id,jdbcType=BIGINT},
+        `create_time` = #{record.createTime,jdbcType=TIMESTAMP},
+        `update_time` = #{record.updateTime,jdbcType=TIMESTAMP},
+        `is_deleted` = #{record.isDeleted,jdbcType=BIT},
+        `uuid` = #{record.uuid,jdbcType=VARCHAR},
+        `role_name` = #{record.roleName,jdbcType=VARCHAR},
+        `parent_uuid` = #{record.parentUuid,jdbcType=VARCHAR}
         <if test="_parameter != null">
             <include refid="Update_By_Example_Where_Clause"/>
         </if>
@@ -216,34 +216,34 @@
         update t_start_role
         <set>
             <if test="createTime != null">
-                "create_time" = #{createTime,jdbcType=TIMESTAMP},
+                `create_time` = #{createTime,jdbcType=TIMESTAMP},
             </if>
             <if test="updateTime != null">
-                "update_time" = #{updateTime,jdbcType=TIMESTAMP},
+                `update_time` = #{updateTime,jdbcType=TIMESTAMP},
             </if>
             <if test="isDeleted != null">
-                "is_deleted" = #{isDeleted,jdbcType=BIT},
+                `is_deleted` = #{isDeleted,jdbcType=BIT},
             </if>
             <if test="uuid != null">
-                "uuid" = #{uuid,jdbcType=VARCHAR},
+                `uuid` = #{uuid,jdbcType=VARCHAR},
             </if>
             <if test="roleName != null">
-                "role_name" = #{roleName,jdbcType=VARCHAR},
+                `role_name` = #{roleName,jdbcType=VARCHAR},
             </if>
             <if test="parentUuid != null">
-                "parent_uuid" = #{parentUuid,jdbcType=VARCHAR},
+                `parent_uuid` = #{parentUuid,jdbcType=VARCHAR},
             </if>
         </set>
-        where "id" = #{id,jdbcType=BIGINT}
+        where `id` = #{id,jdbcType=BIGINT}
     </update>
     <update id="updateByPrimaryKey" parameterType="net.renfei.repository.dao.start.model.TStartRole">
         update t_start_role
-        set "create_time" = #{createTime,jdbcType=TIMESTAMP},
-            "update_time" = #{updateTime,jdbcType=TIMESTAMP},
-            "is_deleted"  = #{isDeleted,jdbcType=BIT},
-            "uuid"        = #{uuid,jdbcType=VARCHAR},
-            "role_name"   = #{roleName,jdbcType=VARCHAR},
-            "parent_uuid" = #{parentUuid,jdbcType=VARCHAR}
-        where "id" = #{id,jdbcType=BIGINT}
+        set `create_time` = #{createTime,jdbcType=TIMESTAMP},
+            `update_time` = #{updateTime,jdbcType=TIMESTAMP},
+            `is_deleted`  = #{isDeleted,jdbcType=BIT},
+            `uuid`        = #{uuid,jdbcType=VARCHAR},
+            `role_name`   = #{roleName,jdbcType=VARCHAR},
+            `parent_uuid` = #{parentUuid,jdbcType=VARCHAR}
+        where `id` = #{id,jdbcType=BIGINT}
     </update>
 </mapper>
