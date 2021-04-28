@@ -16,6 +16,7 @@ import net.renfei.web.api.start.ao.ReportPublicKeyAO;
 import net.renfei.web.api.start.ao.SignInAO;
 import net.renfei.web.api.start.vo.SecretKeyVO;
 import net.renfei.web.api.start.vo.SignInVO;
+import net.renfei.web.api.start.vo.UserVO;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -26,7 +27,7 @@ import java.util.Map;
  * @author renfei
  */
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("/api/auth")
 @Api(value = "认证接口", tags = "认证接口")
 public class AuthController extends BaseController {
     private final UserService userService;
@@ -107,5 +108,20 @@ public class AuthController extends BaseController {
             signInVO.setToken(token);
         }
         return new APIResult<>(signInVO);
+    }
+
+    @GetMapping("myInfo")
+    @ApiOperation(value = "获取当前登录的用户信息", tags = "认证接口")
+    public APIResult<UserVO> getMyInfo() {
+        UserDTO userDTO = getSignedUser();
+        if (userDTO == null) {
+            return APIResult.builder()
+                    .code(StateCode.Unauthorized)
+                    .message(StateCode.Unauthorized.getDescribe())
+                    .build();
+        }
+        UserVO userVO = new UserVO();
+        org.springframework.beans.BeanUtils.copyProperties(userDTO, userVO);
+        return new APIResult<>(userVO);
     }
 }

@@ -2,7 +2,10 @@ package net.renfei.web;
 
 import net.renfei.config.RenFeiConfig;
 import net.renfei.sdk.utils.IpUtils;
+import net.renfei.service.start.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -37,5 +40,19 @@ public abstract class BaseController {
 
     protected String getIp() {
         return IpUtils.getIpAddress(this.request);
+    }
+
+    protected UserDTO getSignedUser() {
+        Object object = null;
+        if ("SESSION".equals(renFeiConfig.getAuthMode())) {
+            object = request.getSession().getAttribute(SESSION_KEY);
+        } else {
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            object = authentication.getPrincipal();
+        }
+        if (object instanceof UserDTO) {
+            return (UserDTO) object;
+        }
+        return null;
     }
 }

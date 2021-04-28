@@ -59,7 +59,7 @@ public class UserServiceImpl extends BaseService implements UserService, UserDet
         }
         TStartUser user = ListUtils.getOne(userMapper.selectByExample(example));
         UserDTO userDTO = new UserDTO(permissionService);
-        org.springframework.beans.BeanUtils.copyProperties(user, UserDTO.class);
+        org.springframework.beans.BeanUtils.copyProperties(user, userDTO);
         return userDTO;
     }
 

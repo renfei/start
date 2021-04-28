@@ -53,8 +53,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        // rest 接口不用 CSRF
         http.csrf().csrfTokenRepository(new HttpSessionCsrfTokenRepository())
-                .ignoringAntMatchers("/demo/**")
+                .ignoringAntMatchers("/api/**")
                 .and()
                 .headers()
                 .frameOptions().sameOrigin()
