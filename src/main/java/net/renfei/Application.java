@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import springfox.documentation.oas.annotations.EnableOpenApi;
@@ -19,6 +20,7 @@ import springfox.documentation.oas.annotations.EnableOpenApi;
 @EnableCaching
 @EnableOpenApi
 @EnableScheduling
+@EnableFeignClients
 @SpringBootApplication
 @EnableConfigurationProperties
 public class Application {

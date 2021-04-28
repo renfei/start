@@ -47,6 +47,14 @@ spring:
     expose-session-attributes: true
     request-context-attribute: request
     suffix: .ftl
+# feign #####################################
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 5000
+        readTimeout: 5000
+        loggerLevel: basic
 # MyBatis ###################################
 mybatis:
   mapper-locations: classpath:mapper/mysql/*.xml
