@@ -2,7 +2,7 @@
 
 # start
 
-[![Actions Status](https://github.com/renfei/start/workflows/Continuous-Integration/badge.svg)](https://github.com/renfei/start/actions/workflows/continuous-integration.yml)
+[![Actions Status](https://github.com/renfei/start/workflows/build/badge.svg)](https://github.com/renfei/start/actions/workflows/build.yml)
 [![travis-ci](https://api.travis-ci.com/renfei/start.svg?branch=master)](https://travis-ci.com/github/renfei/start)
 ![license](https://img.shields.io/github/license/renfei/start.svg)
 
