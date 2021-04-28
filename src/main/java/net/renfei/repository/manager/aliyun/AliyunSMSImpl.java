@@ -17,8 +17,8 @@ import org.springframework.stereotype.Service;
  */
 @Slf4j
 @Service
-public class AliyunSMS extends AliyunService implements SmsService {
-    protected AliyunSMS(RenFeiConfig renFeiConfig) {
+public class AliyunSMSImpl extends AliyunService implements SmsService {
+    protected AliyunSMSImpl(RenFeiConfig renFeiConfig) {
         super(renFeiConfig, null);
     }
 
