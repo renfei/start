@@ -1,10 +1,10 @@
 ---
-layout: page
-title:  "Start 项目简介"
+layout: page title:  "Start 项目简介"
 subtitle: "任霏的基线代码项目"
-date:   2021-04-23 15:41:35 +0800
-categories: ["general"]
+date:   2021-04-23 15:41:35 +0800 categories: ["general"]
 ---
+![start](/assets/img/social.jpg)
+
 随着工作经验的积累，在工作和私有项目中越来越多的项目需要开始启动，而重复的内容使我厌烦，同时维护很多版本的代码。
 
 这个项目就产生了，它不是一个完整的项目而是作为模板项目、代码基线而存在，在我未来的工作和私有项目都将以此项目作为基线版本，在此之上增加各自的业务代码。

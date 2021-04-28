@@ -430,12 +430,29 @@
       text-shadow: -1px 0 0 blue, 1px 0 0 lime; }
     97% {
       text-shadow: -1px 0 0 blue, 1px 0 0 lime; }
-    98% {
-      text-shadow: -1px 0 0 blue, 1px 0 0 lime; }
-    99% {
-      text-shadow: -1px 0 0 blue, 1px 0 0 lime; }
-    100% {
-      text-shadow: -1px 0 0 blue, 1px 0 0 lime; } }
-  /* Custom */
-  .go-home {
-    text-align: center; }
+      98% {
+          text-shadow: -1px 0 0 blue, 1px 0 0 lime;
+      }
+      99% {
+          text-shadow: -1px 0 0 blue, 1px 0 0 lime;
+      }
+      100% {
+          text-shadow: -1px 0 0 blue, 1px 0 0 lime;
+      }
+  }
+
+/* Custom */
+.go-home {
+    text-align: center;
+}
+
+.badge {
+
+}
+
+.badge li {
+    float: left;
+    list-style: none;
+    margin-right: 5px;
+    margin-bottom: 3px;
+}
