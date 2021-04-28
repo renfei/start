@@ -52,9 +52,3 @@ jobs:
 
       - name: Build with Maven
         run: mvn -B clean package --file pom.xml
-
-      - name: Unit Test Coverage Statistics
-        run: |
-        bash <(curl -s https://codecov.io/bash)
-        mvn clean test org.jacoco:jacoco-maven-plugin:prepare-agent install org.jacoco:jacoco-maven-plugin:report
-        mvn org.eluder.coveralls:coveralls-maven-plugin:report -DrepoToken="${{ secrets.COVERALLS_TOKEN }}"

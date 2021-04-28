@@ -5,6 +5,7 @@
 [![Actions Status](https://github.com/renfei/start/workflows/build/badge.svg)](https://github.com/renfei/start/actions/workflows/build.yml)
 [![travis-ci](https://api.travis-ci.com/renfei/start.svg?branch=master)](https://travis-ci.com/github/renfei/start)
 [![Coverage Status](https://coveralls.io/repos/github/renfei/start/badge.svg?branch=master)](https://coveralls.io/github/renfei/start?branch=master)
+[![codebeat badge](https://codebeat.co/badges/4d73bef6-614a-411d-95ef-eef6aac95d87)](https://codebeat.co/projects/github-com-renfei-start-master)
 ![license](https://img.shields.io/github/license/renfei/start.svg)
 
 With the accumulation of work experience, more and more projects in work and private projects need to be started, and
