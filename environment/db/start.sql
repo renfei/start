@@ -42,6 +42,12 @@ CREATE TABLE `t_start_permission`
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='系统资源（权限）';
 
 -- ----------------------------
+-- Records of t_start_permission
+-- ----------------------------
+BEGIN;
+COMMIT;
+
+-- ----------------------------
 -- Table structure for t_start_role
 -- ----------------------------
 DROP TABLE IF EXISTS `t_start_role`;
@@ -56,6 +62,12 @@ CREATE TABLE `t_start_role`
     `parent_uuid` varchar(36)  DEFAULT NULL COMMENT '父级角色UUID',
     PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='系统角色（用户组）';
+
+-- ----------------------------
+-- Records of t_start_role
+-- ----------------------------
+BEGIN;
+COMMIT;
 
 -- ----------------------------
 -- Table structure for t_start_role_permission
@@ -74,6 +86,12 @@ CREATE TABLE `t_start_role_permission`
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='角色与权限关系表';
 
 -- ----------------------------
+-- Records of t_start_role_permission
+-- ----------------------------
+BEGIN;
+COMMIT;
+
+-- ----------------------------
 -- Table structure for t_start_secret_key
 -- ----------------------------
 DROP TABLE IF EXISTS `t_start_secret_key`;
@@ -87,7 +105,13 @@ CREATE TABLE `t_start_secret_key`
     `public_key`  text CHARACTER SET utf8mb4 DEFAULT NULL COMMENT '公钥',
     `private_key` text CHARACTER SET utf8mb4 DEFAULT NULL COMMENT '私钥',
     PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='秘钥表';
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8 COMMENT='秘钥表';
+
+-- ----------------------------
+-- Records of t_start_secret_key
+-- ----------------------------
+BEGIN;
+COMMIT;
 
 -- ----------------------------
 -- Table structure for t_start_user
@@ -114,7 +138,17 @@ CREATE TABLE `t_start_user`
     `first_name`        varchar(255) CHARACTER SET utf8mb4                            DEFAULT NULL COMMENT '名字',
     `last_login`        date                                                          DEFAULT NULL COMMENT '最后登录时间',
     PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户表';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='用户表';
+
+-- ----------------------------
+-- Records of t_start_user
+-- ----------------------------
+BEGIN;
+INSERT INTO `t_start_user`
+VALUES (1, '2021-04-28 11:42:57', NULL, 0, 'BBAD927D-CF9F-4C39-825F-A4935E4524AC', 'tester',
+        'sha256:64000:18:vWLIwAgt1Q5SzrYDdIgQzTxi+PIpC08H:XddskjIqWV77/Yr5KtzjEPlw', 'i@renfei.net', NULL,
+        '2021-04-28 11:44:05', NULL, '127.0.0.1', 0, NULL, 1, NULL, NULL, NULL);
+COMMIT;
 
 -- ----------------------------
 -- Table structure for t_start_user_role
@@ -131,6 +165,12 @@ CREATE TABLE `t_start_user_role`
     `role_uuid`   varchar(36) NOT NULL COMMENT '角色UUID',
     PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户与角色关系表';
+
+-- ----------------------------
+-- Records of t_start_user_role
+-- ----------------------------
+BEGIN;
+COMMIT;
 
 SET
 FOREIGN_KEY_CHECKS = 1;
