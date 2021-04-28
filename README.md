@@ -2,6 +2,8 @@
 
 # start
 
+[![Actions Status](https://github.com/renfei/start/workflows/Continuous-Integration/badge.svg)](https://github.com/renfei/start/actions/workflows/continuous-integration.yml)
+[![travis-ci](https://api.travis-ci.com/renfei/start.svg?branch=master)](https://travis-ci.com/github/renfei/start)
 ![license](https://img.shields.io/github/license/renfei/start.svg)
 
 With the accumulation of work experience, more and more projects in work and private projects need to be started, and

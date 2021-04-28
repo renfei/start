@@ -2,6 +2,8 @@
 
 # start
 
+[![Actions Status](https://github.com/renfei/start/workflows/Continuous-Integration/badge.svg)](https://github.com/renfei/start/actions/workflows/continuous-integration.yml)
+[![travis-ci](https://api.travis-ci.com/renfei/start.svg?branch=master)](https://travis-ci.com/github/renfei/start)
 ![license](https://img.shields.io/github/license/renfei/start.svg)
 
 随着工作经验的积累，在工作和私有项目中越来越多的项目需要开始启动，而重复的内容使我厌烦，同时维护很多版本的代码。
