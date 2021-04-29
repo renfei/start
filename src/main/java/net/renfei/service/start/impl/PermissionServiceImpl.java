@@ -16,6 +16,7 @@ import net.renfei.service.start.type.ResourceTypeEnum;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Service;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Vector;
 
@@ -25,7 +26,8 @@ import java.util.Vector;
  * @author renfei
  */
 @Service
-public class PermissionServiceImpl extends BaseService implements PermissionService {
+public class PermissionServiceImpl extends BaseService implements PermissionService, Serializable {
+    private static final long serialVersionUID = -8366929034564774130L;
     private final TStartRoleMapper roleMapper;
     private final TStartUserRoleMapper userRoleMapper;
     private final TStartPermissionMapper permissionMapper;

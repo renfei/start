@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.mock.web.MockHttpSession;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.Map;
@@ -29,6 +30,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 public class ApplicationTests {
     protected static String TOKEN;
+    protected MockHttpSession SESSION = new MockHttpSession();
     @Autowired
     protected MockMvc mockMvc;
     @Autowired
@@ -37,7 +39,9 @@ public class ApplicationTests {
     @BeforeEach
     public void getToken() throws Exception {
         if (TOKEN == null) {
-            String result = mockMvc.perform(get("/api/auth/secretKey").contentType(MediaType.APPLICATION_JSON))
+            String result = mockMvc.perform(get("/api/auth/secretKey")
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .session(SESSION))
                     .andExpect(status().isOk())
                     .andDo(print())
                     .andReturn().getResponse().getContentAsString();
@@ -84,7 +88,8 @@ public class ApplicationTests {
         // 上报给服务器
         String result = mockMvc.perform(post("/api/auth/secretKey")
                 .content(JSON.toJSONString(reportPublicKey))
-                .contentType(MediaType.APPLICATION_JSON))
+                .contentType(MediaType.APPLICATION_JSON)
+                .session(SESSION))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andReturn().getResponse().getContentAsString();
@@ -104,7 +109,8 @@ public class ApplicationTests {
     public SignInVO signIn(SignInAO signInAo) throws Exception {
         String result = mockMvc.perform(post("/api/auth/signIn")
                 .content(JSON.toJSONString(signInAo))
-                .contentType(MediaType.APPLICATION_JSON))
+                .contentType(MediaType.APPLICATION_JSON)
+                .session(SESSION))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andReturn().getResponse().getContentAsString();
