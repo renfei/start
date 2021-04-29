@@ -30,7 +30,7 @@ public class AccessDecisionManagerImpl implements AccessDecisionManager {
      * configAttributes 是本次访问需要的权限。即上一步的 {@link FilterInvocationSecurityMetadataSourceImpl} 中查询核对得到的权限列表
      *
      * @param authentication
-     * @param o
+     * @param object
      * @param collection
      * @throws AccessDeniedException
      * @throws InsufficientAuthenticationException
@@ -44,6 +44,10 @@ public class AccessDecisionManagerImpl implements AccessDecisionManager {
             throw new AccessDeniedException("Access Denied! 当前访问没有权限！");
         }
         HttpServletRequest request = ((FilterInvocation) object).getHttpRequest();
+        if (new AntPathRequestMatcher("/api/auth/**").matches(request)) {
+            //登陆接口不做限制
+            return;
+        }
         //当前用户所具有的权限
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
         for (GrantedAuthority authority : authorities) {
@@ -55,21 +59,12 @@ public class AccessDecisionManagerImpl implements AccessDecisionManager {
                 }
             }
         }
-        for (GrantedAuthority authority : authorities) {
-            if ("ROLE_ANONYMOUS".equals(authority.getAuthority())) {
-                if (new AntPathRequestMatcher("/api/auth/**").matches(request)) {
-                    //未登录，允许访问登陆接口
-                    return;
-                }
-                if (new AntPathRequestMatcher("/api/**").matches(request)) {
-                    //未登录，不允许访问API接口
-                    throw new AccessDeniedException("Access Denied! 权限不足！");
-                }
-                // 未登录，允许访问其他地址，如果还需保护其他地址请新增
-                return;
-            }
+        if (new AntPathRequestMatcher("/api/**").matches(request)) {
+            //API接口，抛出禁止访问
+            throw new AccessDeniedException("Access Denied! 权限不足！");
         }
-        throw new AccessDeniedException("Access Denied! 权限不足！");
+        // 其他未命中的放行，如果还需保护其他地址请新增
+        return;
     }
 
     @Override
