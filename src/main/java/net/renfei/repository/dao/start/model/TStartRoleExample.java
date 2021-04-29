@@ -415,6 +415,76 @@ public class TStartRoleExample {
             return (Criteria) this;
         }
 
+        public Criteria andRoleEnNameIsNull() {
+            addCriterion("`role_en_name` is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleEnNameIsNotNull() {
+            addCriterion("`role_en_name` is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleEnNameEqualTo(String value) {
+            addCriterion("`role_en_name` =", value, "roleEnName");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleEnNameNotEqualTo(String value) {
+            addCriterion("`role_en_name` <>", value, "roleEnName");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleEnNameGreaterThan(String value) {
+            addCriterion("`role_en_name` >", value, "roleEnName");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleEnNameGreaterThanOrEqualTo(String value) {
+            addCriterion("`role_en_name` >=", value, "roleEnName");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleEnNameLessThan(String value) {
+            addCriterion("`role_en_name` <", value, "roleEnName");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleEnNameLessThanOrEqualTo(String value) {
+            addCriterion("`role_en_name` <=", value, "roleEnName");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleEnNameLike(String value) {
+            addCriterion("`role_en_name` like", value, "roleEnName");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleEnNameNotLike(String value) {
+            addCriterion("`role_en_name` not like", value, "roleEnName");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleEnNameIn(List<String> values) {
+            addCriterion("`role_en_name` in", values, "roleEnName");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleEnNameNotIn(List<String> values) {
+            addCriterion("`role_en_name` not in", values, "roleEnName");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleEnNameBetween(String value1, String value2) {
+            addCriterion("`role_en_name` between", value1, value2, "roleEnName");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleEnNameNotBetween(String value1, String value2) {
+            addCriterion("`role_en_name` not between", value1, value2, "roleEnName");
+            return (Criteria) this;
+        }
+
         public Criteria andRoleNameIsNull() {
             addCriterion("`role_name` is null");
             return (Criteria) this;

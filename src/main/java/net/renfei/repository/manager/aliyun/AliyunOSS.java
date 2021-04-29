@@ -29,7 +29,7 @@ import java.util.UUID;
 @Slf4j
 @Service
 public class AliyunOSS extends AliyunService implements FileUploadService, FileSignedService {
-    protected AliyunOSS(RenFeiConfig renFeiConfig) {
+    public AliyunOSS(RenFeiConfig renFeiConfig) {
         super(renFeiConfig, null);
     }
 

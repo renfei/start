@@ -7,6 +7,7 @@
         <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
         <result column="is_deleted" jdbcType="BIT" property="isDeleted"/>
         <result column="uuid" jdbcType="VARCHAR" property="uuid"/>
+        <result column="role_en_name" jdbcType="VARCHAR" property="roleEnName"/>
         <result column="role_name" jdbcType="VARCHAR" property="roleName"/>
         <result column="parent_uuid" jdbcType="VARCHAR" property="parentUuid"/>
     </resultMap>
@@ -72,7 +73,8 @@
     </sql>
     <sql id="Base_Column_List">
         `id`
-        , `create_time`, `update_time`, `is_deleted`, `uuid`, `role_name`, `parent_uuid`
+        , `create_time`, `update_time`, `is_deleted`, `uuid`, `role_en_name`, `role_name`,
+    `parent_uuid`
     </sql>
     <select id="selectByExample" parameterType="net.renfei.repository.dao.start.model.TStartRoleExample"
             resultMap="BaseResultMap">
@@ -108,11 +110,11 @@
     </delete>
     <insert id="insert" parameterType="net.renfei.repository.dao.start.model.TStartRole">
         insert into t_start_role (`id`, `create_time`, `update_time`,
-                                  `is_deleted`, `uuid`, `role_name`,
-                                  `parent_uuid`)
+                                  `is_deleted`, `uuid`, `role_en_name`,
+                                  `role_name`, `parent_uuid`)
         values (#{id,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP},
-                #{isDeleted,jdbcType=BIT}, #{uuid,jdbcType=VARCHAR}, #{roleName,jdbcType=VARCHAR},
-                #{parentUuid,jdbcType=VARCHAR})
+                #{isDeleted,jdbcType=BIT}, #{uuid,jdbcType=VARCHAR}, #{roleEnName,jdbcType=VARCHAR},
+                #{roleName,jdbcType=VARCHAR}, #{parentUuid,jdbcType=VARCHAR})
     </insert>
     <insert id="insertSelective" parameterType="net.renfei.repository.dao.start.model.TStartRole">
         insert into t_start_role
@@ -131,6 +133,9 @@
             </if>
             <if test="uuid != null">
                 `uuid`,
+            </if>
+            <if test="roleEnName != null">
+                `role_en_name`,
             </if>
             <if test="roleName != null">
                 `role_name`,
@@ -154,6 +159,9 @@
             </if>
             <if test="uuid != null">
                 #{uuid,jdbcType=VARCHAR},
+            </if>
+            <if test="roleEnName != null">
+                #{roleEnName,jdbcType=VARCHAR},
             </if>
             <if test="roleName != null">
                 #{roleName,jdbcType=VARCHAR},
@@ -188,6 +196,9 @@
             <if test="record.uuid != null">
                 `uuid` = #{record.uuid,jdbcType=VARCHAR},
             </if>
+            <if test="record.roleEnName != null">
+                `role_en_name` = #{record.roleEnName,jdbcType=VARCHAR},
+            </if>
             <if test="record.roleName != null">
                 `role_name` = #{record.roleName,jdbcType=VARCHAR},
             </if>
@@ -206,6 +217,7 @@
         `update_time` = #{record.updateTime,jdbcType=TIMESTAMP},
         `is_deleted` = #{record.isDeleted,jdbcType=BIT},
         `uuid` = #{record.uuid,jdbcType=VARCHAR},
+        `role_en_name` = #{record.roleEnName,jdbcType=VARCHAR},
         `role_name` = #{record.roleName,jdbcType=VARCHAR},
         `parent_uuid` = #{record.parentUuid,jdbcType=VARCHAR}
         <if test="_parameter != null">
@@ -227,6 +239,9 @@
             <if test="uuid != null">
                 `uuid` = #{uuid,jdbcType=VARCHAR},
             </if>
+            <if test="roleEnName != null">
+                `role_en_name` = #{roleEnName,jdbcType=VARCHAR},
+            </if>
             <if test="roleName != null">
                 `role_name` = #{roleName,jdbcType=VARCHAR},
             </if>
@@ -238,12 +253,13 @@
     </update>
     <update id="updateByPrimaryKey" parameterType="net.renfei.repository.dao.start.model.TStartRole">
         update t_start_role
-        set `create_time` = #{createTime,jdbcType=TIMESTAMP},
-            `update_time` = #{updateTime,jdbcType=TIMESTAMP},
-            `is_deleted`  = #{isDeleted,jdbcType=BIT},
-            `uuid`        = #{uuid,jdbcType=VARCHAR},
-            `role_name`   = #{roleName,jdbcType=VARCHAR},
-            `parent_uuid` = #{parentUuid,jdbcType=VARCHAR}
+        set `create_time`  = #{createTime,jdbcType=TIMESTAMP},
+            `update_time`  = #{updateTime,jdbcType=TIMESTAMP},
+            `is_deleted`   = #{isDeleted,jdbcType=BIT},
+            `uuid`         = #{uuid,jdbcType=VARCHAR},
+            `role_en_name` = #{roleEnName,jdbcType=VARCHAR},
+            `role_name`    = #{roleName,jdbcType=VARCHAR},
+            `parent_uuid`  = #{parentUuid,jdbcType=VARCHAR}
         where `id` = #{id,jdbcType=BIGINT}
     </update>
 </mapper>

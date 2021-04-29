@@ -27,7 +27,7 @@ import java.util.UUID;
 @Service
 public class FileUploadLocationImpl extends BaseService implements FileUploadService {
 
-    protected FileUploadLocationImpl(RenFeiConfig renFeiConfig) {
+    public FileUploadLocationImpl(RenFeiConfig renFeiConfig) {
         super(renFeiConfig);
     }
 

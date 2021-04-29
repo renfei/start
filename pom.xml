@@ -75,10 +75,14 @@
         <spring-cloud.version>2020.0.2</spring-cloud.version>
         <renfeisdk.version>1.0.15</renfeisdk.version>
         <swagger.version>3.0.0</swagger.version>
-        <druid.version>1.2.6</druid.version>
+        <druid.version>1.2.5</druid.version>
         <mybatis.version>2.1.4</mybatis.version>
         <aliyun.core.version>4.5.20</aliyun.core.version>
         <aliyun.oss.version>3.12.0</aliyun.oss.version>
+        <aliyun.cas.version>20180713_0114</aliyun.cas.version>
+        <aliyun.cdn.version>3.6.2</aliyun.cdn.version>
+        <aliyun.dcdn.version>2.1.2</aliyun.dcdn.version>
+        <aliyun.green.version>3.6.3</aliyun.green.version>
         <jjwt.version>0.11.2</jjwt.version>
         <maven.build.timestamp.format>yyyyMMddHHmmss</maven.build.timestamp.format>
         <buildtimestamp>${maven.build.timestamp}</buildtimestamp>
@@ -126,12 +130,24 @@
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.springframework.session</groupId>
-            <artifactId>spring-session-core</artifactId>
-        </dependency>
-        <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis-reactive</artifactId>
+        </dependency>
+        <!--        <dependency>-->
+        <!--            <groupId>org.springframework.session</groupId>-->
+        <!--            <artifactId>spring-session-data-redis</artifactId>-->
+        <!--        </dependency>-->
+        <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-pool2</artifactId>
         </dependency>
 
         <dependency>
@@ -202,6 +218,32 @@
                     <groupId>com.aliyun</groupId>
                 </exclusion>
             </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>com.aliyun</groupId>
+            <artifactId>aliyun-java-sdk-cas</artifactId>
+            <version>${aliyun.cas.version}</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>aliyun-java-sdk-core</artifactId>
+                    <groupId>com.aliyun</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>com.aliyun</groupId>
+            <artifactId>aliyun-java-sdk-cdn</artifactId>
+            <version>${aliyun.cdn.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.aliyun</groupId>
+            <artifactId>aliyun-java-sdk-dcdn</artifactId>
+            <version>${aliyun.dcdn.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.aliyun</groupId>
+            <artifactId>aliyun-java-sdk-green</artifactId>
+            <version>${aliyun.green.version}</version>
         </dependency>
         <dependency>
             <groupId>com.github.whvcse</groupId>

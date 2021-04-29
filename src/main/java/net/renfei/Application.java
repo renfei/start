@@ -9,6 +9,7 @@ import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import springfox.documentation.oas.annotations.EnableOpenApi;
 
 /**
@@ -22,6 +23,7 @@ import springfox.documentation.oas.annotations.EnableOpenApi;
 @EnableScheduling
 @EnableFeignClients
 @SpringBootApplication
+@EnableTransactionManagement
 @EnableConfigurationProperties
 public class Application {
     public static void main(String[] args) {

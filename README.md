@@ -38,3 +38,15 @@ performance. It is biased towards performance. Druid is more inclined to monitor
 enhancement (WallFilter can prevent SQL injection, StatFilter can perform performance monitoring, LogFilter can output
 SQL logs), and Alibaba has experience in Taobao's high concurrency big data, I believe in Druid's security and
 stability.
+
+## Security warning
+
+### Spring Security
+
+Because I have implemented the ```FilterInvocationSecurityMetadataSource``` and ```AccessDecisionManager``` interfaces,
+in order to achieve dynamic reading of roles and permissions from the database. But this leads to the failure
+of ```@PreAuthorize```! At the same time, the configuration will be invalid. For details, please refer to the code
+of ```net.renfei.security.interceptor.AccessDecisionManagerImpl.decide```, and add the address of the resource you want
+to protect. The database tables involved are: ```t_start_permission``` resource table, ```t_start_role``` role
+table, ```t_start_role_permission``` role and resource association table, only resource addresses in these three tables
+Will be protected. 

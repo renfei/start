@@ -1,7 +1,11 @@
 package net.renfei.security.interceptor;
 
 import lombok.extern.slf4j.Slf4j;
+import net.renfei.service.start.PermissionService;
+import net.renfei.service.start.dto.PermissionDTO;
+import net.renfei.service.start.type.ResourceTypeEnum;
 import org.springframework.security.access.ConfigAttribute;
+import org.springframework.security.access.SecurityConfig;
 import org.springframework.security.access.SecurityMetadataSource;
 import org.springframework.security.web.FilterInvocation;
 import org.springframework.security.web.access.intercept.FilterInvocationSecurityMetadataSource;
@@ -10,6 +14,8 @@ import org.springframework.util.AntPathMatcher;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Collection;
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * 自定义权限资源过滤器，实现动态的权限验证
@@ -23,25 +29,48 @@ import java.util.Collection;
 @Component
 public class FilterInvocationSecurityMetadataSourceImpl implements FilterInvocationSecurityMetadataSource {
     private final AntPathMatcher antPathMatcher;
+    private final PermissionService permissionService;
+    private final List<PermissionDTO> permissionList;
 
-    public FilterInvocationSecurityMetadataSourceImpl() {
+    public FilterInvocationSecurityMetadataSourceImpl(PermissionService permissionService) {
+        this.permissionService = permissionService;
         this.antPathMatcher = new AntPathMatcher();
+        // 从数据库加载权限配置
+        permissionList = this.permissionService.getAllPermissionList(ResourceTypeEnum.API);
     }
 
     /**
      * 返回本次访问需要的权限，可以有多个权限
+     * 其实就是通过url地址获取 角色信息的方法
      *
-     * @param o {@link FilterInvocation}
+     * @param object {@link FilterInvocation}
      * @return
      * @throws IllegalArgumentException
      */
     @Override
-    public Collection<ConfigAttribute> getAttributes(Object o) throws IllegalArgumentException {
-        FilterInvocation filterInvocation = (FilterInvocation) o;
+    public Collection<ConfigAttribute> getAttributes(Object object) throws IllegalArgumentException {
+        FilterInvocation filterInvocation = (FilterInvocation) object;
         HttpServletRequest request = filterInvocation.getHttpRequest();
         String requestUrl = request.getMethod().toLowerCase() + ":" + filterInvocation.getRequestUrl();
-        // TODO 去数据库查询资源 antPathMatcher.match(getUrl(), requestUrl)
-        return null;
+        if (permissionList != null && !permissionList.isEmpty()) {
+            List<ConfigAttribute> configAttributes = new CopyOnWriteArrayList<>();
+            for (PermissionDTO permission : permissionList
+            ) {
+                // 遍历系统所有的资源进行匹配
+                String url = permission.getRequestMethod().toLowerCase() + ":" + permission.getResourceUrl();
+                if (antPathMatcher.match(url, requestUrl)) {
+                    // 匹配命中了，将访问此资源需要的角色添加到 List<ConfigAttribute>
+                    configAttributes.addAll(permissionService.getRoleListByPermission(permission));
+                }
+            }
+            if (!configAttributes.isEmpty()) {
+                return configAttributes;
+            }
+        }
+        // 【警告】如果返回为null则说明此url地址不需要相应的角色就可以访问, 这样Security会放行
+        Collection<ConfigAttribute> co = new CopyOnWriteArrayList<>();
+        co.add(new SecurityConfig("null"));
+        return co;
     }
 
     /**
