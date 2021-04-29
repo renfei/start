@@ -31,17 +31,17 @@
             <property name="forceBigDecimals" value="false"/>
         </javaTypeResolver>
         <!--自动生成定义位置-->
-        <javaModelGenerator targetPackage="net.renfei.repository.dao.start.model" targetProject="src/main/java">
-            <property name="enableSubPackages" value="false"/>
-            <property name="trimStrings" value="false"/>
-        </javaModelGenerator>
-        <sqlMapGenerator targetPackage="mapper/mysql" targetProject="src/main/resources">
-            <property name="enableSubPackages" value="false"/>
-        </sqlMapGenerator>
-        <javaClientGenerator type="XMLMAPPER" targetPackage="net.renfei.repository.dao.start"
-                             targetProject="src/main/java">
-            <property name="enableSubPackages" value="false"/>
-        </javaClientGenerator>
+        <!--<javaModelGenerator targetPackage="net.renfei.repository.dao.start.model" targetProject="src/main/java">-->
+        <!--    <property name="enableSubPackages" value="false"/>-->
+        <!--    <property name="trimStrings" value="false"/>-->
+        <!--</javaModelGenerator>-->
+        <!--<sqlMapGenerator targetPackage="mapper/mysql" targetProject="src/main/resources">-->
+        <!--    <property name="enableSubPackages" value="false"/>-->
+        <!--</sqlMapGenerator>-->
+        <!--<javaClientGenerator type="XMLMAPPER" targetPackage="net.renfei.repository.dao.start"-->
+        <!--                     targetProject="src/main/java">-->
+        <!--    <property name="enableSubPackages" value="false"/>-->
+        <!--</javaClientGenerator>-->
         <!--<table schema="start" delimitAllColumns="true" tableName="t_start_user"/>-->
         <!--<table schema="start" delimitAllColumns="true" tableName="t_start_permission"/>-->
         <!--<table schema="start" delimitAllColumns="true" tableName="t_start_role"/>-->
@@ -49,5 +49,22 @@
         <!--<table schema="start" delimitAllColumns="true" tableName="t_start_role_permission"/>-->
         <!--<table schema="start" delimitAllColumns="true" tableName="t_start_secret_key"/>-->
         <!--<table schema="start" delimitAllColumns="true" tableName="t_start_operation_log"/>-->
+        <!--CMS-->
+        <javaModelGenerator targetPackage="net.renfei.repository.dao.cms.model" targetProject="src/main/java">
+            <property name="enableSubPackages" value="false"/>
+            <property name="trimStrings" value="false"/>
+        </javaModelGenerator>
+        <sqlMapGenerator targetPackage="mapper/mysql" targetProject="src/main/resources">
+            <property name="enableSubPackages" value="false"/>
+        </sqlMapGenerator>
+        <javaClientGenerator type="XMLMAPPER" targetPackage="net.renfei.repository.dao.cms"
+                             targetProject="src/main/java">
+            <property name="enableSubPackages" value="false"/>
+        </javaClientGenerator>
+        <!--<table schema="start" delimitAllColumns="true" tableName="t_cms_posts"/>-->
+        <!--<table schema="start" delimitAllColumns="true" tableName="t_cms_tag"/>-->
+        <!--<table schema="start" delimitAllColumns="true" tableName="t_cms_post_tag"/>-->
+        <!--<table schema="start" delimitAllColumns="true" tableName="t_cms_comments"/>-->
+        <!--<table schema="start" delimitAllColumns="true" tableName="t_cms_category"/>-->
     </context>
 </generatorConfiguration>

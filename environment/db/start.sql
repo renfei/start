@@ -3,6 +3,125 @@ SET
 FOREIGN_KEY_CHECKS = 0;
 
 -- ----------------------------
+-- Table structure for t_cms_category
+-- ----------------------------
+DROP TABLE IF EXISTS `t_cms_category`;
+CREATE TABLE `t_cms_category`
+(
+    `id`             bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+    `en_name`        varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+    `zh_name`        varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+    `featured_image` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '特色图像',
+    PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='文章分类表';
+
+-- ----------------------------
+-- Records of t_cms_category
+-- ----------------------------
+BEGIN;
+COMMIT;
+
+-- ----------------------------
+-- Table structure for t_cms_comments
+-- ----------------------------
+DROP TABLE IF EXISTS `t_cms_comments`;
+CREATE TABLE `t_cms_comments`
+(
+    `id`             bigint(20) NOT NULL,
+    `target_id`      bigint(20) unsigned NOT NULL COMMENT '目标ID',
+    `author`         text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '作者名称',
+    `author_email`   text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '作者邮箱',
+    `author_url`     text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '作者链接',
+    `author_IP`      text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '作者IP',
+    `author_address` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '作者物理地址',
+    `addtime`        datetime NOT NULL COMMENT '评论时间',
+    `content`        text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '评论内容',
+    `is_delete`      tinyint(1) NOT NULL DEFAULT 0 COMMENT '是否删除',
+    `parent_id`      bigint(20) unsigned DEFAULT NULL COMMENT '父级评论ID',
+    `is_owner`       tinyint(1) NOT NULL DEFAULT 0 COMMENT '是否是官方回复',
+    PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='文章评论表';
+
+-- ----------------------------
+-- Records of t_cms_comments
+-- ----------------------------
+BEGIN;
+COMMIT;
+
+-- ----------------------------
+-- Table structure for t_cms_post_tag
+-- ----------------------------
+DROP TABLE IF EXISTS `t_cms_post_tag`;
+CREATE TABLE `t_cms_post_tag`
+(
+    `id`        bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+    `tag_id`    bigint(20) unsigned NOT NULL,
+    `target_id` bigint(20) unsigned DEFAULT NULL,
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='文章与标签关系表';
+
+-- ----------------------------
+-- Records of t_cms_post_tag
+-- ----------------------------
+BEGIN;
+COMMIT;
+
+-- ----------------------------
+-- Table structure for t_cms_posts
+-- ----------------------------
+DROP TABLE IF EXISTS `t_cms_posts`;
+CREATE TABLE `t_cms_posts`
+(
+    `id`                    bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+    `category_id`           bigint(20) unsigned NOT NULL COMMENT '文章分类',
+    `featured_image`        text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '特色图像',
+    `title`                 text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '文章标题',
+    `content`               longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '文章内容',
+    `is_original`           tinyint(1) unsigned NOT NULL COMMENT '是否原创文章',
+    `source_url`            text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '原文链接',
+    `source_name`           text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '文章来源名称',
+    `views`                 bigint(20) unsigned NOT NULL DEFAULT 0 COMMENT '浏览量',
+    `thumbs_up`             bigint(20) unsigned NOT NULL DEFAULT 0 COMMENT '点赞',
+    `thumbs_down`           bigint(20) unsigned NOT NULL DEFAULT 0 COMMENT '点踩',
+    `release_time`          datetime NOT NULL COMMENT '发布时间',
+    `add_time`              datetime NOT NULL COMMENT '添加时间',
+    `describes`             text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '文章简介用于SEO',
+    `keyword`               text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '关键字用于SEO',
+    `is_delete`             tinyint(1) unsigned NOT NULL DEFAULT 0 COMMENT '软删除',
+    `is_comment`            tinyint(1) NOT NULL DEFAULT 1 COMMENT '是否允许评论',
+    `avg_views`             double   NOT NULL DEFAULT 0 COMMENT '日均浏览量',
+    `avg_comment`           double   NOT NULL DEFAULT 0 COMMENT '日均评论量',
+    `page_rank`             double   NOT NULL DEFAULT 10000 COMMENT '权重排序',
+    `page_rank_update_time` datetime          DEFAULT NULL COMMENT '权重更新时间',
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='文章表';
+
+-- ----------------------------
+-- Records of t_cms_posts
+-- ----------------------------
+BEGIN;
+COMMIT;
+
+-- ----------------------------
+-- Table structure for t_cms_tag
+-- ----------------------------
+DROP TABLE IF EXISTS `t_cms_tag`;
+CREATE TABLE `t_cms_tag`
+(
+    `id`       bigint(20) NOT NULL,
+    `en_name`  text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+    `zh_name`  text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+    `describe` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='文章标签表';
+
+-- ----------------------------
+-- Records of t_cms_tag
+-- ----------------------------
+BEGIN;
+COMMIT;
+
+-- ----------------------------
 -- Table structure for t_start_operation_log
 -- ----------------------------
 DROP TABLE IF EXISTS `t_start_operation_log`;
@@ -22,6 +141,12 @@ CREATE TABLE `t_start_operation_log`
     `returning`      longtext     DEFAULT NULL COMMENT '返回内容',
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='操作日志表';
+
+-- ----------------------------
+-- Records of t_start_operation_log
+-- ----------------------------
+BEGIN;
+COMMIT;
 
 -- ----------------------------
 -- Table structure for t_start_permission
@@ -105,7 +230,7 @@ CREATE TABLE `t_start_secret_key`
     `public_key`  text CHARACTER SET utf8mb4 DEFAULT NULL COMMENT '公钥',
     `private_key` text CHARACTER SET utf8mb4 DEFAULT NULL COMMENT '私钥',
     PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8 COMMENT='秘钥表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='秘钥表';
 
 -- ----------------------------
 -- Records of t_start_secret_key
