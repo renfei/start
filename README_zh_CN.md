@@ -29,3 +29,12 @@ XML 配置文件，
 
 Spring Boot 2.x 默认使用 HikariCP 连接池，但我选择了阿里巴巴的 Druid。 HiKariCP 很快，性能很高，它偏向性能。Druid
 则更偏向监控和数据访问行为增强（WallFilter可以防御SQL注入，StatFilter可以进行性能监视，LogFilter可以输出SQL日志），而且阿里巴巴有淘宝的高并发大数据的经验，我更相信 Druid 的安全和稳定性。
+
+## 安全性警告
+
+### Spring Security
+
+由于自己实现了```FilterInvocationSecurityMetadataSource```和```AccessDecisionManager```接口，为了实现从数据库中动态读取角色和权限。
+但这就导致了```@PreAuthorize```失效！同时配置也会失效，详见```net.renfei.security.interceptor.AccessDecisionManagerImpl.decide```
+的代码，添加自己要保护的资源地址。 涉及到的数据库表有：```t_start_permission```资源表、```t_start_role```角色表、```t_start_role_permission```
+角色与资源关联表，只有这三个表中有的资源地址才会被保护。

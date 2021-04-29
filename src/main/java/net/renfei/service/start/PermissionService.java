@@ -26,7 +26,7 @@ public interface PermissionService {
      * 获取用户拥有的角色列表
      *
      * @param user {@link UserDTO}
-     * @return {@link RoleDTO}
+     * @return 角色：{@link RoleDTO}
      */
     List<RoleDTO> getRoleListByUser(UserDTO user);
 
@@ -38,4 +38,20 @@ public interface PermissionService {
      * @return {@link PermissionDTO}
      */
     List<PermissionDTO> getPermissionListByRoleList(List<RoleDTO> roleList, ResourceTypeEnum resourceTypeEnum);
+
+    /**
+     * 获取全部资源列表
+     *
+     * @param resourceTypeEnum 资源类型：{@link ResourceTypeEnum}
+     * @return 全部资源列表
+     */
+    List<PermissionDTO> getAllPermissionList(ResourceTypeEnum resourceTypeEnum);
+
+    /**
+     * 根据资源反查角色
+     *
+     * @param permission 资源：{@link PermissionDTO}
+     * @return 角色：{@link RoleDTO}
+     */
+    List<RoleDTO> getRoleListByPermission(PermissionDTO permission);
 }

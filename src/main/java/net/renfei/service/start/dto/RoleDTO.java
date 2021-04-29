@@ -1,6 +1,7 @@
 package net.renfei.service.start.dto;
 
 import lombok.Data;
+import org.springframework.security.access.ConfigAttribute;
 
 import java.util.Date;
 
@@ -10,7 +11,7 @@ import java.util.Date;
  * @author renfei
  */
 @Data
-public class RoleDTO {
+public class RoleDTO implements ConfigAttribute {
     private Long id;
 
     private Date createTime;
@@ -21,7 +22,20 @@ public class RoleDTO {
 
     private String uuid;
 
+    private String roleEnName;
+
     private String roleName;
 
     private String parentUuid;
+
+    @Override
+    public String getAttribute() {
+        if (roleEnName == null) {
+            return null;
+        } else if (roleEnName.startsWith("ROLE_")) {
+            return roleEnName;
+        } else {
+            return "ROLE_" + roleEnName;
+        }
+    }
 }

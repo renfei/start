@@ -18,7 +18,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.Vector;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * 权限服务
@@ -62,17 +62,8 @@ public class PermissionServiceImpl extends BaseService implements PermissionServ
         if (roleList == null || roleList.isEmpty()) {
             return null;
         }
-        // 获取拥有的权限
-        List<PermissionDTO> permissionList = this.getPermissionListByRoleList(roleList, ResourceTypeEnum.API);
-        if (permissionList == null || permissionList.isEmpty()) {
-            return null;
-        }
-        List<GrantedAuthority> authorities = new Vector<>();
-        for (PermissionDTO permission : permissionList
-        ) {
-            String authority = permission.getRequestMethod() + "" + permission.getResourceUrl();
-            authorities.add(new GrantedAuthorityImpl(authority));
-        }
+        List<GrantedAuthority> authorities = new CopyOnWriteArrayList<>();
+        roleList.forEach(roleDTO -> authorities.add(new GrantedAuthorityImpl(roleDTO.getRoleEnName())));
         return authorities;
     }
 
@@ -95,7 +86,7 @@ public class PermissionServiceImpl extends BaseService implements PermissionServ
         if (userRoleList == null || userRoleList.isEmpty()) {
             return null;
         }
-        List<String> roleUuid = new Vector<>(userRoleList.size());
+        List<String> roleUuid = new CopyOnWriteArrayList<>();
         userRoleList.forEach(userRole -> roleUuid.add(userRole.getRoleUuid()));
         TStartRoleExample roleExample = new TStartRoleExample();
         roleExample.createCriteria()
@@ -103,8 +94,15 @@ public class PermissionServiceImpl extends BaseService implements PermissionServ
                 .andUuidIn(roleUuid);
         List<TStartRole> roles = roleMapper.selectByExample(roleExample);
         this.getChildRole(roles);
-        List<RoleDTO> roleDTOS = new Vector<>();
-        org.springframework.beans.BeanUtils.copyProperties(roles, roleDTOS);
+        List<RoleDTO> roleDTOS = new CopyOnWriteArrayList<>();
+        if (!BeanUtils.isEmpty(roles)) {
+            for (TStartRole role : roles
+            ) {
+                RoleDTO roleDTO = new RoleDTO();
+                org.springframework.beans.BeanUtils.copyProperties(role, roleDTO);
+                roleDTOS.add(roleDTO);
+            }
+        }
         return roleDTOS;
     }
 
@@ -119,7 +117,7 @@ public class PermissionServiceImpl extends BaseService implements PermissionServ
         if (roleList == null || roleList.isEmpty()) {
             return null;
         }
-        List<String> roleUuid = new Vector<>(roleList.size());
+        List<String> roleUuid = new CopyOnWriteArrayList<>();
         roleList.forEach(role -> roleUuid.add(role.getUuid()));
         TStartRolePermissionExample rolePermissionExample = new TStartRolePermissionExample();
         rolePermissionExample.createCriteria()
@@ -129,7 +127,7 @@ public class PermissionServiceImpl extends BaseService implements PermissionServ
         if (rolePermissionList == null || rolePermissionList.isEmpty()) {
             return null;
         }
-        List<String> permissionUuid = new Vector<>(rolePermissionList.size());
+        List<String> permissionUuid = new CopyOnWriteArrayList<>();
         rolePermissionList.forEach(rolePermission -> permissionUuid.add(rolePermission.getPermissionUuid()));
         TStartPermissionExample permissionExample = new TStartPermissionExample();
         permissionExample.createCriteria()
@@ -137,9 +135,66 @@ public class PermissionServiceImpl extends BaseService implements PermissionServ
                 .andResourceTypeEqualTo(resourceTypeEnum.toString())
                 .andUuidIn(permissionUuid);
         List<TStartPermission> permissionList = permissionMapper.selectByExample(permissionExample);
-        List<PermissionDTO> permissions = new Vector<>();
+        List<PermissionDTO> permissions = new CopyOnWriteArrayList<>();
+        if (!BeanUtils.isEmpty(permissionList)) {
+            for (TStartPermission permission : permissionList
+            ) {
+                PermissionDTO permissionDTO = new PermissionDTO();
+                org.springframework.beans.BeanUtils.copyProperties(permission, permissionDTO);
+                permissions.add(permissionDTO);
+            }
+        }
         org.springframework.beans.BeanUtils.copyProperties(permissionList, permissions);
         return permissions;
+    }
+
+    @Override
+    public List<PermissionDTO> getAllPermissionList(ResourceTypeEnum resourceTypeEnum) {
+        TStartPermissionExample permissionExample = new TStartPermissionExample();
+        permissionExample.createCriteria()
+                .andIsDeletedEqualTo(false)
+                .andResourceTypeEqualTo(resourceTypeEnum.toString());
+        List<TStartPermission> permissionList = permissionMapper.selectByExample(permissionExample);
+        List<PermissionDTO> permissions = new CopyOnWriteArrayList<>();
+        if (!BeanUtils.isEmpty(permissionList)) {
+            for (TStartPermission permission : permissionList
+            ) {
+                PermissionDTO permissionDTO = new PermissionDTO();
+                org.springframework.beans.BeanUtils.copyProperties(permission, permissionDTO);
+                permissions.add(permissionDTO);
+            }
+        }
+        return permissions;
+    }
+
+    @Override
+    public List<RoleDTO> getRoleListByPermission(PermissionDTO permission) {
+        TStartRolePermissionExample rolePermissionExample = new TStartRolePermissionExample();
+        rolePermissionExample.createCriteria()
+                .andIsDeletedEqualTo(false)
+                .andPermissionUuidEqualTo(permission.getUuid());
+        List<TStartRolePermission> rolePermissionList = rolePermissionMapper.selectByExample(rolePermissionExample);
+        if (rolePermissionList == null || rolePermissionList.isEmpty()) {
+            return null;
+        }
+        List<String> roleUuid = new CopyOnWriteArrayList<>();
+        rolePermissionList.forEach(rolePermission -> roleUuid.add(rolePermission.getRoleUuid()));
+        TStartRoleExample roleExample = new TStartRoleExample();
+        roleExample.createCriteria()
+                .andIsDeletedEqualTo(false)
+                .andUuidIn(roleUuid);
+        List<TStartRole> roles = roleMapper.selectByExample(roleExample);
+        this.getChildRole(roles);
+        List<RoleDTO> roleList = new CopyOnWriteArrayList<>();
+        if (!BeanUtils.isEmpty(roles)) {
+            for (TStartRole role : roles
+            ) {
+                RoleDTO roleDTO = new RoleDTO();
+                org.springframework.beans.BeanUtils.copyProperties(role, roleDTO);
+                roleList.add(roleDTO);
+            }
+        }
+        return roleList;
     }
 
     /**

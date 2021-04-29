@@ -14,6 +14,8 @@ public class TStartRole implements Serializable {
 
     private String uuid;
 
+    private String roleEnName;
+
     private String roleName;
 
     private String parentUuid;
@@ -60,6 +62,14 @@ public class TStartRole implements Serializable {
         this.uuid = uuid;
     }
 
+    public String getRoleEnName() {
+        return roleEnName;
+    }
+
+    public void setRoleEnName(String roleEnName) {
+        this.roleEnName = roleEnName;
+    }
+
     public String getRoleName() {
         return roleName;
     }
@@ -87,6 +97,7 @@ public class TStartRole implements Serializable {
         sb.append(", updateTime=").append(updateTime);
         sb.append(", isDeleted=").append(isDeleted);
         sb.append(", uuid=").append(uuid);
+        sb.append(", roleEnName=").append(roleEnName);
         sb.append(", roleName=").append(roleName);
         sb.append(", parentUuid=").append(parentUuid);
         sb.append(", serialVersionUID=").append(serialVersionUID);

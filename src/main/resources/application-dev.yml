@@ -36,7 +36,7 @@ renfei:
   ipv6DataPath: /opt/RenFeiNet/IPDATA.IPV6.BIN
   buildTime: @buildtimestamp@
   totpSecret: <totpSecret>
-  authMode: SESSION
+  authMode: RESET
   dataCahe:
     ## 设置缓存有效期 秒，2小时
     expireTime: 7200
