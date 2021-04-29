@@ -47,6 +47,8 @@ spring:
     expose-session-attributes: true
     request-context-attribute: request
     suffix: .ftl
+  cache:
+    type: redis
 # feign #####################################
 feign:
   client:
