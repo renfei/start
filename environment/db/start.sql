@@ -8,7 +8,7 @@ FOREIGN_KEY_CHECKS = 0;
 DROP TABLE IF EXISTS `t_cms_tag`;
 CREATE TABLE `t_cms_tag`
 (
-    `id`          bigint(20) NOT NULL,
+    `id`          bigint(20) unsigned NOT NULL AUTO_INCREMENT,
     `en_name`     varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
     `zh_name`     varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
     `describe`    text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
