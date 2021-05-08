@@ -3,6 +3,71 @@ SET
 FOREIGN_KEY_CHECKS = 0;
 
 -- ----------------------------
+-- Table structure for t_cms_tag
+-- ----------------------------
+DROP TABLE IF EXISTS `t_cms_tag`;
+CREATE TABLE `t_cms_tag`
+(
+    `id`          bigint(20) NOT NULL,
+    `en_name`     varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+    `zh_name`     varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+    `describe`    text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+    `create_time` datetime                                                      NOT NULL COMMENT '创建时间',
+    `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+    `is_deleted`  tinyint(1) unsigned NOT NULL DEFAULT 0 COMMENT '是否删除',
+    PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='文章标签表';
+
+-- ----------------------------
+-- Records of t_cms_tag
+-- ----------------------------
+BEGIN;
+COMMIT;
+
+-- ----------------------------
+-- Table structure for t_start_secret_key
+-- ----------------------------
+DROP TABLE IF EXISTS `t_start_secret_key`;
+CREATE TABLE `t_start_secret_key`
+(
+    `id`          bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+    `create_time` datetime    NOT NULL COMMENT '创建时间',
+    `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+    `is_deleted`  tinyint(1) unsigned NOT NULL DEFAULT 0 COMMENT '是否删除',
+    `uuid`        varchar(36) NOT NULL COMMENT '全局唯一ID',
+    `public_key`  text CHARACTER SET utf8mb4 DEFAULT NULL COMMENT '公钥',
+    `private_key` text CHARACTER SET utf8mb4 DEFAULT NULL COMMENT '私钥',
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='秘钥表';
+
+-- ----------------------------
+-- Records of t_start_secret_key
+-- ----------------------------
+BEGIN;
+COMMIT;
+
+-- ----------------------------
+-- Table structure for t_cms_post_tag
+-- ----------------------------
+DROP TABLE IF EXISTS `t_cms_post_tag`;
+CREATE TABLE `t_cms_post_tag`
+(
+    `id`          bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+    `tag_id`      bigint(20) unsigned NOT NULL,
+    `target_id`   bigint(20) unsigned DEFAULT NULL,
+    `create_time` datetime NOT NULL COMMENT '创建时间',
+    `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+    `is_deleted`  tinyint(1) unsigned NOT NULL DEFAULT 0 COMMENT '是否删除',
+    PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='文章与标签关系表';
+
+-- ----------------------------
+-- Records of t_cms_post_tag
+-- ----------------------------
+BEGIN;
+COMMIT;
+
+-- ----------------------------
 -- Table structure for t_cms_category
 -- ----------------------------
 DROP TABLE IF EXISTS `t_cms_category`;
@@ -12,6 +77,9 @@ CREATE TABLE `t_cms_category`
     `en_name`        varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
     `zh_name`        varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
     `featured_image` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '特色图像',
+    `create_time`    datetime                                                      NOT NULL COMMENT '创建时间',
+    `update_time`    datetime DEFAULT NULL COMMENT '更新时间',
+    `is_deleted`     tinyint(1) unsigned NOT NULL DEFAULT 0 COMMENT '是否删除',
     PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='文章分类表';
 
@@ -19,6 +87,33 @@ CREATE TABLE `t_cms_category`
 -- Records of t_cms_category
 -- ----------------------------
 BEGIN;
+COMMIT;
+
+-- ----------------------------
+-- Table structure for t_start_role
+-- ----------------------------
+DROP TABLE IF EXISTS `t_start_role`;
+CREATE TABLE `t_start_role`
+(
+    `id`           bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+    `create_time`  datetime    NOT NULL COMMENT '创建时间',
+    `update_time`  datetime     DEFAULT NULL COMMENT '更新时间',
+    `is_deleted`   tinyint(1) unsigned NOT NULL DEFAULT 0 COMMENT '是否删除',
+    `uuid`         varchar(36) NOT NULL COMMENT '全局唯一ID',
+    `role_en_name` varchar(255) DEFAULT NULL COMMENT '代码中角色名',
+    `role_name`    varchar(255) DEFAULT NULL COMMENT '角色名称',
+    `parent_uuid`  varchar(36)  DEFAULT NULL COMMENT '父级角色UUID',
+    PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='系统角色（用户组）';
+
+-- ----------------------------
+-- Records of t_start_role
+-- ----------------------------
+BEGIN;
+INSERT INTO `t_start_role`
+VALUES (1, '2021-04-29 15:46:12', NULL, 0, '3F6D6191-E510-47E2-ACEA-BB2ACA1EF49C', 'ROLE_TESTER', '单元测试员', NULL);
+INSERT INTO `t_start_role`
+VALUES (2, '2021-04-29 15:56:44', NULL, 0, '629CB1F3-3F69-456A-BDEF-23267DD053C0', 'ROLE_TESTER_TWO', '单元测试员二号', NULL);
 COMMIT;
 
 -- ----------------------------
@@ -44,24 +139,6 @@ CREATE TABLE `t_cms_comments`
 
 -- ----------------------------
 -- Records of t_cms_comments
--- ----------------------------
-BEGIN;
-COMMIT;
-
--- ----------------------------
--- Table structure for t_cms_post_tag
--- ----------------------------
-DROP TABLE IF EXISTS `t_cms_post_tag`;
-CREATE TABLE `t_cms_post_tag`
-(
-    `id`        bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-    `tag_id`    bigint(20) unsigned NOT NULL,
-    `target_id` bigint(20) unsigned DEFAULT NULL,
-    PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='文章与标签关系表';
-
--- ----------------------------
--- Records of t_cms_post_tag
 -- ----------------------------
 BEGIN;
 COMMIT;
@@ -103,25 +180,6 @@ BEGIN;
 COMMIT;
 
 -- ----------------------------
--- Table structure for t_cms_tag
--- ----------------------------
-DROP TABLE IF EXISTS `t_cms_tag`;
-CREATE TABLE `t_cms_tag`
-(
-    `id`       bigint(20) NOT NULL,
-    `en_name`  text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-    `zh_name`  text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-    `describe` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-    PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='文章标签表';
-
--- ----------------------------
--- Records of t_cms_tag
--- ----------------------------
-BEGIN;
-COMMIT;
-
--- ----------------------------
 -- Table structure for t_start_operation_log
 -- ----------------------------
 DROP TABLE IF EXISTS `t_start_operation_log`;
@@ -146,63 +204,6 @@ CREATE TABLE `t_start_operation_log`
 -- Records of t_start_operation_log
 -- ----------------------------
 BEGIN;
-COMMIT;
-
--- ----------------------------
--- Table structure for t_start_permission
--- ----------------------------
-DROP TABLE IF EXISTS `t_start_permission`;
-CREATE TABLE `t_start_permission`
-(
-    `id`             bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '自增ID',
-    `create_time`    datetime     NOT NULL COMMENT '创建时间',
-    `update_time`    datetime DEFAULT NULL COMMENT '更新时间',
-    `is_deleted`     tinyint(1) unsigned NOT NULL DEFAULT 0 COMMENT '是否删除',
-    `uuid`           varchar(36)  NOT NULL COMMENT '全局唯一ID',
-    `resource_name`  varchar(255) NOT NULL COMMENT '资源名称',
-    `request_method` varchar(255) NOT NULL COMMENT '请求方法',
-    `resource_url`   varchar(255) NOT NULL COMMENT '资源路径',
-    `resource_type`  varchar(255) NOT NULL COMMENT '资源类型，菜单、接口、按钮',
-    PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='系统资源（权限）';
-
--- ----------------------------
--- Records of t_start_permission
--- ----------------------------
-BEGIN;
-INSERT INTO `t_start_permission`
-VALUES (1, '2021-04-29 15:44:58', NULL, 0, '93215229-E1BE-4F81-BE15-BF3A8B2D277B', '测试用例', 'get', '/api/test/testOne',
-        'API');
-INSERT INTO `t_start_permission`
-VALUES (2, '2021-04-29 15:57:33', NULL, 0, 'FD177621-B15A-411A-9E9D-636ADBC37901', '测试用例二', 'get', '/api/test/testTwo',
-        'API');
-COMMIT;
-
--- ----------------------------
--- Table structure for t_start_role
--- ----------------------------
-DROP TABLE IF EXISTS `t_start_role`;
-CREATE TABLE `t_start_role`
-(
-    `id`           bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-    `create_time`  datetime    NOT NULL COMMENT '创建时间',
-    `update_time`  datetime     DEFAULT NULL COMMENT '更新时间',
-    `is_deleted`   tinyint(1) unsigned NOT NULL DEFAULT 0 COMMENT '是否删除',
-    `uuid`         varchar(36) NOT NULL COMMENT '全局唯一ID',
-    `role_en_name` varchar(255) DEFAULT NULL COMMENT '代码中角色名',
-    `role_name`    varchar(255) DEFAULT NULL COMMENT '角色名称',
-    `parent_uuid`  varchar(36)  DEFAULT NULL COMMENT '父级角色UUID',
-    PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='系统角色（用户组）';
-
--- ----------------------------
--- Records of t_start_role
--- ----------------------------
-BEGIN;
-INSERT INTO `t_start_role`
-VALUES (1, '2021-04-29 15:46:12', NULL, 0, '3F6D6191-E510-47E2-ACEA-BB2ACA1EF49C', 'ROLE_TESTER', '单元测试员', NULL);
-INSERT INTO `t_start_role`
-VALUES (2, '2021-04-29 15:56:44', NULL, 0, '629CB1F3-3F69-456A-BDEF-23267DD053C0', 'ROLE_TESTER_TWO', '单元测试员二号', NULL);
 COMMIT;
 
 -- ----------------------------
@@ -234,25 +235,58 @@ VALUES (2, '2021-04-29 15:58:12', NULL, 0, '7EE81321-468E-4E17-8AAC-5AA52158D134
 COMMIT;
 
 -- ----------------------------
--- Table structure for t_start_secret_key
+-- Table structure for t_start_user_role
 -- ----------------------------
-DROP TABLE IF EXISTS `t_start_secret_key`;
-CREATE TABLE `t_start_secret_key`
+DROP TABLE IF EXISTS `t_start_user_role`;
+CREATE TABLE `t_start_user_role`
 (
     `id`          bigint(20) unsigned NOT NULL AUTO_INCREMENT,
     `create_time` datetime    NOT NULL COMMENT '创建时间',
     `update_time` datetime DEFAULT NULL COMMENT '更新时间',
     `is_deleted`  tinyint(1) unsigned NOT NULL DEFAULT 0 COMMENT '是否删除',
     `uuid`        varchar(36) NOT NULL COMMENT '全局唯一ID',
-    `public_key`  text CHARACTER SET utf8mb4 DEFAULT NULL COMMENT '公钥',
-    `private_key` text CHARACTER SET utf8mb4 DEFAULT NULL COMMENT '私钥',
-    PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='秘钥表';
+    `user_uuid`   varchar(36) NOT NULL COMMENT '用户UUID',
+    `role_uuid`   varchar(36) NOT NULL COMMENT '角色UUID',
+    PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='用户与角色关系表';
 
 -- ----------------------------
--- Records of t_start_secret_key
+-- Records of t_start_user_role
 -- ----------------------------
 BEGIN;
+INSERT INTO `t_start_user_role`
+VALUES (1, '2021-04-29 15:55:51', NULL, 0, '48698FC9-6FB4-4E86-878A-3A00CDCB1FDA',
+        'BBAD927D-CF9F-4C39-825F-A4935E4524AC', '3F6D6191-E510-47E2-ACEA-BB2ACA1EF49C');
+COMMIT;
+
+-- ----------------------------
+-- Table structure for t_start_permission
+-- ----------------------------
+DROP TABLE IF EXISTS `t_start_permission`;
+CREATE TABLE `t_start_permission`
+(
+    `id`             bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '自增ID',
+    `create_time`    datetime     NOT NULL COMMENT '创建时间',
+    `update_time`    datetime DEFAULT NULL COMMENT '更新时间',
+    `is_deleted`     tinyint(1) unsigned NOT NULL DEFAULT 0 COMMENT '是否删除',
+    `uuid`           varchar(36)  NOT NULL COMMENT '全局唯一ID',
+    `resource_name`  varchar(255) NOT NULL COMMENT '资源名称',
+    `request_method` varchar(255) NOT NULL COMMENT '请求方法',
+    `resource_url`   varchar(255) NOT NULL COMMENT '资源路径',
+    `resource_type`  varchar(255) NOT NULL COMMENT '资源类型，菜单、接口、按钮',
+    PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='系统资源（权限）';
+
+-- ----------------------------
+-- Records of t_start_permission
+-- ----------------------------
+BEGIN;
+INSERT INTO `t_start_permission`
+VALUES (1, '2021-04-29 15:44:58', NULL, 0, '93215229-E1BE-4F81-BE15-BF3A8B2D277B', '测试用例', 'get', '/api/test/testOne',
+        'API');
+INSERT INTO `t_start_permission`
+VALUES (2, '2021-04-29 15:57:33', NULL, 0, 'FD177621-B15A-411A-9E9D-636ADBC37901', '测试用例二', 'get', '/api/test/testTwo',
+        'API');
 COMMIT;
 
 -- ----------------------------
@@ -290,31 +324,6 @@ INSERT INTO `t_start_user`
 VALUES (1, '2021-04-28 11:42:57', NULL, 0, 'BBAD927D-CF9F-4C39-825F-A4935E4524AC', 'tester',
         'sha256:64000:18:vWLIwAgt1Q5SzrYDdIgQzTxi+PIpC08H:XddskjIqWV77/Yr5KtzjEPlw', 'i@renfei.net', NULL,
         '2021-04-28 11:44:05', NULL, '127.0.0.1', 0, NULL, 1, NULL, NULL, NULL);
-COMMIT;
-
--- ----------------------------
--- Table structure for t_start_user_role
--- ----------------------------
-DROP TABLE IF EXISTS `t_start_user_role`;
-CREATE TABLE `t_start_user_role`
-(
-    `id`          bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-    `create_time` datetime    NOT NULL COMMENT '创建时间',
-    `update_time` datetime DEFAULT NULL COMMENT '更新时间',
-    `is_deleted`  tinyint(1) unsigned NOT NULL DEFAULT 0 COMMENT '是否删除',
-    `uuid`        varchar(36) NOT NULL COMMENT '全局唯一ID',
-    `user_uuid`   varchar(36) NOT NULL COMMENT '用户UUID',
-    `role_uuid`   varchar(36) NOT NULL COMMENT '角色UUID',
-    PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='用户与角色关系表';
-
--- ----------------------------
--- Records of t_start_user_role
--- ----------------------------
-BEGIN;
-INSERT INTO `t_start_user_role`
-VALUES (1, '2021-04-29 15:55:51', NULL, 0, '48698FC9-6FB4-4E86-878A-3A00CDCB1FDA',
-        'BBAD927D-CF9F-4C39-825F-A4935E4524AC', '3F6D6191-E510-47E2-ACEA-BB2ACA1EF49C');
 COMMIT;
 
 SET

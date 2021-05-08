@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/weChat")
 @Api(value = "微信服务接口", tags = "微信服务接口")
-public class WeChatController extends BaseController {
-    protected WeChatController(RenFeiConfig renFeiConfig) {
+public class WeChatApiController extends BaseController {
+    protected WeChatApiController(RenFeiConfig renFeiConfig) {
         super(renFeiConfig);
     }
 

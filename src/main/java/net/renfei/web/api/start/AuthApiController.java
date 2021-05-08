@@ -29,15 +29,15 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/auth")
 @Api(value = "认证接口", tags = "认证接口")
-public class AuthController extends BaseController {
+public class AuthApiController extends BaseController {
     private final UserService userService;
     private final JwtTokenUtil jwtTokenUtil;
     private final SecretKeyService secretKeyService;
 
-    public AuthController(RenFeiConfig renFeiConfig,
-                          UserService userService,
-                          JwtTokenUtil jwtTokenUtil,
-                          SecretKeyService secretKeyService) {
+    public AuthApiController(RenFeiConfig renFeiConfig,
+                             UserService userService,
+                             JwtTokenUtil jwtTokenUtil,
+                             SecretKeyService secretKeyService) {
         super(renFeiConfig);
         this.userService = userService;
         this.jwtTokenUtil = jwtTokenUtil;

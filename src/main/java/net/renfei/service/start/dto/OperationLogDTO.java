@@ -2,13 +2,15 @@ package net.renfei.service.start.dto;
 
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * @author renfei
  */
 @Data
-public class OperationLogDTO {
+public class OperationLogDTO implements Serializable {
+    private static final long serialVersionUID = 1L;
     private Long id;
 
     private Date operDate;

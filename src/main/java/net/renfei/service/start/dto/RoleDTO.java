@@ -3,6 +3,7 @@ package net.renfei.service.start.dto;
 import lombok.Data;
 import org.springframework.security.access.ConfigAttribute;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -11,7 +12,8 @@ import java.util.Date;
  * @author renfei
  */
 @Data
-public class RoleDTO implements ConfigAttribute {
+public class RoleDTO implements ConfigAttribute, Serializable {
+    private static final long serialVersionUID = 1L;
     private Long id;
 
     private Date createTime;

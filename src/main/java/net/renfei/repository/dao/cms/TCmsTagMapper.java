@@ -34,4 +34,6 @@ public interface TCmsTagMapper {
     int updateByPrimaryKeySelective(TCmsTag record);
 
     int updateByPrimaryKeyWithBLOBs(TCmsTag record);
+
+    int updateByPrimaryKey(TCmsTag record);
 }

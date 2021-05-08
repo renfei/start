@@ -5,6 +5,7 @@ import net.renfei.service.start.PermissionService;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 
@@ -12,7 +13,8 @@ import java.util.Date;
  * @author renfei
  */
 @Data
-public class UserDTO implements UserDetails {
+public class UserDTO implements UserDetails, Serializable {
+    private static final long serialVersionUID = 1L;
     private final PermissionService permissionService;
     private Long id;
     private Date createTime;
