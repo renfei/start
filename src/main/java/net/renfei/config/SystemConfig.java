@@ -12,8 +12,8 @@ import org.springframework.stereotype.Component;
  */
 @Data
 @Component
-@ConfigurationProperties(prefix = "renfei")
-public class RenFeiConfig {
+@ConfigurationProperties(prefix = "system")
+public class SystemConfig {
     private String version;
     private String active;
     private String siteName;

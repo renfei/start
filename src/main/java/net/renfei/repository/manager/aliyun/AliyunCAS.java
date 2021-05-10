@@ -4,7 +4,7 @@ import com.aliyuncs.cas.model.v20180713.CreateUserCertificateRequest;
 import com.aliyuncs.cas.model.v20180713.CreateUserCertificateResponse;
 import com.aliyuncs.exceptions.ClientException;
 import com.aliyuncs.profile.DefaultProfile;
-import net.renfei.config.RenFeiConfig;
+import net.renfei.config.SystemConfig;
 import org.springframework.stereotype.Service;
 
 /**
@@ -14,10 +14,10 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class AliyunCAS extends AliyunService {
-    protected AliyunCAS(RenFeiConfig renFeiConfig) {
-        super(renFeiConfig, DefaultProfile.getProfile("cn-hangzhou",
-                renFeiConfig.getAliyun().getAccessKeyId(),
-                renFeiConfig.getAliyun().getAccessKeySecret()));
+    protected AliyunCAS(SystemConfig systemConfig) {
+        super(systemConfig, DefaultProfile.getProfile("cn-hangzhou",
+                systemConfig.getAliyun().getAccessKeyId(),
+                systemConfig.getAliyun().getAccessKeySecret()));
     }
 
     /**

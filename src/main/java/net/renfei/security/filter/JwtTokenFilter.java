@@ -1,6 +1,6 @@
 package net.renfei.security.filter;
 
-import net.renfei.config.RenFeiConfig;
+import net.renfei.config.SystemConfig;
 import net.renfei.sdk.utils.BeanUtils;
 import net.renfei.service.start.UserService;
 import net.renfei.service.start.dto.UserDTO;
@@ -26,14 +26,14 @@ import static net.renfei.web.BaseController.SESSION_KEY;
  */
 @Component
 public class JwtTokenFilter extends OncePerRequestFilter {
-    private final RenFeiConfig renFeiConfig;
+    private final SystemConfig systemConfig;
     private final JwtTokenUtil jwtTokenUtil;
     private final UserService userService;
 
-    public JwtTokenFilter(RenFeiConfig renFeiConfig,
+    public JwtTokenFilter(SystemConfig systemConfig,
                           JwtTokenUtil jwtTokenUtil,
                           UserService userService) {
-        this.renFeiConfig = renFeiConfig;
+        this.systemConfig = systemConfig;
         this.jwtTokenUtil = jwtTokenUtil;
         this.userService = userService;
     }
@@ -45,7 +45,7 @@ public class JwtTokenFilter extends OncePerRequestFilter {
             throws ServletException, IOException {
         final String auth = request.getHeader("Authorization");
         UserDetails userDetails = null;
-        if ("SESSION".equals(renFeiConfig.getAuthMode())) {
+        if ("SESSION".equals(systemConfig.getAuthMode())) {
             HttpSession session = request.getSession();
             Object sessionObject = session.getAttribute(SESSION_KEY);
             if (sessionObject instanceof UserDTO) {

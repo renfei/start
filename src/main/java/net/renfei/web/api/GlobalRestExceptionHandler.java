@@ -1,7 +1,7 @@
 package net.renfei.web.api;
 
 import lombok.extern.slf4j.Slf4j;
-import net.renfei.config.RenFeiConfig;
+import net.renfei.config.SystemConfig;
 import net.renfei.sdk.comm.StateCode;
 import net.renfei.sdk.entity.APIResult;
 import net.renfei.web.BaseController;
@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice(basePackages = "net.renfei.web.api")
 public class GlobalRestExceptionHandler extends BaseController {
 
-    protected GlobalRestExceptionHandler(RenFeiConfig renFeiConfig) {
-        super(renFeiConfig);
+    protected GlobalRestExceptionHandler(SystemConfig systemConfig) {
+        super(systemConfig);
     }
 
     @ExceptionHandler(Exception.class)

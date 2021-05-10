@@ -13,10 +13,10 @@ import springfox.documentation.spring.web.plugins.Docket;
 
 @Configuration
 public class Swagger3Config implements WebMvcConfigurer {
-    private final RenFeiConfig renFeiConfig;
+    private final SystemConfig systemConfig;
 
-    public Swagger3Config(RenFeiConfig renFeiConfig) {
-        this.renFeiConfig = renFeiConfig;
+    public Swagger3Config(SystemConfig systemConfig) {
+        this.systemConfig = systemConfig;
     }
 
     @Bean
@@ -36,7 +36,7 @@ public class Swagger3Config implements WebMvcConfigurer {
                 .description("RenFei.NET Open API")
                 .termsOfServiceUrl("https://www.renfei.net/")
                 .contact(contact)
-                .version(renFeiConfig.getVersion())
+                .version(systemConfig.getVersion())
                 .build();
     }
 }

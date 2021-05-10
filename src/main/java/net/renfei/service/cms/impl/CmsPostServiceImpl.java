@@ -2,7 +2,7 @@ package net.renfei.service.cms.impl;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-import net.renfei.config.RenFeiConfig;
+import net.renfei.config.SystemConfig;
 import net.renfei.repository.dao.cms.TCmsPostTagMapper;
 import net.renfei.repository.dao.cms.TCmsPostsMapper;
 import net.renfei.repository.dao.cms.model.TCmsPostTag;
@@ -37,10 +37,10 @@ public class CmsPostServiceImpl extends BaseService implements CmsPostService {
     private final TCmsPostsMapper postsMapper;
     private final TCmsPostTagMapper postTagMapper;
 
-    protected CmsPostServiceImpl(RenFeiConfig renFeiConfig,
+    protected CmsPostServiceImpl(SystemConfig systemConfig,
                                  TCmsPostsMapper postsMapper,
                                  TCmsPostTagMapper postTagMapper) {
-        super(renFeiConfig);
+        super(systemConfig);
         this.postsMapper = postsMapper;
         this.postTagMapper = postTagMapper;
     }

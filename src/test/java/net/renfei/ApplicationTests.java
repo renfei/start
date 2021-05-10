@@ -3,7 +3,7 @@ package net.renfei;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
-import net.renfei.config.RenFeiConfig;
+import net.renfei.config.SystemConfig;
 import net.renfei.sdk.utils.AESUtil;
 import net.renfei.sdk.utils.RSAUtils;
 import net.renfei.web.api.start.ao.ReportPublicKeyAO;
@@ -36,7 +36,7 @@ public class ApplicationTests {
     @Autowired
     protected MockMvc mockMvc;
     @Autowired
-    protected RenFeiConfig renFeiConfig;
+    protected SystemConfig systemConfig;
 
     @BeforeEach
     public void getToken() throws Exception {

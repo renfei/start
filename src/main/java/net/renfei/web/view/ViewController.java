@@ -1,6 +1,6 @@
 package net.renfei.web.view;
 
-import net.renfei.config.RenFeiConfig;
+import net.renfei.config.SystemConfig;
 import net.renfei.web.BaseController;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -13,8 +13,8 @@ import org.springframework.web.servlet.ModelAndView;
  * @author renfei
  */
 public abstract class ViewController extends BaseController {
-    public ViewController(RenFeiConfig renFeiConfig) {
-        super(renFeiConfig);
+    public ViewController(SystemConfig systemConfig) {
+        super(systemConfig);
     }
 
     /**

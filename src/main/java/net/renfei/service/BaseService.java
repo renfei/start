@@ -1,14 +1,14 @@
 package net.renfei.service;
 
-import net.renfei.config.RenFeiConfig;
+import net.renfei.config.SystemConfig;
 
 /**
  * @author renfei
  */
 public abstract class BaseService {
-    protected final RenFeiConfig renFeiConfig;
+    protected final SystemConfig systemConfig;
 
-    protected BaseService(RenFeiConfig renFeiConfig) {
-        this.renFeiConfig = renFeiConfig;
+    protected BaseService(SystemConfig systemConfig) {
+        this.systemConfig = systemConfig;
     }
 }

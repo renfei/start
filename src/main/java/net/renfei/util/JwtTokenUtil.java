@@ -4,7 +4,7 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import net.renfei.config.RenFeiConfig;
+import net.renfei.config.SystemConfig;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
@@ -22,10 +22,10 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 @Component
 public class JwtTokenUtil {
-    private final RenFeiConfig renFeiConfig;
+    private final SystemConfig systemConfig;
 
-    public JwtTokenUtil(RenFeiConfig renFeiConfig) {
-        this.renFeiConfig = renFeiConfig;
+    public JwtTokenUtil(SystemConfig systemConfig) {
+        this.systemConfig = systemConfig;
     }
 
     public String createJwt(String userName) {
@@ -47,14 +47,14 @@ public class JwtTokenUtil {
                 // 签发时间
                 .setIssuedAt(now)
                 // 签发者
-                .setIssuer(renFeiConfig.getJwt().getIssuer());
+                .setIssuer(systemConfig.getJwt().getIssuer());
 
         JwtBuilder builder = Jwts.builder().setHeader(map)
                 // 使用 JSON 实例设置 payload
                 .setClaims(claims)
                 // 签名算法以及密钥
                 .signWith(secretKey, algorithm);
-        Date expDate = new Date(System.currentTimeMillis() + renFeiConfig.getJwt().getExpiration());
+        Date expDate = new Date(System.currentTimeMillis() + systemConfig.getJwt().getExpiration());
         // 过期时间
         builder.setExpiration(expDate);
         return builder.compact();
@@ -85,7 +85,7 @@ public class JwtTokenUtil {
     }
 
     private SecretKey generalKey() {
-        byte[] encodedKey = Base64.getDecoder().decode(renFeiConfig.getJwt().getSecret());
+        byte[] encodedKey = Base64.getDecoder().decode(systemConfig.getJwt().getSecret());
         return new SecretKeySpec(encodedKey, 0, encodedKey.length, "HmacSHA256");
     }
 }

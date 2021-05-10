@@ -1,6 +1,6 @@
 package net.renfei.service.cms.impl;
 
-import net.renfei.config.RenFeiConfig;
+import net.renfei.config.SystemConfig;
 import net.renfei.exception.BusinessException;
 import net.renfei.repository.dao.cms.TCmsPostTagMapper;
 import net.renfei.repository.dao.cms.TCmsTagMapper;
@@ -31,10 +31,10 @@ public class CmsTagServiceImpl extends BaseService implements CmsTagService {
     private final TCmsTagMapper tagMapper;
     private final TCmsPostTagMapper postTagMapper;
 
-    protected CmsTagServiceImpl(RenFeiConfig renFeiConfig,
+    protected CmsTagServiceImpl(SystemConfig systemConfig,
                                 TCmsTagMapper tagMapper,
                                 TCmsPostTagMapper postTagMapper) {
-        super(renFeiConfig);
+        super(systemConfig);
         this.tagMapper = tagMapper;
         this.postTagMapper = postTagMapper;
     }

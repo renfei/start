@@ -1,6 +1,6 @@
 package net.renfei.service.cms.impl;
 
-import net.renfei.config.RenFeiConfig;
+import net.renfei.config.SystemConfig;
 import net.renfei.service.BaseService;
 import net.renfei.service.cms.CmsCommentsService;
 import org.springframework.stereotype.Service;
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class CmsCommentsServiceImpl extends BaseService implements CmsCommentsService {
-    protected CmsCommentsServiceImpl(RenFeiConfig renFeiConfig) {
-        super(renFeiConfig);
+    protected CmsCommentsServiceImpl(SystemConfig systemConfig) {
+        super(systemConfig);
     }
 }

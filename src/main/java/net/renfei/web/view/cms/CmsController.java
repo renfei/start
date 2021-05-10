@@ -1,6 +1,6 @@
 package net.renfei.web.view.cms;
 
-import net.renfei.config.RenFeiConfig;
+import net.renfei.config.SystemConfig;
 import net.renfei.service.cms.CmsPostService;
 import net.renfei.web.view.ViewController;
 import org.springframework.stereotype.Controller;
@@ -14,9 +14,9 @@ import org.springframework.stereotype.Controller;
 public class CmsController extends ViewController {
     private final CmsPostService cmsPostService;
 
-    public CmsController(RenFeiConfig renFeiConfig,
+    public CmsController(SystemConfig systemConfig,
                          CmsPostService cmsPostService) {
-        super(renFeiConfig);
+        super(systemConfig);
         this.cmsPostService = cmsPostService;
     }
 }

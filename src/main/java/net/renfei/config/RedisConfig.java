@@ -32,12 +32,12 @@ import java.time.Duration;
 @Slf4j
 @Configuration
 public class RedisConfig extends CachingConfigurerSupport {
-    private final RenFeiConfig renFeiConfig;
+    private final SystemConfig systemConfig;
     @Resource
     private LettuceConnectionFactory lettuceConnectionFactory;
 
-    public RedisConfig(RenFeiConfig renFeiConfig) {
-        this.renFeiConfig = renFeiConfig;
+    public RedisConfig(SystemConfig systemConfig) {
+        this.systemConfig = systemConfig;
     }
 
     @Bean
@@ -46,7 +46,7 @@ public class RedisConfig extends CachingConfigurerSupport {
         //设置Redis缓存有效期为1天
         RedisCacheConfiguration redisCacheConfiguration = RedisCacheConfiguration.defaultCacheConfig()
                 .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(new GenericFastJsonRedisSerializer()))
-                .entryTtl(Duration.ofSeconds(renFeiConfig.getDataCahe().getExpireTime()));
+                .entryTtl(Duration.ofSeconds(systemConfig.getDataCahe().getExpireTime()));
         return new RedisCacheManager(redisCacheWriter, redisCacheConfiguration);
     }
 

@@ -1,6 +1,6 @@
 package net.renfei.web.api.cms;
 
-import net.renfei.config.RenFeiConfig;
+import net.renfei.config.SystemConfig;
 import net.renfei.service.cms.CmsPostService;
 import net.renfei.web.BaseController;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class CmsApiController extends BaseController {
     private final CmsPostService cmsPostService;
 
-    protected CmsApiController(RenFeiConfig renFeiConfig,
+    protected CmsApiController(SystemConfig systemConfig,
                                CmsPostService cmsPostService) {
-        super(renFeiConfig);
+        super(systemConfig);
         this.cmsPostService = cmsPostService;
     }
 }

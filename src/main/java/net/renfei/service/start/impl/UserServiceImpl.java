@@ -1,7 +1,7 @@
 package net.renfei.service.start.impl;
 
 import com.aliyun.oss.ServiceException;
-import net.renfei.config.RenFeiConfig;
+import net.renfei.config.SystemConfig;
 import net.renfei.exception.BusinessException;
 import net.renfei.exception.NeedU2FException;
 import net.renfei.repository.dao.start.TStartUserMapper;
@@ -30,10 +30,10 @@ public class UserServiceImpl extends BaseService implements UserService, UserDet
     private final TStartUserMapper userMapper;
     private final PermissionService permissionService;
 
-    protected UserServiceImpl(RenFeiConfig renFeiConfig,
+    protected UserServiceImpl(SystemConfig systemConfig,
                               TStartUserMapper userMapper,
                               PermissionService permissionService) {
-        super(renFeiConfig);
+        super(systemConfig);
         this.userMapper = userMapper;
         this.permissionService = permissionService;
     }

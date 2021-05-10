@@ -1,6 +1,6 @@
 package net.renfei.service.cms.impl;
 
-import net.renfei.config.RenFeiConfig;
+import net.renfei.config.SystemConfig;
 import net.renfei.exception.BusinessException;
 import net.renfei.repository.dao.cms.TCmsCategoryMapper;
 import net.renfei.repository.dao.cms.TCmsPostsMapper;
@@ -30,10 +30,10 @@ public class CmsCategoryServiceImpl extends BaseService implements CmsCategorySe
     private final TCmsPostsMapper postsMapper;
     private final TCmsCategoryMapper categoryMapper;
 
-    protected CmsCategoryServiceImpl(RenFeiConfig renFeiConfig,
+    protected CmsCategoryServiceImpl(SystemConfig systemConfig,
                                      TCmsPostsMapper postsMapper,
                                      TCmsCategoryMapper categoryMapper) {
-        super(renFeiConfig);
+        super(systemConfig);
         this.postsMapper = postsMapper;
         this.categoryMapper = categoryMapper;
     }
