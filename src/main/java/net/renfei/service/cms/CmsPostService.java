@@ -2,6 +2,7 @@ package net.renfei.service.cms;
 
 import net.renfei.sdk.entity.ListData;
 import net.renfei.service.cms.dto.PostDTO;
+import net.renfei.web.api.cms.ao.PostAO;
 
 /**
  * 文章服务
@@ -9,6 +10,27 @@ import net.renfei.service.cms.dto.PostDTO;
  * @author renfei
  */
 public interface CmsPostService {
+    /**
+     * 添加文章
+     *
+     * @param post 文章对象
+     */
+    void addPost(PostAO post);
+
+    /**
+     * 更新文章
+     *
+     * @param post 文章对象
+     */
+    void updatePost(PostAO post);
+
+    /**
+     * 删除文章
+     *
+     * @param id 文章ID
+     */
+    void deletePost(long id);
+
     /**
      * 获取全部文章列表
      *

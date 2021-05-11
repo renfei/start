@@ -37,6 +37,9 @@ system:
   buildTime: @buildtimestamp@
   totpSecret: <totpSecret>
   authMode: RESET
+  fileUploadPath: /opt/RenFeiNet/
+  #  fileUploadMode: ALIYUNOSS
+  fileUploadMode: LOCAL
   dataCahe:
     ## 设置缓存有效期 秒，2小时
     expireTime: 7200

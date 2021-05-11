@@ -25,6 +25,8 @@ public class SystemConfig {
     private String buildTime;
     private String totpSecret;
     private String authMode;
+    private String fileUploadPath;
+    private String fileUploadMode;
     private Aliyun aliyun;
     private Baidu baidu;
     private Google google;

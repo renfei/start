@@ -187,6 +187,9 @@ public class CmsCategoryServiceImpl extends BaseService implements CmsCategorySe
         example.createCriteria()
                 .andEnNameEqualTo(enName);
         TCmsCategory cmsCategory = ListUtils.getOne(categoryMapper.selectByExample(example));
+        if (cmsCategory == null) {
+            return null;
+        }
         CategoryDTO categoryDTO = new CategoryDTO();
         BeanUtils.copyProperties(cmsCategory, categoryDTO);
         return categoryDTO;

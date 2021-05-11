@@ -164,7 +164,8 @@
                 #{title,jdbcType=LONGVARCHAR}, #{content,jdbcType=LONGVARCHAR}, #{sourceUrl,jdbcType=LONGVARCHAR},
                 #{sourceName,jdbcType=LONGVARCHAR}, #{describes,jdbcType=LONGVARCHAR}, #{keyword,jdbcType=LONGVARCHAR})
     </insert>
-    <insert id="insertSelective" parameterType="net.renfei.repository.dao.cms.model.TCmsPostsWithBLOBs">
+    <insert id="insertSelective" parameterType="net.renfei.repository.dao.cms.model.TCmsPostsWithBLOBs"
+            useGeneratedKeys="true" keyColumn="id">
         insert into t_cms_posts
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
