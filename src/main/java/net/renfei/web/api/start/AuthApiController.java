@@ -104,7 +104,7 @@ public class AuthApiController extends BaseController {
             request.getSession().setAttribute(SESSION_KEY, userDTO);
         } else {
             // 签发 TOKEN
-            String token = jwtTokenUtil.createJwt(userDTO.getUsername());
+            String token = jwtTokenUtil.createJwt(userDTO.getUsername(), request);
             signInVO.setToken(token);
         }
         return new APIResult<>(signInVO);

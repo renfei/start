@@ -60,7 +60,7 @@ public class JwtTokenFilter extends OncePerRequestFilter {
                 return;
             }
             final String token = auth.split(" ")[1].trim();
-            if (!jwtTokenUtil.validate(token)) {
+            if (!jwtTokenUtil.validate(token, request)) {
                 chain.doFilter(request, response);
                 return;
             }

@@ -5,10 +5,12 @@ import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import net.renfei.config.SystemConfig;
+import net.renfei.sdk.utils.IpUtils;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
+import javax.servlet.http.HttpServletRequest;
 import java.util.Base64;
 import java.util.Date;
 import java.util.Map;
@@ -28,7 +30,7 @@ public class JwtTokenUtil {
         this.systemConfig = systemConfig;
     }
 
-    public String createJwt(String userName) {
+    public String createJwt(String userName, HttpServletRequest request) {
         SignatureAlgorithm algorithm = SignatureAlgorithm.HS256;
         long nowMillis = System.currentTimeMillis();
         Date now = new Date(nowMillis);
@@ -44,6 +46,8 @@ public class JwtTokenUtil {
         claims.setId(UUID.randomUUID().toString())
                 // 主题
                 .setSubject(userName)
+                // 受众，跟IP绑定
+                .setAudience(IpUtils.getIpAddress(request))
                 // 签发时间
                 .setIssuedAt(now)
                 // 签发者
@@ -66,8 +70,12 @@ public class JwtTokenUtil {
         return claims == null ? null : claims.getSubject();
     }
 
-    public boolean validate(String token) {
-        return this.parseJwt(token) != null;
+    public boolean validate(String token, HttpServletRequest request) {
+        Claims claims = this.parseJwt(token);
+        if (this.parseJwt(token) == null) {
+            return false;
+        }
+        return IpUtils.getIpAddress(request).equals(claims.getAudience());
     }
 
     public Claims parseJwt(String jwt) {
