@@ -4,6 +4,8 @@ import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 /**
  * <p>Title: RenFeiConfig</p>
  * <p>Description: 自定义配置</p>
@@ -27,6 +29,7 @@ public class SystemConfig {
     private String authMode;
     private String fileUploadPath;
     private String fileUploadMode;
+    private List<String> authIgnore;
     private Aliyun aliyun;
     private Baidu baidu;
     private Google google;

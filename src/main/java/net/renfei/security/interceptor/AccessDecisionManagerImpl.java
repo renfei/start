@@ -1,5 +1,6 @@
 package net.renfei.security.interceptor;
 
+import net.renfei.config.SystemConfig;
 import net.renfei.service.start.impl.UserServiceImpl;
 import org.springframework.security.access.AccessDecisionManager;
 import org.springframework.security.access.AccessDeniedException;
@@ -23,6 +24,12 @@ import java.util.Collection;
  */
 @Component
 public class AccessDecisionManagerImpl implements AccessDecisionManager {
+    private final SystemConfig systemConfig;
+
+    public AccessDecisionManagerImpl(SystemConfig systemConfig) {
+        this.systemConfig = systemConfig;
+    }
+
     /**
      * 取当前用户的权限与这次请求的这个url需要的权限作对比，决定是否放行
      * auth 包含了当前的用户信息，包括拥有的权限,即之前{@link UserServiceImpl}登录时候存储的用户对象
@@ -44,9 +51,14 @@ public class AccessDecisionManagerImpl implements AccessDecisionManager {
             throw new AccessDeniedException("Access Denied! 当前访问没有权限！");
         }
         HttpServletRequest request = ((FilterInvocation) object).getHttpRequest();
-        if (new AntPathRequestMatcher("/api/auth/**").matches(request)) {
-            //登陆接口不做限制
-            return;
+        if (systemConfig.getAuthIgnore() != null && !systemConfig.getAuthIgnore().isEmpty()) {
+            for (String url : systemConfig.getAuthIgnore()
+            ) {
+                // 需要忽略鉴权的地址，直接 return
+                if (new AntPathRequestMatcher(url).matches(request)) {
+                    return;
+                }
+            }
         }
         //当前用户所具有的权限
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
@@ -63,8 +75,6 @@ public class AccessDecisionManagerImpl implements AccessDecisionManager {
             //API接口，抛出禁止访问
             throw new AccessDeniedException("Access Denied! 权限不足！");
         }
-        // 其他未命中的放行，如果还需保护其他地址请新增
-        return;
     }
 
     @Override

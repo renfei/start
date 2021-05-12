@@ -40,6 +40,9 @@ system:
   fileUploadPath: /opt/RenFeiNet/
   #  fileUploadMode: ALIYUNOSS
   fileUploadMode: LOCAL
+  authIgnore:
+    - /api/auth/**
+    - /api/regionCode/**
   dataCahe:
     ## 设置缓存有效期 秒，2小时
     expireTime: 7200
