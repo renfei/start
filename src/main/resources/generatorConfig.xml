@@ -67,5 +67,6 @@
         <!--<table schema="start" delimitAllColumns="true" tableName="t_cms_post_tag"/>-->
         <!--<table schema="start" delimitAllColumns="true" tableName="t_cms_comments"/>-->
         <!--<table schema="start" delimitAllColumns="true" tableName="t_cms_category"/>-->
+        <!--<table schema="start" delimitAllColumns="true" tableName="t_cms_post_attachments"/>-->
     </context>
 </generatorConfiguration>
