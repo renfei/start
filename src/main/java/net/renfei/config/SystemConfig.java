@@ -30,6 +30,7 @@ public class SystemConfig {
     private String authMode;
     private String fileUploadPath;
     private String fileUploadMode;
+    private Integer fileEncryptionXor;
     private List<String> authIgnore;
     private ConfidentialRankEnum maxConfidentialRank;
     private Aliyun aliyun;

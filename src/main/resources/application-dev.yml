@@ -40,6 +40,7 @@ system:
   fileUploadPath: /opt/RenFeiNet/
   #  fileUploadMode: ALIYUNOSS
   fileUploadMode: LOCAL
+  fileEncryptionXor: 152
   authIgnore:
     - /api/auth/**
     - /api/regionCode/**
