@@ -4,6 +4,8 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import java.io.Serializable;
+
 /**
  * <p>Title: IpInfoDTO</p>
  * <p>Description: IP信息数据传输对象</p>
@@ -12,7 +14,8 @@ import lombok.Data;
  */
 @Data
 @ApiModel(value = "IP信息数据传输对象", description = "IP信息数据传输对象")
-public class IpInfoDTO {
+public class IpInfoDTO implements Serializable {
+    private static final long serialVersionUID = 1L;
     @ApiModelProperty(value = "IP地址")
     String ipAddress;
     @ApiModelProperty(value = "国家缩写")

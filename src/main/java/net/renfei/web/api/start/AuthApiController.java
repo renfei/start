@@ -2,7 +2,7 @@ package net.renfei.web.api.start;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import net.renfei.config.RenFeiConfig;
+import net.renfei.config.SystemConfig;
 import net.renfei.exception.BusinessException;
 import net.renfei.sdk.comm.StateCode;
 import net.renfei.sdk.entity.APIResult;
@@ -29,16 +29,16 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/auth")
 @Api(value = "认证接口", tags = "认证接口")
-public class AuthController extends BaseController {
+public class AuthApiController extends BaseController {
     private final UserService userService;
     private final JwtTokenUtil jwtTokenUtil;
     private final SecretKeyService secretKeyService;
 
-    public AuthController(RenFeiConfig renFeiConfig,
-                          UserService userService,
-                          JwtTokenUtil jwtTokenUtil,
-                          SecretKeyService secretKeyService) {
-        super(renFeiConfig);
+    public AuthApiController(SystemConfig systemConfig,
+                             UserService userService,
+                             JwtTokenUtil jwtTokenUtil,
+                             SecretKeyService secretKeyService) {
+        super(systemConfig);
         this.userService = userService;
         this.jwtTokenUtil = jwtTokenUtil;
         this.secretKeyService = secretKeyService;
@@ -99,12 +99,12 @@ public class AuthController extends BaseController {
         } catch (BusinessException businessException) {
             return APIResult.builder().code(StateCode.Failure).message(businessException.getMessage()).build();
         }
-        if ("SESSION".equals(renFeiConfig.getAuthMode())) {
+        if ("SESSION".equals(systemConfig.getAuthMode())) {
             // 放入 Session
             request.getSession().setAttribute(SESSION_KEY, userDTO);
         } else {
             // 签发 TOKEN
-            String token = jwtTokenUtil.createJwt(userDTO.getUsername());
+            String token = jwtTokenUtil.createJwt(userDTO.getUsername(), request);
             signInVO.setToken(token);
         }
         return new APIResult<>(signInVO);

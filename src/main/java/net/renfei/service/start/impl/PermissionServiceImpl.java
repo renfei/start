@@ -1,6 +1,6 @@
 package net.renfei.service.start.impl;
 
-import net.renfei.config.RenFeiConfig;
+import net.renfei.config.SystemConfig;
 import net.renfei.repository.dao.start.TStartPermissionMapper;
 import net.renfei.repository.dao.start.TStartRoleMapper;
 import net.renfei.repository.dao.start.TStartRolePermissionMapper;
@@ -33,12 +33,12 @@ public class PermissionServiceImpl extends BaseService implements PermissionServ
     private final TStartPermissionMapper permissionMapper;
     private final TStartRolePermissionMapper rolePermissionMapper;
 
-    protected PermissionServiceImpl(RenFeiConfig renFeiConfig,
+    protected PermissionServiceImpl(SystemConfig systemConfig,
                                     TStartRoleMapper roleMapper,
                                     TStartUserRoleMapper userRoleMapper,
                                     TStartPermissionMapper permissionMapper,
                                     TStartRolePermissionMapper rolePermissionMapper) {
-        super(renFeiConfig);
+        super(systemConfig);
         this.roleMapper = roleMapper;
         this.userRoleMapper = userRoleMapper;
         this.permissionMapper = permissionMapper;

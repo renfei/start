@@ -1,7 +1,7 @@
 package net.renfei.web.api.start;
 
 import com.wf.captcha.ArithmeticCaptcha;
-import net.renfei.config.RenFeiConfig;
+import net.renfei.config.SystemConfig;
 import net.renfei.sdk.entity.APIResult;
 import net.renfei.service.start.StorageService;
 import net.renfei.service.start.StorageServiceFactory;
@@ -26,9 +26,9 @@ import java.util.UUID;
 public class CommonController extends BaseController {
     private final StorageServiceFactory storageServiceFactory;
 
-    public CommonController(RenFeiConfig renFeiConfig,
+    public CommonController(SystemConfig systemConfig,
                             StorageServiceFactory storageServiceFactory) {
-        super(renFeiConfig);
+        super(systemConfig);
         this.storageServiceFactory = storageServiceFactory;
     }
 

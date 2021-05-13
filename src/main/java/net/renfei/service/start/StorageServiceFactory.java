@@ -1,7 +1,7 @@
 package net.renfei.service.start;
 
 import lombok.extern.slf4j.Slf4j;
-import net.renfei.config.RenFeiConfig;
+import net.renfei.config.SystemConfig;
 import net.renfei.service.start.impl.SessionStorageServiceImpl;
 import org.springframework.stereotype.Service;
 
@@ -16,10 +16,10 @@ import javax.servlet.http.HttpServletRequest;
 @Slf4j
 @Service
 public class StorageServiceFactory {
-    private final RenFeiConfig renFeiConfig;
+    private final SystemConfig systemConfig;
 
-    public StorageServiceFactory(RenFeiConfig renFeiConfig) {
-        this.renFeiConfig = renFeiConfig;
+    public StorageServiceFactory(SystemConfig systemConfig) {
+        this.systemConfig = systemConfig;
     }
 
     public StorageService getStorageService(HttpServletRequest request) {

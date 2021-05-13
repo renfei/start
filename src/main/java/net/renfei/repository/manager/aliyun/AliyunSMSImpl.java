@@ -5,7 +5,7 @@ import com.aliyuncs.CommonResponse;
 import com.aliyuncs.exceptions.ClientException;
 import com.aliyuncs.http.MethodType;
 import lombok.extern.slf4j.Slf4j;
-import net.renfei.config.RenFeiConfig;
+import net.renfei.config.SystemConfig;
 import net.renfei.service.start.SmsService;
 import net.renfei.service.start.dto.SmsDTO;
 import org.springframework.stereotype.Service;
@@ -18,8 +18,8 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @Service
 public class AliyunSMSImpl extends AliyunService implements SmsService {
-    protected AliyunSMSImpl(RenFeiConfig renFeiConfig) {
-        super(renFeiConfig, null);
+    protected AliyunSMSImpl(SystemConfig systemConfig) {
+        super(systemConfig, null);
     }
 
     @Override
@@ -30,7 +30,7 @@ public class AliyunSMSImpl extends AliyunService implements SmsService {
         request.setSysDomain("dysmsapi.aliyuncs.com");
         request.setSysVersion("2017-05-25");
         request.setSysAction("SendSms");
-        request.putQueryParameter("RegionId", renFeiConfig.getAliyun().getSms().getRegionId());
+        request.putQueryParameter("RegionId", systemConfig.getAliyun().getSms().getRegionId());
         request.putQueryParameter("PhoneNumbers", sms.getPhoneNumbers());
         request.putQueryParameter("SignName", sms.getSignName());
         request.putQueryParameter("TemplateCode", sms.getTemplateCode());

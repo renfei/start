@@ -1,13 +1,14 @@
 package net.renfei.service.start.impl;
 
 import com.aliyun.oss.ServiceException;
-import net.renfei.config.RenFeiConfig;
+import net.renfei.config.SystemConfig;
 import net.renfei.exception.BusinessException;
 import net.renfei.exception.NeedU2FException;
 import net.renfei.repository.dao.start.TStartUserMapper;
 import net.renfei.repository.dao.start.model.TStartUser;
 import net.renfei.repository.dao.start.model.TStartUserExample;
 import net.renfei.sdk.utils.*;
+import net.renfei.security.ConfidentialRankEnum;
 import net.renfei.service.BaseService;
 import net.renfei.service.start.PermissionService;
 import net.renfei.service.start.UserService;
@@ -30,10 +31,10 @@ public class UserServiceImpl extends BaseService implements UserService, UserDet
     private final TStartUserMapper userMapper;
     private final PermissionService permissionService;
 
-    protected UserServiceImpl(RenFeiConfig renFeiConfig,
+    protected UserServiceImpl(SystemConfig systemConfig,
                               TStartUserMapper userMapper,
                               PermissionService permissionService) {
-        super(renFeiConfig);
+        super(systemConfig);
         this.userMapper = userMapper;
         this.permissionService = permissionService;
     }
@@ -60,6 +61,7 @@ public class UserServiceImpl extends BaseService implements UserService, UserDet
         TStartUser user = ListUtils.getOne(userMapper.selectByExample(example));
         UserDTO userDTO = new UserDTO(permissionService);
         org.springframework.beans.BeanUtils.copyProperties(user, userDTO);
+        userDTO.setConfidentialRank(ConfidentialRankEnum.parse(user.getConfidentialRank()));
         return userDTO;
     }
 
@@ -124,11 +126,11 @@ public class UserServiceImpl extends BaseService implements UserService, UserDet
                 .andIsDeletedEqualTo(false)
                 .andUuidEqualTo(uuid);
         TStartUser user = ListUtils.getOne(userMapper.selectByExample(example));
-        // 记录错误，如果错误超过6次，锁定时间为 (N-6)*1分钟
+        // 记录错误，如果错误超过3次，锁定时间为 (N-3)*10分钟
         user.setTrialErrorTimes(user.getTrialErrorTimes() + 1);
-        if (user.getTrialErrorTimes() > 6) {
+        if (user.getTrialErrorTimes() > 3) {
             // 锁定时间
-            user.setLockTime(DateUtils.nextMinutes(user.getTrialErrorTimes() - 6));
+            user.setLockTime(DateUtils.nextMinutes((user.getTrialErrorTimes() - 3) * 10));
         }
         userMapper.updateByPrimaryKeySelective(user);
     }

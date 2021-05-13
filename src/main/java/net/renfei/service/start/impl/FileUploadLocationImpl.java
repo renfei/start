@@ -1,7 +1,7 @@
 package net.renfei.service.start.impl;
 
 import lombok.extern.slf4j.Slf4j;
-import net.renfei.config.RenFeiConfig;
+import net.renfei.config.SystemConfig;
 import net.renfei.exception.BusinessException;
 import net.renfei.sdk.utils.BeanUtils;
 import net.renfei.service.BaseService;
@@ -27,8 +27,8 @@ import java.util.UUID;
 @Service
 public class FileUploadLocationImpl extends BaseService implements FileUploadService {
 
-    public FileUploadLocationImpl(RenFeiConfig renFeiConfig) {
-        super(renFeiConfig);
+    public FileUploadLocationImpl(SystemConfig systemConfig) {
+        super(systemConfig);
     }
 
     @Override
@@ -51,7 +51,7 @@ public class FileUploadLocationImpl extends BaseService implements FileUploadSer
             return null;
         }
         if (BeanUtils.isEmpty(newPath)) {
-            return renFeiConfig.getStaticDomain() + "/" + path + fileName;
+            return systemConfig.getStaticDomain() + "/" + path + fileName;
         } else {
             return newPath + "/" + path + fileName;
         }
@@ -76,7 +76,7 @@ public class FileUploadLocationImpl extends BaseService implements FileUploadSer
             return null;
         }
         if (BeanUtils.isEmpty(newPath)) {
-            return renFeiConfig.getStaticDomain() + "/" + path + fileName;
+            return systemConfig.getStaticDomain() + "/" + path + fileName;
         } else {
             return newPath + "/" + path + fileName;
         }

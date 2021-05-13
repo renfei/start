@@ -13,9 +13,9 @@ public interface FileUploadService {
     /**
      * 上传文件
      *
-     * @param multipartFile
-     * @param savePath
-     * @param newPath
+     * @param multipartFile 文件
+     * @param savePath      保存路径
+     * @param newPath       返回路径
      * @return
      */
     String uploadFile(MultipartFile multipartFile, String savePath, String newPath);
@@ -23,9 +23,9 @@ public interface FileUploadService {
     /**
      * 上传文件
      *
-     * @param file
-     * @param savePath
-     * @param newPath
+     * @param file     文件
+     * @param savePath 保存路径
+     * @param newPath  返回路径
      * @return
      */
     String uploadFile(File file, String savePath, String newPath);

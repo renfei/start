@@ -2,7 +2,7 @@ package net.renfei.service.start.impl;
 
 import com.aliyun.oss.ServiceException;
 import lombok.extern.slf4j.Slf4j;
-import net.renfei.config.RenFeiConfig;
+import net.renfei.config.SystemConfig;
 import net.renfei.exception.BusinessException;
 import net.renfei.repository.dao.start.TStartSecretKeyMapper;
 import net.renfei.repository.dao.start.model.TStartSecretKeyExample;
@@ -30,9 +30,9 @@ public class SecretKeyServiceImpl extends BaseService implements SecretKeyServic
     private final static int SERVER_SECRET_KEY_SIZE = 2048;
     private final TStartSecretKeyMapper secretKeyMapper;
 
-    protected SecretKeyServiceImpl(RenFeiConfig renFeiConfig,
+    protected SecretKeyServiceImpl(SystemConfig systemConfig,
                                    TStartSecretKeyMapper secretKeyMapper) {
-        super(renFeiConfig);
+        super(systemConfig);
         this.secretKeyMapper = secretKeyMapper;
     }
 

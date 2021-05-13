@@ -11,6 +11,7 @@
         <result column="release_time" jdbcType="TIMESTAMP" property="releaseTime"/>
         <result column="add_time" jdbcType="TIMESTAMP" property="addTime"/>
         <result column="is_delete" jdbcType="BIT" property="isDelete"/>
+        <result column="confidential_rank" jdbcType="INTEGER" property="confidentialRank"/>
         <result column="is_comment" jdbcType="BIT" property="isComment"/>
         <result column="avg_views" jdbcType="DOUBLE" property="avgViews"/>
         <result column="avg_comment" jdbcType="DOUBLE" property="avgComment"/>
@@ -90,7 +91,8 @@
     <sql id="Base_Column_List">
         `id`
         , `category_id`, `is_original`, `views`, `thumbs_up`, `thumbs_down`, `release_time`,
-    `add_time`, `is_delete`, `is_comment`, `avg_views`, `avg_comment`, `page_rank`, `page_rank_update_time`
+    `add_time`, `is_delete`, `confidential_rank`, `is_comment`, `avg_views`, `avg_comment`, 
+    `page_rank`, `page_rank_update_time`
     </sql>
     <sql id="Blob_Column_List">
         `featured_image`
@@ -151,18 +153,20 @@
         insert into t_cms_posts (`id`, `category_id`, `is_original`,
                                  `views`, `thumbs_up`, `thumbs_down`,
                                  `release_time`, `add_time`, `is_delete`,
-                                 `is_comment`, `avg_views`, `avg_comment`,
-                                 `page_rank`, `page_rank_update_time`, `featured_image`,
-                                 `title`, `content`, `source_url`,
-                                 `source_name`, `describes`, `keyword`)
+                                 `confidential_rank`, `is_comment`, `avg_views`,
+                                 `avg_comment`, `page_rank`, `page_rank_update_time`,
+                                 `featured_image`, `title`, `content`,
+                                 `source_url`, `source_name`, `describes`,
+                                 `keyword`)
         values (#{id,jdbcType=BIGINT}, #{categoryId,jdbcType=BIGINT}, #{isOriginal,jdbcType=BIT},
                 #{views,jdbcType=BIGINT}, #{thumbsUp,jdbcType=BIGINT}, #{thumbsDown,jdbcType=BIGINT},
                 #{releaseTime,jdbcType=TIMESTAMP}, #{addTime,jdbcType=TIMESTAMP}, #{isDelete,jdbcType=BIT},
-                #{isComment,jdbcType=BIT}, #{avgViews,jdbcType=DOUBLE}, #{avgComment,jdbcType=DOUBLE},
-                #{pageRank,jdbcType=DOUBLE}, #{pageRankUpdateTime,jdbcType=TIMESTAMP},
-                #{featuredImage,jdbcType=LONGVARCHAR},
-                #{title,jdbcType=LONGVARCHAR}, #{content,jdbcType=LONGVARCHAR}, #{sourceUrl,jdbcType=LONGVARCHAR},
-                #{sourceName,jdbcType=LONGVARCHAR}, #{describes,jdbcType=LONGVARCHAR}, #{keyword,jdbcType=LONGVARCHAR})
+                #{confidentialRank,jdbcType=INTEGER}, #{isComment,jdbcType=BIT}, #{avgViews,jdbcType=DOUBLE},
+                #{avgComment,jdbcType=DOUBLE}, #{pageRank,jdbcType=DOUBLE}, #{pageRankUpdateTime,jdbcType=TIMESTAMP},
+                #{featuredImage,jdbcType=LONGVARCHAR}, #{title,jdbcType=LONGVARCHAR}, #{content,jdbcType=LONGVARCHAR},
+                #{sourceUrl,jdbcType=LONGVARCHAR}, #{sourceName,jdbcType=LONGVARCHAR},
+                #{describes,jdbcType=LONGVARCHAR},
+                #{keyword,jdbcType=LONGVARCHAR})
     </insert>
     <insert id="insertSelective" parameterType="net.renfei.repository.dao.cms.model.TCmsPostsWithBLOBs">
         insert into t_cms_posts
@@ -193,6 +197,9 @@
             </if>
             <if test="isDelete != null">
                 `is_delete`,
+            </if>
+            <if test="confidentialRank != null">
+                `confidential_rank`,
             </if>
             <if test="isComment != null">
                 `is_comment`,
@@ -258,6 +265,9 @@
             </if>
             <if test="isDelete != null">
                 #{isDelete,jdbcType=BIT},
+            </if>
+            <if test="confidentialRank != null">
+                #{confidentialRank,jdbcType=INTEGER},
             </if>
             <if test="isComment != null">
                 #{isComment,jdbcType=BIT},
@@ -334,6 +344,9 @@
             <if test="record.isDelete != null">
                 `is_delete` = #{record.isDelete,jdbcType=BIT},
             </if>
+            <if test="record.confidentialRank != null">
+                `confidential_rank` = #{record.confidentialRank,jdbcType=INTEGER},
+            </if>
             <if test="record.isComment != null">
                 `is_comment` = #{record.isComment,jdbcType=BIT},
             </if>
@@ -386,6 +399,7 @@
         `release_time` = #{record.releaseTime,jdbcType=TIMESTAMP},
         `add_time` = #{record.addTime,jdbcType=TIMESTAMP},
         `is_delete` = #{record.isDelete,jdbcType=BIT},
+        `confidential_rank` = #{record.confidentialRank,jdbcType=INTEGER},
         `is_comment` = #{record.isComment,jdbcType=BIT},
         `avg_views` = #{record.avgViews,jdbcType=DOUBLE},
         `avg_comment` = #{record.avgComment,jdbcType=DOUBLE},
@@ -413,6 +427,7 @@
         `release_time` = #{record.releaseTime,jdbcType=TIMESTAMP},
         `add_time` = #{record.addTime,jdbcType=TIMESTAMP},
         `is_delete` = #{record.isDelete,jdbcType=BIT},
+        `confidential_rank` = #{record.confidentialRank,jdbcType=INTEGER},
         `is_comment` = #{record.isComment,jdbcType=BIT},
         `avg_views` = #{record.avgViews,jdbcType=DOUBLE},
         `avg_comment` = #{record.avgComment,jdbcType=DOUBLE},
@@ -448,6 +463,9 @@
             </if>
             <if test="isDelete != null">
                 `is_delete` = #{isDelete,jdbcType=BIT},
+            </if>
+            <if test="confidentialRank != null">
+                `confidential_rank` = #{confidentialRank,jdbcType=INTEGER},
             </if>
             <if test="isComment != null">
                 `is_comment` = #{isComment,jdbcType=BIT},
@@ -498,6 +516,7 @@
             `release_time`          = #{releaseTime,jdbcType=TIMESTAMP},
             `add_time`              = #{addTime,jdbcType=TIMESTAMP},
             `is_delete`             = #{isDelete,jdbcType=BIT},
+            `confidential_rank`     = #{confidentialRank,jdbcType=INTEGER},
             `is_comment`            = #{isComment,jdbcType=BIT},
             `avg_views`             = #{avgViews,jdbcType=DOUBLE},
             `avg_comment`           = #{avgComment,jdbcType=DOUBLE},
@@ -522,6 +541,7 @@
             `release_time`          = #{releaseTime,jdbcType=TIMESTAMP},
             `add_time`              = #{addTime,jdbcType=TIMESTAMP},
             `is_delete`             = #{isDelete,jdbcType=BIT},
+            `confidential_rank`     = #{confidentialRank,jdbcType=INTEGER},
             `is_comment`            = #{isComment,jdbcType=BIT},
             `avg_views`             = #{avgViews,jdbcType=DOUBLE},
             `avg_comment`           = #{avgComment,jdbcType=DOUBLE},

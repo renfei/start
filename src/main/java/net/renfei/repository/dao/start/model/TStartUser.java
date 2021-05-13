@@ -40,6 +40,8 @@ public class TStartUser implements Serializable {
 
     private Date lastLogin;
 
+    private Integer confidentialRank;
+
     private static final long serialVersionUID = 1L;
 
     public Long getId() {
@@ -186,6 +188,14 @@ public class TStartUser implements Serializable {
         this.lastLogin = lastLogin;
     }
 
+    public Integer getConfidentialRank() {
+        return confidentialRank;
+    }
+
+    public void setConfidentialRank(Integer confidentialRank) {
+        this.confidentialRank = confidentialRank;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -210,6 +220,7 @@ public class TStartUser implements Serializable {
         sb.append(", lastName=").append(lastName);
         sb.append(", firstName=").append(firstName);
         sb.append(", lastLogin=").append(lastLogin);
+        sb.append(", confidentialRank=").append(confidentialRank);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

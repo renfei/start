@@ -26,7 +26,7 @@ spring:
     database: 0
     password: #默认为空
 # 自定义配置 #####################################
-renfei:
+system:
   active: dev
   version: @project.version@
   siteName: 任霏的博客
@@ -37,6 +37,14 @@ renfei:
   buildTime: @buildtimestamp@
   totpSecret: <totpSecret>
   authMode: RESET
+  fileUploadPath: /opt/RenFeiNet/
+  #  fileUploadMode: ALIYUNOSS
+  fileUploadMode: LOCAL
+  fileEncryptionXor: 152
+  authIgnore:
+    - /api/auth/**
+    - /api/regionCode/**
+  maxConfidentialRank: CONFIDENTIAL
   dataCahe:
     ## 设置缓存有效期 秒，2小时
     expireTime: 7200

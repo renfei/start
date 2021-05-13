@@ -1,6 +1,6 @@
 package net.renfei.service.start.impl;
 
-import net.renfei.config.RenFeiConfig;
+import net.renfei.config.SystemConfig;
 import net.renfei.repository.dao.start.TStartOperationLogMapper;
 import net.renfei.repository.dao.start.model.TStartOperationLogWithBLOBs;
 import net.renfei.service.BaseService;
@@ -24,9 +24,9 @@ import static net.renfei.web.BaseController.SESSION_KEY;
 public class OperationLogServiceForDataBaseImpl extends BaseService implements OperationLogService {
     private final TStartOperationLogMapper operationLogMapper;
 
-    protected OperationLogServiceForDataBaseImpl(RenFeiConfig renFeiConfig,
+    protected OperationLogServiceForDataBaseImpl(SystemConfig systemConfig,
                                                  TStartOperationLogMapper operationLogMapper) {
-        super(renFeiConfig);
+        super(systemConfig);
         this.operationLogMapper = operationLogMapper;
     }
 
@@ -49,7 +49,7 @@ public class OperationLogServiceForDataBaseImpl extends BaseService implements O
             BeanUtils.copyProperties(operationLog, operationLogDo);
             HttpServletRequest request = servletRequestAttributes.getRequest();
             UserDTO user = null;
-            if ("SESSION".equals(renFeiConfig.getAuthMode())) {
+            if ("SESSION".equals(systemConfig.getAuthMode())) {
                 Object session = request.getSession().getAttribute(SESSION_KEY);
                 if (session instanceof UserDTO) {
                     user = (UserDTO) session;

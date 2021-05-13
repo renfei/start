@@ -5,7 +5,7 @@ import com.aliyun.oss.OSS;
 import com.aliyun.oss.OSSClientBuilder;
 import com.aliyun.oss.model.GeneratePresignedUrlRequest;
 import lombok.extern.slf4j.Slf4j;
-import net.renfei.config.RenFeiConfig;
+import net.renfei.config.SystemConfig;
 import net.renfei.exception.BusinessException;
 import net.renfei.sdk.utils.BeanUtils;
 import net.renfei.service.start.FileSignedService;
@@ -29,8 +29,8 @@ import java.util.UUID;
 @Slf4j
 @Service
 public class AliyunOSS extends AliyunService implements FileUploadService, FileSignedService {
-    public AliyunOSS(RenFeiConfig renFeiConfig) {
-        super(renFeiConfig, null);
+    public AliyunOSS(SystemConfig systemConfig) {
+        super(systemConfig, null);
     }
 
     @Override
@@ -52,7 +52,7 @@ public class AliyunOSS extends AliyunService implements FileUploadService, FileS
             return null;
         }
         if (BeanUtils.isEmpty(newPath)) {
-            return renFeiConfig.getStaticDomain() + "/" + path + fileName;
+            return systemConfig.getStaticDomain() + "/" + path + fileName;
         } else {
             return newPath + "/" + path + fileName;
         }
@@ -76,7 +76,7 @@ public class AliyunOSS extends AliyunService implements FileUploadService, FileS
             return null;
         }
         if (BeanUtils.isEmpty(newPath)) {
-            return renFeiConfig.getStaticDomain() + "/" + path + fileName;
+            return systemConfig.getStaticDomain() + "/" + path + fileName;
         } else {
             return newPath + "/" + path + fileName;
         }
@@ -86,24 +86,24 @@ public class AliyunOSS extends AliyunService implements FileUploadService, FileS
     public String getSignedUrl(String objectName) {
         // 设置URL过期时间为24小时。1天(d)=86400000毫秒(ms)
         Date expiration = new Date(System.currentTimeMillis() + 86400000);
-        return getSignedUrl(renFeiConfig.getAliyun().getOss().getDownloadBucketName(), objectName, expiration);
+        return getSignedUrl(systemConfig.getAliyun().getOss().getDownloadBucketName(), objectName, expiration);
     }
 
     @Override
     public String getSignedUrl(String objectName, Date expiration) {
-        return getSignedUrl(renFeiConfig.getAliyun().getOss().getDownloadBucketName(), objectName, expiration);
+        return getSignedUrl(systemConfig.getAliyun().getOss().getDownloadBucketName(), objectName, expiration);
     }
 
     @Override
     public String getSignedUrl(String bucketName, String objectName, Date expiration) {
         // 创建OSSClient实例。
         OSS ossClient = new OSSClientBuilder()
-                .build(renFeiConfig.getAliyun().getOss().getEndpoint(), renFeiConfig.getAliyun().getAccessKeyId(), renFeiConfig.getAliyun().getAccessKeySecret());
+                .build(systemConfig.getAliyun().getOss().getEndpoint(), systemConfig.getAliyun().getAccessKeyId(), systemConfig.getAliyun().getAccessKeySecret());
         // 生成以GET方法访问的签名URL，访客可以直接通过浏览器访问相关内容。
         URL url = ossClient.generatePresignedUrl(bucketName, objectName, expiration);
         // 关闭OSSClient。
         ossClient.shutdown();
-        return renFeiConfig.getAliyun().getOss().getDownloadHost() + url.getPath() + "?" + url.getQuery();
+        return systemConfig.getAliyun().getOss().getDownloadHost() + url.getPath() + "?" + url.getQuery();
     }
 
     /**
@@ -120,20 +120,20 @@ public class AliyunOSS extends AliyunService implements FileUploadService, FileS
         int limitSpeed = speed * 1024 * 8;
         // 创建OSSClient实例。
         OSS ossClient = new OSSClientBuilder()
-                .build(renFeiConfig.getAliyun().getOss().getEndpoint(), renFeiConfig.getAliyun().getAccessKeyId(), renFeiConfig.getAliyun().getAccessKeySecret());
+                .build(systemConfig.getAliyun().getOss().getEndpoint(), systemConfig.getAliyun().getAccessKeyId(), systemConfig.getAliyun().getAccessKeySecret());
         GeneratePresignedUrlRequest request = new GeneratePresignedUrlRequest(bucketName, objectName, HttpMethod.GET);
         request.setExpiration(expiration);
         request.setTrafficLimit(limitSpeed);
         URL url = ossClient.generatePresignedUrl(request);
         ossClient.shutdown();
-        return renFeiConfig.getAliyun().getOss().getDownloadHost() + url.getPath() + "?" + url.getQuery();
+        return systemConfig.getAliyun().getOss().getDownloadHost() + url.getPath() + "?" + url.getQuery();
     }
 
     private void uploadFile(InputStream inputStream, String objectName) {
         // 创建OSSClient实例。
         OSS ossClient = new OSSClientBuilder()
-                .build(renFeiConfig.getAliyun().getOss().getEndpoint(), renFeiConfig.getAliyun().getAccessKeyId(), renFeiConfig.getAliyun().getAccessKeySecret());
-        ossClient.putObject(renFeiConfig.getAliyun().getOss().getBucketName(), objectName, inputStream);
+                .build(systemConfig.getAliyun().getOss().getEndpoint(), systemConfig.getAliyun().getAccessKeyId(), systemConfig.getAliyun().getAccessKeySecret());
+        ossClient.putObject(systemConfig.getAliyun().getOss().getBucketName(), objectName, inputStream);
         // 关闭OSSClient。
         ossClient.shutdown();
     }

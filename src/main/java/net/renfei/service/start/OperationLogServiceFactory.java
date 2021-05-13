@@ -1,6 +1,6 @@
 package net.renfei.service.start;
 
-import net.renfei.config.RenFeiConfig;
+import net.renfei.config.SystemConfig;
 import net.renfei.service.start.impl.OperationLogServiceForDataBaseImpl;
 import org.springframework.stereotype.Service;
 
@@ -12,12 +12,12 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class OperationLogServiceFactory {
-    private final RenFeiConfig renFeiConfig;
+    private final SystemConfig systemConfig;
     private final OperationLogServiceForDataBaseImpl operationLogServiceForDataBase;
 
-    public OperationLogServiceFactory(RenFeiConfig renFeiConfig,
+    public OperationLogServiceFactory(SystemConfig systemConfig,
                                       OperationLogServiceForDataBaseImpl operationLogServiceForDataBase) {
-        this.renFeiConfig = renFeiConfig;
+        this.systemConfig = systemConfig;
         this.operationLogServiceForDataBase = operationLogServiceForDataBase;
     }
 

@@ -3,20 +3,20 @@ package net.renfei.repository.manager.aliyun;
 import com.aliyuncs.DefaultAcsClient;
 import com.aliyuncs.IAcsClient;
 import com.aliyuncs.profile.IClientProfile;
-import net.renfei.config.RenFeiConfig;
+import net.renfei.config.SystemConfig;
 import net.renfei.service.BaseService;
 
 /**
  * @author renfei
  */
 public abstract class AliyunService extends BaseService {
-    protected final RenFeiConfig renFeiConfig;
+    protected final SystemConfig systemConfig;
     protected IAcsClient client;
 
-    protected AliyunService(RenFeiConfig renFeiConfig,
+    protected AliyunService(SystemConfig systemConfig,
                             IClientProfile profile) {
-        super(renFeiConfig);
-        this.renFeiConfig = renFeiConfig;
+        super(systemConfig);
+        this.systemConfig = systemConfig;
         if (profile != null) {
             client = new DefaultAcsClient(profile);
         }

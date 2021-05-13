@@ -1,7 +1,7 @@
 package net.renfei.service.start.impl;
 
 import lombok.extern.slf4j.Slf4j;
-import net.renfei.config.RenFeiConfig;
+import net.renfei.config.SystemConfig;
 import net.renfei.exception.BusinessException;
 import net.renfei.repository.manager.ip2location.IP2Location;
 import net.renfei.repository.manager.ip2location.IPResult;
@@ -34,15 +34,15 @@ public class IPServiceImpl extends BaseService implements IPService {
     private IP2Location ip2LocationV4;
     private IP2Location ip2LocationV6;
 
-    public IPServiceImpl(RenFeiConfig renFeiConfig) {
-        super(renFeiConfig);
-        if (!BeanUtils.isEmpty(renFeiConfig.getIpv4DataPath())) {
+    public IPServiceImpl(SystemConfig systemConfig) {
+        super(systemConfig);
+        if (!BeanUtils.isEmpty(systemConfig.getIpv4DataPath())) {
             this.ip2LocationV4 = new IP2Location();
-            this.ip2LocationV4.IPDatabasePath = renFeiConfig.getIpv4DataPath();
+            this.ip2LocationV4.IPDatabasePath = systemConfig.getIpv4DataPath();
         }
-        if (!BeanUtils.isEmpty(renFeiConfig.getIpv6DataPath())) {
+        if (!BeanUtils.isEmpty(systemConfig.getIpv6DataPath())) {
             this.ip2LocationV6 = new IP2Location();
-            this.ip2LocationV6.IPDatabasePath = renFeiConfig.getIpv6DataPath();
+            this.ip2LocationV6.IPDatabasePath = systemConfig.getIpv6DataPath();
         }
     }
 

@@ -1,6 +1,6 @@
 package net.renfei.web.api.start;
 
-import net.renfei.config.RenFeiConfig;
+import net.renfei.config.SystemConfig;
 import net.renfei.web.BaseController;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/test")
 public class TestController extends BaseController {
-    protected TestController(RenFeiConfig renFeiConfig) {
-        super(renFeiConfig);
+    protected TestController(SystemConfig systemConfig) {
+        super(systemConfig);
     }
 
     @GetMapping("testOne")

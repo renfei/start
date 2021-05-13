@@ -8,7 +8,7 @@ import com.aliyuncs.http.FormatType;
 import com.aliyuncs.http.HttpResponse;
 import com.aliyuncs.profile.DefaultProfile;
 import lombok.extern.slf4j.Slf4j;
-import net.renfei.config.RenFeiConfig;
+import net.renfei.config.SystemConfig;
 import net.renfei.service.GreenNetworkService;
 import org.springframework.stereotype.Service;
 
@@ -23,9 +23,9 @@ import java.util.*;
 @Slf4j
 @Service
 public class AliyunGreenImpl extends AliyunService implements GreenNetworkService {
-    protected AliyunGreenImpl(RenFeiConfig renFeiConfig) {
-        super(renFeiConfig, DefaultProfile.getProfile(renFeiConfig.getAliyun().getGreen().getRegionId(),
-                renFeiConfig.getAliyun().getAccessKeyId(), renFeiConfig.getAliyun().getAccessKeySecret()));
+    protected AliyunGreenImpl(SystemConfig systemConfig) {
+        super(systemConfig, DefaultProfile.getProfile(systemConfig.getAliyun().getGreen().getRegionId(),
+                systemConfig.getAliyun().getAccessKeyId(), systemConfig.getAliyun().getAccessKeySecret()));
     }
 
     /**
@@ -42,7 +42,7 @@ public class AliyunGreenImpl extends AliyunService implements GreenNetworkServic
         // 指定请求方法
         textScanRequest.setSysMethod(com.aliyuncs.http.MethodType.POST);
         textScanRequest.setSysEncoding("UTF-8");
-        textScanRequest.setSysRegionId(renFeiConfig.getAliyun().getGreen().getRegionId());
+        textScanRequest.setSysRegionId(systemConfig.getAliyun().getGreen().getRegionId());
         List<Map<String, Object>> tasks = new ArrayList<Map<String, Object>>();
         Map<String, Object> task1 = new LinkedHashMap<String, Object>();
         task1.put("dataId", UUID.randomUUID().toString());

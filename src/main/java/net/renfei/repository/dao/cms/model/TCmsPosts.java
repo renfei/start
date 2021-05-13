@@ -4,21 +4,36 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class TCmsPosts implements Serializable {
-    private static final long serialVersionUID = 1L;
     private Long id;
+
     private Long categoryId;
+
     private Boolean isOriginal;
+
     private Long views;
+
     private Long thumbsUp;
+
     private Long thumbsDown;
+
     private Date releaseTime;
+
     private Date addTime;
+
     private Boolean isDelete;
+
+    private static final long serialVersionUID = 1L;
+
     private Boolean isComment;
+
     private Double avgViews;
+
     private Double avgComment;
+
     private Double pageRank;
+
     private Date pageRankUpdateTime;
+    private Integer confidentialRank;
 
     public Long getId() {
         return id;
@@ -92,6 +107,14 @@ public class TCmsPosts implements Serializable {
         this.isDelete = isDelete;
     }
 
+    public Integer getConfidentialRank() {
+        return confidentialRank;
+    }
+
+    public void setConfidentialRank(Integer confidentialRank) {
+        this.confidentialRank = confidentialRank;
+    }
+
     public Boolean getIsComment() {
         return isComment;
     }
@@ -147,6 +170,7 @@ public class TCmsPosts implements Serializable {
         sb.append(", releaseTime=").append(releaseTime);
         sb.append(", addTime=").append(addTime);
         sb.append(", isDelete=").append(isDelete);
+        sb.append(", confidentialRank=").append(confidentialRank);
         sb.append(", isComment=").append(isComment);
         sb.append(", avgViews=").append(avgViews);
         sb.append(", avgComment=").append(avgComment);

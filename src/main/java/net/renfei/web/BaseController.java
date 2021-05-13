@@ -1,6 +1,6 @@
 package net.renfei.web;
 
-import net.renfei.config.RenFeiConfig;
+import net.renfei.config.SystemConfig;
 import net.renfei.sdk.utils.IpUtils;
 import net.renfei.service.start.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,12 +18,12 @@ import javax.servlet.http.HttpServletRequest;
  */
 public abstract class BaseController {
     public static final String SESSION_KEY = "signedUserSession";
-    protected final RenFeiConfig renFeiConfig;
+    protected final SystemConfig systemConfig;
     @Autowired
     protected HttpServletRequest request;
 
-    protected BaseController(RenFeiConfig renFeiConfig) {
-        this.renFeiConfig = renFeiConfig;
+    protected BaseController(SystemConfig systemConfig) {
+        this.systemConfig = systemConfig;
     }
 
     /**
@@ -44,7 +44,7 @@ public abstract class BaseController {
 
     protected UserDTO getSignedUser() {
         Object object = null;
-        if ("SESSION".equals(renFeiConfig.getAuthMode())) {
+        if ("SESSION".equals(systemConfig.getAuthMode())) {
             object = request.getSession().getAttribute(SESSION_KEY);
         } else {
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

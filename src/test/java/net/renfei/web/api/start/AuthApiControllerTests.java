@@ -19,7 +19,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * @author renfei
  */
 @Slf4j
-class AuthControllerTests extends ApplicationTests {
+class AuthApiControllerTests extends ApplicationTests {
     @Test
     public void getMyInfo() throws Exception {
         if (TOKEN != null) {

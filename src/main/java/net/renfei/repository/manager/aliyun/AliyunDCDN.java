@@ -3,7 +3,7 @@ package net.renfei.repository.manager.aliyun;
 import com.aliyuncs.dcdn.model.v20180115.SetDcdnDomainCertificateRequest;
 import com.aliyuncs.exceptions.ClientException;
 import com.aliyuncs.profile.DefaultProfile;
-import net.renfei.config.RenFeiConfig;
+import net.renfei.config.SystemConfig;
 import org.springframework.stereotype.Service;
 
 /**
@@ -13,11 +13,11 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class AliyunDCDN extends AliyunService {
-    protected AliyunDCDN(RenFeiConfig renFeiConfig) {
-        super(renFeiConfig,
+    protected AliyunDCDN(SystemConfig systemConfig) {
+        super(systemConfig,
                 DefaultProfile.getProfile("cn-hangzhou",
-                        renFeiConfig.getAliyun().getAccessKeyId(),
-                        renFeiConfig.getAliyun().getAccessKeySecret()));
+                        systemConfig.getAliyun().getAccessKeyId(),
+                        systemConfig.getAliyun().getAccessKeySecret()));
     }
 
     public void setDcdnDomainCertificate(String domainName, String certName, String privateKey) throws ClientException {

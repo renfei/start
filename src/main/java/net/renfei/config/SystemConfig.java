@@ -1,8 +1,11 @@
 package net.renfei.config;
 
 import lombok.Data;
+import net.renfei.security.ConfidentialRankEnum;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 /**
  * <p>Title: RenFeiConfig</p>
@@ -12,8 +15,8 @@ import org.springframework.stereotype.Component;
  */
 @Data
 @Component
-@ConfigurationProperties(prefix = "renfei")
-public class RenFeiConfig {
+@ConfigurationProperties(prefix = "system")
+public class SystemConfig {
     private String version;
     private String active;
     private String siteName;
@@ -25,6 +28,11 @@ public class RenFeiConfig {
     private String buildTime;
     private String totpSecret;
     private String authMode;
+    private String fileUploadPath;
+    private String fileUploadMode;
+    private Integer fileEncryptionXor;
+    private List<String> authIgnore;
+    private ConfidentialRankEnum maxConfidentialRank;
     private Aliyun aliyun;
     private Baidu baidu;
     private Google google;

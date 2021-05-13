@@ -2,6 +2,8 @@ package net.renfei.service.start.dto;
 
 import lombok.Data;
 
+import java.io.Serializable;
+
 /**
  * <p>Title: Sms</p>
  * <p>Description: 短信实体类</p>
@@ -10,7 +12,8 @@ import lombok.Data;
  * @date : 2020-04-17 17:47
  */
 @Data
-public class SmsDTO {
+public class SmsDTO implements Serializable {
+    private static final long serialVersionUID = 1L;
     /**
      * 接收短信的手机号码。
      * 格式：
