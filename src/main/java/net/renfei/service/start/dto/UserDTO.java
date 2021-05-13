@@ -1,6 +1,7 @@
 package net.renfei.service.start.dto;
 
 import lombok.Data;
+import net.renfei.security.ConfidentialRankEnum;
 import net.renfei.service.start.PermissionService;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -34,6 +35,7 @@ public class UserDTO implements UserDetails, Serializable {
     private String lastName;
     private String firstName;
     private Date lastLogin;
+    private ConfidentialRankEnum confidentialRank;
 
     public UserDTO(PermissionService permissionService) {
         this.permissionService = permissionService;

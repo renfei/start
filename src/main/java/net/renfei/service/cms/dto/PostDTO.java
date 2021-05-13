@@ -1,6 +1,7 @@
 package net.renfei.service.cms.dto;
 
 import lombok.Data;
+import net.renfei.security.ConfidentialRankEnum;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -34,4 +35,5 @@ public class PostDTO implements Serializable {
     private String sourceName;
     private String describes;
     private String keyword;
+    private ConfidentialRankEnum confidentialRank;
 }

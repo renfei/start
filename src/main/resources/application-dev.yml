@@ -43,6 +43,7 @@ system:
   authIgnore:
     - /api/auth/**
     - /api/regionCode/**
+  maxConfidentialRank: CONFIDENTIAL
   dataCahe:
     ## 设置缓存有效期 秒，2小时
     expireTime: 7200

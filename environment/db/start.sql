@@ -8,13 +8,14 @@ FOREIGN_KEY_CHECKS = 0;
 DROP TABLE IF EXISTS `t_cms_category`;
 CREATE TABLE `t_cms_category`
 (
-    `id`             bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-    `en_name`        varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-    `zh_name`        varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-    `featured_image` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '特色图像',
-    `create_time`    datetime                                                      NOT NULL COMMENT '创建时间',
-    `update_time`    datetime DEFAULT NULL COMMENT '更新时间',
-    `is_deleted`     tinyint(1) unsigned NOT NULL DEFAULT 0 COMMENT '是否删除',
+    `id`                bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+    `en_name`           varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+    `zh_name`           varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+    `featured_image`    text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '特色图像',
+    `create_time`       datetime                                                      NOT NULL COMMENT '创建时间',
+    `update_time`       datetime DEFAULT NULL COMMENT '更新时间',
+    `is_deleted`        tinyint(1) unsigned NOT NULL DEFAULT 0 COMMENT '是否删除',
+    `confidential_rank` int(11) NOT NULL DEFAULT 0 COMMENT '保密等级',
     PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='文章分类表';
 
@@ -94,12 +95,13 @@ CREATE TABLE `t_cms_posts`
     `describes`             text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '文章简介用于SEO',
     `keyword`               text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '关键字用于SEO',
     `is_delete`             tinyint(1) unsigned NOT NULL DEFAULT 0 COMMENT '软删除',
+    `confidential_rank`     int(11) NOT NULL DEFAULT 0 COMMENT '保密等级',
     `is_comment`            tinyint(1) NOT NULL DEFAULT 1 COMMENT '是否允许评论',
     `avg_views`             double   NOT NULL DEFAULT 0 COMMENT '日均浏览量',
     `avg_comment`           double   NOT NULL DEFAULT 0 COMMENT '日均评论量',
     `page_rank`             double   NOT NULL DEFAULT 10000 COMMENT '权重排序',
     `page_rank_update_time` datetime          DEFAULT NULL COMMENT '权重更新时间',
-    PRIMARY KEY (`id`)
+    PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='文章表';
 
 -- ----------------------------
@@ -7181,6 +7183,7 @@ CREATE TABLE `t_start_user`
     `last_name`         varchar(255) CHARACTER SET utf8mb4                            DEFAULT NULL COMMENT '姓氏',
     `first_name`        varchar(255) CHARACTER SET utf8mb4                            DEFAULT NULL COMMENT '名字',
     `last_login`        date                                                          DEFAULT NULL COMMENT '最后登录时间',
+    `confidential_rank` int(11) NOT NULL DEFAULT 0 COMMENT '保密等级',
     PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='用户表';
 
@@ -7191,7 +7194,7 @@ BEGIN;
 INSERT INTO `t_start_user`
 VALUES (1, '2021-04-28 11:42:57', NULL, 0, 'BBAD927D-CF9F-4C39-825F-A4935E4524AC', 'tester',
         'sha256:64000:18:vWLIwAgt1Q5SzrYDdIgQzTxi+PIpC08H:XddskjIqWV77/Yr5KtzjEPlw', 'i@renfei.net', NULL,
-        '2021-04-28 11:44:05', NULL, '127.0.0.1', 0, NULL, 1, NULL, NULL, NULL);
+        '2021-04-28 11:44:05', NULL, '127.0.0.1', 0, NULL, 1, NULL, NULL, NULL, 0);
 COMMIT;
 
 -- ----------------------------

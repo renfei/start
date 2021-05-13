@@ -1,6 +1,7 @@
 package net.renfei.web.api.cms.ao;
 
 import lombok.Data;
+import net.renfei.security.ConfidentialRankEnum;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.Serializable;
@@ -26,4 +27,5 @@ public class PostAO implements Serializable {
     private String describes;
     private String keyword;
     private List<Long> tags;
+    private ConfidentialRankEnum confidentialRank;
 }

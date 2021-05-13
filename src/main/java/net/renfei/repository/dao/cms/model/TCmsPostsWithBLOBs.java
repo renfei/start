@@ -3,14 +3,21 @@ package net.renfei.repository.dao.cms.model;
 import java.io.Serializable;
 
 public class TCmsPostsWithBLOBs extends TCmsPosts implements Serializable {
-    private static final long serialVersionUID = 1L;
     private String featuredImage;
+
     private String title;
+
     private String content;
+
     private String sourceUrl;
+
     private String sourceName;
+
     private String describes;
+
     private String keyword;
+
+    private static final long serialVersionUID = 1L;
 
     public String getFeaturedImage() {
         return featuredImage;

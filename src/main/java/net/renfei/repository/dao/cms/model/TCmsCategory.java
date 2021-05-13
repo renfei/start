@@ -10,12 +10,15 @@ public class TCmsCategory implements Serializable {
 
     private String zhName;
 
-    private static final long serialVersionUID = 1L;
     private Date createTime;
+
     private Date updateTime;
 
-    private String featuredImage;
     private Boolean isDeleted;
+
+    private static final long serialVersionUID = 1L;
+    private Integer confidentialRank;
+    private String featuredImage;
 
     public Long getId() {
         return id;
@@ -65,6 +68,14 @@ public class TCmsCategory implements Serializable {
         this.isDeleted = isDeleted;
     }
 
+    public Integer getConfidentialRank() {
+        return confidentialRank;
+    }
+
+    public void setConfidentialRank(Integer confidentialRank) {
+        this.confidentialRank = confidentialRank;
+    }
+
     public String getFeaturedImage() {
         return featuredImage;
     }
@@ -85,6 +96,7 @@ public class TCmsCategory implements Serializable {
         sb.append(", createTime=").append(createTime);
         sb.append(", updateTime=").append(updateTime);
         sb.append(", isDeleted=").append(isDeleted);
+        sb.append(", confidentialRank=").append(confidentialRank);
         sb.append(", featuredImage=").append(featuredImage);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");

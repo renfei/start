@@ -1,6 +1,7 @@
 package net.renfei.config;
 
 import lombok.Data;
+import net.renfei.security.ConfidentialRankEnum;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
@@ -30,6 +31,7 @@ public class SystemConfig {
     private String fileUploadPath;
     private String fileUploadMode;
     private List<String> authIgnore;
+    private ConfidentialRankEnum maxConfidentialRank;
     private Aliyun aliyun;
     private Baidu baidu;
     private Google google;

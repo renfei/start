@@ -1301,6 +1301,66 @@ public class TStartUserExample {
             addCriterionForJDBCDate("`last_login` not between", value1, value2, "lastLogin");
             return (Criteria) this;
         }
+
+        public Criteria andConfidentialRankIsNull() {
+            addCriterion("`confidential_rank` is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andConfidentialRankIsNotNull() {
+            addCriterion("`confidential_rank` is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andConfidentialRankEqualTo(Integer value) {
+            addCriterion("`confidential_rank` =", value, "confidentialRank");
+            return (Criteria) this;
+        }
+
+        public Criteria andConfidentialRankNotEqualTo(Integer value) {
+            addCriterion("`confidential_rank` <>", value, "confidentialRank");
+            return (Criteria) this;
+        }
+
+        public Criteria andConfidentialRankGreaterThan(Integer value) {
+            addCriterion("`confidential_rank` >", value, "confidentialRank");
+            return (Criteria) this;
+        }
+
+        public Criteria andConfidentialRankGreaterThanOrEqualTo(Integer value) {
+            addCriterion("`confidential_rank` >=", value, "confidentialRank");
+            return (Criteria) this;
+        }
+
+        public Criteria andConfidentialRankLessThan(Integer value) {
+            addCriterion("`confidential_rank` <", value, "confidentialRank");
+            return (Criteria) this;
+        }
+
+        public Criteria andConfidentialRankLessThanOrEqualTo(Integer value) {
+            addCriterion("`confidential_rank` <=", value, "confidentialRank");
+            return (Criteria) this;
+        }
+
+        public Criteria andConfidentialRankIn(List<Integer> values) {
+            addCriterion("`confidential_rank` in", values, "confidentialRank");
+            return (Criteria) this;
+        }
+
+        public Criteria andConfidentialRankNotIn(List<Integer> values) {
+            addCriterion("`confidential_rank` not in", values, "confidentialRank");
+            return (Criteria) this;
+        }
+
+        public Criteria andConfidentialRankBetween(Integer value1, Integer value2) {
+            addCriterion("`confidential_rank` between", value1, value2, "confidentialRank");
+            return (Criteria) this;
+        }
+
+        public Criteria andConfidentialRankNotBetween(Integer value1, Integer value2) {
+            addCriterion("`confidential_rank` not between", value1, value2, "confidentialRank");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

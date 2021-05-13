@@ -8,6 +8,7 @@
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
         <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
         <result column="is_deleted" jdbcType="BIT" property="isDeleted"/>
+        <result column="confidential_rank" jdbcType="INTEGER" property="confidentialRank"/>
     </resultMap>
     <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="net.renfei.repository.dao.cms.model.TCmsCategory">
         <result column="featured_image" jdbcType="LONGVARCHAR" property="featuredImage"/>
@@ -74,7 +75,7 @@
     </sql>
     <sql id="Base_Column_List">
         `id`
-        , `en_name`, `zh_name`, `create_time`, `update_time`, `is_deleted`
+        , `en_name`, `zh_name`, `create_time`, `update_time`, `is_deleted`, `confidential_rank`
     </sql>
     <sql id="Blob_Column_List">
         `featured_image`
@@ -133,10 +134,10 @@
     <insert id="insert" parameterType="net.renfei.repository.dao.cms.model.TCmsCategory">
         insert into t_cms_category (`id`, `en_name`, `zh_name`,
                                     `create_time`, `update_time`, `is_deleted`,
-                                    `featured_image`)
+                                    `confidential_rank`, `featured_image`)
         values (#{id,jdbcType=BIGINT}, #{enName,jdbcType=VARCHAR}, #{zhName,jdbcType=VARCHAR},
                 #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{isDeleted,jdbcType=BIT},
-                #{featuredImage,jdbcType=LONGVARCHAR})
+                #{confidentialRank,jdbcType=INTEGER}, #{featuredImage,jdbcType=LONGVARCHAR})
     </insert>
     <insert id="insertSelective" parameterType="net.renfei.repository.dao.cms.model.TCmsCategory">
         insert into t_cms_category
@@ -158,6 +159,9 @@
             </if>
             <if test="isDeleted != null">
                 `is_deleted`,
+            </if>
+            <if test="confidentialRank != null">
+                `confidential_rank`,
             </if>
             <if test="featuredImage != null">
                 `featured_image`,
@@ -181,6 +185,9 @@
             </if>
             <if test="isDeleted != null">
                 #{isDeleted,jdbcType=BIT},
+            </if>
+            <if test="confidentialRank != null">
+                #{confidentialRank,jdbcType=INTEGER},
             </if>
             <if test="featuredImage != null">
                 #{featuredImage,jdbcType=LONGVARCHAR},
@@ -215,6 +222,9 @@
             <if test="record.isDeleted != null">
                 `is_deleted` = #{record.isDeleted,jdbcType=BIT},
             </if>
+            <if test="record.confidentialRank != null">
+                `confidential_rank` = #{record.confidentialRank,jdbcType=INTEGER},
+            </if>
             <if test="record.featuredImage != null">
                 `featured_image` = #{record.featuredImage,jdbcType=LONGVARCHAR},
             </if>
@@ -231,6 +241,7 @@
         `create_time` = #{record.createTime,jdbcType=TIMESTAMP},
         `update_time` = #{record.updateTime,jdbcType=TIMESTAMP},
         `is_deleted` = #{record.isDeleted,jdbcType=BIT},
+        `confidential_rank` = #{record.confidentialRank,jdbcType=INTEGER},
         `featured_image` = #{record.featuredImage,jdbcType=LONGVARCHAR}
         <if test="_parameter != null">
             <include refid="Update_By_Example_Where_Clause"/>
@@ -243,7 +254,8 @@
         `zh_name` = #{record.zhName,jdbcType=VARCHAR},
         `create_time` = #{record.createTime,jdbcType=TIMESTAMP},
         `update_time` = #{record.updateTime,jdbcType=TIMESTAMP},
-        `is_deleted` = #{record.isDeleted,jdbcType=BIT}
+        `is_deleted` = #{record.isDeleted,jdbcType=BIT},
+        `confidential_rank` = #{record.confidentialRank,jdbcType=INTEGER}
         <if test="_parameter != null">
             <include refid="Update_By_Example_Where_Clause"/>
         </if>
@@ -266,6 +278,9 @@
             <if test="isDeleted != null">
                 `is_deleted` = #{isDeleted,jdbcType=BIT},
             </if>
+            <if test="confidentialRank != null">
+                `confidential_rank` = #{confidentialRank,jdbcType=INTEGER},
+            </if>
             <if test="featuredImage != null">
                 `featured_image` = #{featuredImage,jdbcType=LONGVARCHAR},
             </if>
@@ -274,21 +289,23 @@
     </update>
     <update id="updateByPrimaryKeyWithBLOBs" parameterType="net.renfei.repository.dao.cms.model.TCmsCategory">
         update t_cms_category
-        set `en_name`        = #{enName,jdbcType=VARCHAR},
-            `zh_name`        = #{zhName,jdbcType=VARCHAR},
-            `create_time`    = #{createTime,jdbcType=TIMESTAMP},
-            `update_time`    = #{updateTime,jdbcType=TIMESTAMP},
-            `is_deleted`     = #{isDeleted,jdbcType=BIT},
-            `featured_image` = #{featuredImage,jdbcType=LONGVARCHAR}
+        set `en_name`           = #{enName,jdbcType=VARCHAR},
+            `zh_name`           = #{zhName,jdbcType=VARCHAR},
+            `create_time`       = #{createTime,jdbcType=TIMESTAMP},
+            `update_time`       = #{updateTime,jdbcType=TIMESTAMP},
+            `is_deleted`        = #{isDeleted,jdbcType=BIT},
+            `confidential_rank` = #{confidentialRank,jdbcType=INTEGER},
+            `featured_image`    = #{featuredImage,jdbcType=LONGVARCHAR}
         where `id` = #{id,jdbcType=BIGINT}
     </update>
     <update id="updateByPrimaryKey" parameterType="net.renfei.repository.dao.cms.model.TCmsCategory">
         update t_cms_category
-        set `en_name`     = #{enName,jdbcType=VARCHAR},
-            `zh_name`     = #{zhName,jdbcType=VARCHAR},
-            `create_time` = #{createTime,jdbcType=TIMESTAMP},
-            `update_time` = #{updateTime,jdbcType=TIMESTAMP},
-            `is_deleted`  = #{isDeleted,jdbcType=BIT}
+        set `en_name`           = #{enName,jdbcType=VARCHAR},
+            `zh_name`           = #{zhName,jdbcType=VARCHAR},
+            `create_time`       = #{createTime,jdbcType=TIMESTAMP},
+            `update_time`       = #{updateTime,jdbcType=TIMESTAMP},
+            `is_deleted`        = #{isDeleted,jdbcType=BIT},
+            `confidential_rank` = #{confidentialRank,jdbcType=INTEGER}
         where `id` = #{id,jdbcType=BIGINT}
     </update>
 </mapper>

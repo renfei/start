@@ -1,6 +1,7 @@
 package net.renfei.service.cms.dto;
 
 import lombok.Data;
+import net.renfei.security.ConfidentialRankEnum;
 
 import java.io.Serializable;
 
@@ -14,4 +15,5 @@ public class CategoryDTO implements Serializable {
     private String enName;
     private String zhName;
     private String featuredImage;
+    private ConfidentialRankEnum confidentialRank;
 }

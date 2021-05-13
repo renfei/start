@@ -15,20 +15,20 @@ public class TCmsPostsExample {
         oredCriteria = new ArrayList<>();
     }
 
-    public String getOrderByClause() {
-        return orderByClause;
-    }
-
     public void setOrderByClause(String orderByClause) {
         this.orderByClause = orderByClause;
     }
 
-    public boolean isDistinct() {
-        return distinct;
+    public String getOrderByClause() {
+        return orderByClause;
     }
 
     public void setDistinct(boolean distinct) {
         this.distinct = distinct;
+    }
+
+    public boolean isDistinct() {
+        return distinct;
     }
 
     public List<Criteria> getOredCriteria() {
@@ -645,6 +645,66 @@ public class TCmsPostsExample {
             return (Criteria) this;
         }
 
+        public Criteria andConfidentialRankIsNull() {
+            addCriterion("`confidential_rank` is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andConfidentialRankIsNotNull() {
+            addCriterion("`confidential_rank` is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andConfidentialRankEqualTo(Integer value) {
+            addCriterion("`confidential_rank` =", value, "confidentialRank");
+            return (Criteria) this;
+        }
+
+        public Criteria andConfidentialRankNotEqualTo(Integer value) {
+            addCriterion("`confidential_rank` <>", value, "confidentialRank");
+            return (Criteria) this;
+        }
+
+        public Criteria andConfidentialRankGreaterThan(Integer value) {
+            addCriterion("`confidential_rank` >", value, "confidentialRank");
+            return (Criteria) this;
+        }
+
+        public Criteria andConfidentialRankGreaterThanOrEqualTo(Integer value) {
+            addCriterion("`confidential_rank` >=", value, "confidentialRank");
+            return (Criteria) this;
+        }
+
+        public Criteria andConfidentialRankLessThan(Integer value) {
+            addCriterion("`confidential_rank` <", value, "confidentialRank");
+            return (Criteria) this;
+        }
+
+        public Criteria andConfidentialRankLessThanOrEqualTo(Integer value) {
+            addCriterion("`confidential_rank` <=", value, "confidentialRank");
+            return (Criteria) this;
+        }
+
+        public Criteria andConfidentialRankIn(List<Integer> values) {
+            addCriterion("`confidential_rank` in", values, "confidentialRank");
+            return (Criteria) this;
+        }
+
+        public Criteria andConfidentialRankNotIn(List<Integer> values) {
+            addCriterion("`confidential_rank` not in", values, "confidentialRank");
+            return (Criteria) this;
+        }
+
+        public Criteria andConfidentialRankBetween(Integer value1, Integer value2) {
+            addCriterion("`confidential_rank` between", value1, value2, "confidentialRank");
+            return (Criteria) this;
+        }
+
+        public Criteria andConfidentialRankNotBetween(Integer value1, Integer value2) {
+            addCriterion("`confidential_rank` not between", value1, value2, "confidentialRank");
+            return (Criteria) this;
+        }
+
         public Criteria andIsCommentIsNull() {
             addCriterion("`is_comment` is null");
             return (Criteria) this;
@@ -954,13 +1014,52 @@ public class TCmsPostsExample {
 
     public static class Criterion {
         private final String condition;
-        private final String typeHandler;
+
         private Object value;
+
         private Object secondValue;
+
         private boolean noValue;
+
         private boolean singleValue;
+
         private boolean betweenValue;
+
         private boolean listValue;
+
+        private final String typeHandler;
+
+        public String getCondition() {
+            return condition;
+        }
+
+        public Object getValue() {
+            return value;
+        }
+
+        public Object getSecondValue() {
+            return secondValue;
+        }
+
+        public boolean isNoValue() {
+            return noValue;
+        }
+
+        public boolean isSingleValue() {
+            return singleValue;
+        }
+
+        public boolean isBetweenValue() {
+            return betweenValue;
+        }
+
+        public boolean isListValue() {
+            return listValue;
+        }
+
+        public String getTypeHandler() {
+            return typeHandler;
+        }
 
         protected Criterion(String condition) {
             super();
@@ -996,38 +1095,6 @@ public class TCmsPostsExample {
 
         protected Criterion(String condition, Object value, Object secondValue) {
             this(condition, value, secondValue, null);
-        }
-
-        public String getCondition() {
-            return condition;
-        }
-
-        public Object getValue() {
-            return value;
-        }
-
-        public Object getSecondValue() {
-            return secondValue;
-        }
-
-        public boolean isNoValue() {
-            return noValue;
-        }
-
-        public boolean isSingleValue() {
-            return singleValue;
-        }
-
-        public boolean isBetweenValue() {
-            return betweenValue;
-        }
-
-        public boolean isListValue() {
-            return listValue;
-        }
-
-        public String getTypeHandler() {
-            return typeHandler;
         }
     }
 }
