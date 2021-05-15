@@ -1,6 +1,7 @@
 package net.renfei.web.api.cms.vo;
 
 import lombok.Data;
+import net.renfei.security.ConfidentialRankEnum;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -30,4 +31,5 @@ public class PostVO implements Serializable {
     private String sourceName;
     private String describes;
     private String keyword;
+    private ConfidentialRankEnum confidentialRank;
 }
