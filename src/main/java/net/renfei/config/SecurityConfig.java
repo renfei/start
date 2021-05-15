@@ -2,6 +2,7 @@ package net.renfei.config;
 
 import net.renfei.security.filter.JwtTokenFilter;
 import net.renfei.security.handler.AccessDeniedHandlerImpl;
+import net.renfei.security.handler.AuthenticationEntryPointImpl;
 import net.renfei.security.interceptor.AccessDecisionManagerImpl;
 import net.renfei.security.interceptor.FilterInvocationSecurityMetadataSourceImpl;
 import org.springframework.context.annotation.Configuration;
@@ -73,7 +74,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     }
                 })
                 .anyRequest().permitAll()
-                .and().exceptionHandling().accessDeniedHandler(new AccessDeniedHandlerImpl());
+                .and().exceptionHandling()
+                .accessDeniedHandler(new AccessDeniedHandlerImpl())
+                .authenticationEntryPoint(new AuthenticationEntryPointImpl());
         http.addFilterBefore(
                 jwtTokenFilter,
                 UsernamePasswordAuthenticationFilter.class
