@@ -10,6 +10,7 @@
         <result column="role_en_name" jdbcType="VARCHAR" property="roleEnName"/>
         <result column="role_name" jdbcType="VARCHAR" property="roleName"/>
         <result column="parent_uuid" jdbcType="VARCHAR" property="parentUuid"/>
+        <result column="is_built_in" jdbcType="BIT" property="isBuiltIn"/>
     </resultMap>
     <sql id="Example_Where_Clause">
         <where>
@@ -74,7 +75,7 @@
     <sql id="Base_Column_List">
         `id`
         , `create_time`, `update_time`, `is_deleted`, `uuid`, `role_en_name`, `role_name`,
-    `parent_uuid`
+    `parent_uuid`, `is_built_in`
     </sql>
     <select id="selectByExample" parameterType="net.renfei.repository.dao.start.model.TStartRoleExample"
             resultMap="BaseResultMap">
@@ -111,10 +112,10 @@
     <insert id="insert" parameterType="net.renfei.repository.dao.start.model.TStartRole">
         insert into t_start_role (`id`, `create_time`, `update_time`,
                                   `is_deleted`, `uuid`, `role_en_name`,
-                                  `role_name`, `parent_uuid`)
+                                  `role_name`, `parent_uuid`, `is_built_in`)
         values (#{id,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP},
                 #{isDeleted,jdbcType=BIT}, #{uuid,jdbcType=VARCHAR}, #{roleEnName,jdbcType=VARCHAR},
-                #{roleName,jdbcType=VARCHAR}, #{parentUuid,jdbcType=VARCHAR})
+                #{roleName,jdbcType=VARCHAR}, #{parentUuid,jdbcType=VARCHAR}, #{isBuiltIn,jdbcType=BIT})
     </insert>
     <insert id="insertSelective" parameterType="net.renfei.repository.dao.start.model.TStartRole">
         insert into t_start_role
@@ -143,6 +144,9 @@
             <if test="parentUuid != null">
                 `parent_uuid`,
             </if>
+            <if test="isBuiltIn != null">
+                `is_built_in`,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -168,6 +172,9 @@
             </if>
             <if test="parentUuid != null">
                 #{parentUuid,jdbcType=VARCHAR},
+            </if>
+            <if test="isBuiltIn != null">
+                #{isBuiltIn,jdbcType=BIT},
             </if>
         </trim>
     </insert>
@@ -205,6 +212,9 @@
             <if test="record.parentUuid != null">
                 `parent_uuid` = #{record.parentUuid,jdbcType=VARCHAR},
             </if>
+            <if test="record.isBuiltIn != null">
+                `is_built_in` = #{record.isBuiltIn,jdbcType=BIT},
+            </if>
         </set>
         <if test="_parameter != null">
             <include refid="Update_By_Example_Where_Clause"/>
@@ -219,7 +229,8 @@
         `uuid` = #{record.uuid,jdbcType=VARCHAR},
         `role_en_name` = #{record.roleEnName,jdbcType=VARCHAR},
         `role_name` = #{record.roleName,jdbcType=VARCHAR},
-        `parent_uuid` = #{record.parentUuid,jdbcType=VARCHAR}
+        `parent_uuid` = #{record.parentUuid,jdbcType=VARCHAR},
+        `is_built_in` = #{record.isBuiltIn,jdbcType=BIT}
         <if test="_parameter != null">
             <include refid="Update_By_Example_Where_Clause"/>
         </if>
@@ -248,6 +259,9 @@
             <if test="parentUuid != null">
                 `parent_uuid` = #{parentUuid,jdbcType=VARCHAR},
             </if>
+            <if test="isBuiltIn != null">
+                `is_built_in` = #{isBuiltIn,jdbcType=BIT},
+            </if>
         </set>
         where `id` = #{id,jdbcType=BIGINT}
     </update>
@@ -259,7 +273,8 @@
             `uuid`         = #{uuid,jdbcType=VARCHAR},
             `role_en_name` = #{roleEnName,jdbcType=VARCHAR},
             `role_name`    = #{roleName,jdbcType=VARCHAR},
-            `parent_uuid`  = #{parentUuid,jdbcType=VARCHAR}
+            `parent_uuid`  = #{parentUuid,jdbcType=VARCHAR},
+            `is_built_in`  = #{isBuiltIn,jdbcType=BIT}
         where `id` = #{id,jdbcType=BIGINT}
     </update>
 </mapper>
