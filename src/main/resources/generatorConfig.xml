@@ -50,6 +50,7 @@
         <!--<table schema="start" delimitAllColumns="true" tableName="t_start_secret_key"/>-->
         <!--<table schema="start" delimitAllColumns="true" tableName="t_start_operation_log"/>-->
         <!--<table schema="start" delimitAllColumns="true" tableName="t_start_region"/>-->
+        <!--<table schema="start" delimitAllColumns="true" tableName="t_start_kv_storage"/>-->
         <!--CMS-->
         <javaModelGenerator targetPackage="net.renfei.repository.dao.cms.model" targetProject="src/main/java">
             <property name="enableSubPackages" value="false"/>

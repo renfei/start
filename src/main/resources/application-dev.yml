@@ -29,7 +29,7 @@ spring:
 system:
   active: dev
   version: @project.version@
-  siteName: 任霏的博客
+  siteName: 站点名称
   domain: http://localhost:8099
   staticDomain: https://cdn.renfei.net
   ipv4DataPath: /opt/RenFeiNet/IPDATA.BIN
@@ -37,6 +37,7 @@ system:
   buildTime: @buildtimestamp@
   totpSecret: <totpSecret>
   authMode: RESET
+  kvStorage: DataBase
   fileUploadPath: /opt/RenFeiNet/
   #  fileUploadMode: ALIYUNOSS
   fileUploadMode: LOCAL

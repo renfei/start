@@ -1,5 +1,6 @@
 package net.renfei.service.start;
 
+import net.renfei.sdk.entity.ListData;
 import net.renfei.service.start.dto.UserDTO;
 import net.renfei.web.api.start.ao.SignInAO;
 
@@ -30,5 +31,8 @@ public interface UserService {
      *
      * @param uuid 用户UUID
      */
-    void recordNumberOfPasswordErrorByUuid(String uuid);
+    int recordNumberOfPasswordErrorByUuid(String uuid);
+
+    ListData<UserDTO> getUserList(UserDTO user, String userName, String email,
+                                  String phone, String pages, String rows);
 }

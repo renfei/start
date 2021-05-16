@@ -5,28 +5,29 @@ import net.renfei.service.start.StorageService;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * 使用Session实现的存储
+ * 使用Session实现的KV存储
  *
  * @author renfei
  */
-public class SessionStorageServiceImpl implements StorageService {
+public class StorageServiceSessionImpl implements StorageService {
     HttpServletRequest request;
 
-    public SessionStorageServiceImpl(HttpServletRequest request) {
+    public StorageServiceSessionImpl(HttpServletRequest request) {
         this.request = request;
     }
 
     @Override
-    public void set(String key, Object object, Long expiration) {
+    public void set(String key, String object, Long expiration) {
         request.getSession().setAttribute(key, object);
     }
 
     @Override
-    public Object get(String key, Boolean remove) {
+    public String get(String key, Boolean remove) {
         Object object = request.getSession().getAttribute(key);
-        if (remove != null && remove) {
+        if (object != null && remove) {
             request.getSession().removeAttribute(key);
+            return (String) object;
         }
-        return object;
+        return null;
     }
 }

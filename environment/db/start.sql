@@ -160,6 +160,25 @@ BEGIN;
 COMMIT;
 
 -- ----------------------------
+-- Table structure for t_start_kv_storage
+-- ----------------------------
+DROP TABLE IF EXISTS `t_start_kv_storage`;
+CREATE TABLE `t_start_kv_storage`
+(
+    `id`         bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+    `keys`       varchar(255) NOT NULL COMMENT '键值',
+    `values`     text         NOT NULL COMMENT '内容',
+    `expiration` date         NOT NULL COMMENT '过期时间',
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='基于数据实现KV存储';
+
+-- ----------------------------
+-- Records of t_start_kv_storage
+-- ----------------------------
+BEGIN;
+COMMIT;
+
+-- ----------------------------
 -- Table structure for t_start_operation_log
 -- ----------------------------
 DROP TABLE IF EXISTS `t_start_operation_log`;

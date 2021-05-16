@@ -1,12 +1,12 @@
 package net.renfei.service.start.impl;
 
-import com.aliyun.oss.ServiceException;
 import net.renfei.config.SystemConfig;
 import net.renfei.exception.BusinessException;
 import net.renfei.exception.NeedU2FException;
 import net.renfei.repository.dao.start.TStartUserMapper;
 import net.renfei.repository.dao.start.model.TStartUser;
 import net.renfei.repository.dao.start.model.TStartUserExample;
+import net.renfei.sdk.entity.ListData;
 import net.renfei.sdk.utils.*;
 import net.renfei.security.ConfidentialRankEnum;
 import net.renfei.service.BaseService;
@@ -81,7 +81,7 @@ public class UserServiceImpl extends BaseService implements UserService, UserDet
             throw new BusinessException("用户未注册，请先注册");
         }
         if (userDTO.getStateCode() < 0) {
-            throw new BusinessException("当前账户已被冻结，请联系我们解冻");
+            throw new BusinessException("当前账户已被冻结，请联系管理员解冻");
         }
         if (userDTO.getStateCode() < 1) {
             // TODO 发送激活邮件
@@ -102,17 +102,24 @@ public class UserServiceImpl extends BaseService implements UserService, UserDet
         }
         if (signInAo.getUseVerCode()) {
             // TODO 使用验证码验证
+            throw new BusinessException("暂不支持使用验证码登陆");
         } else {
             // 使用密码登陆
             if (!PasswordUtils.verifyPassword(signInAo.getPassword(), userDTO.getPassword())) {
-                this.recordNumberOfPasswordErrorByUuid(userDTO.getUuid());
-                throw new ServiceException("用户名或密码错误");
+                int trialErrorTimes = this.recordNumberOfPasswordErrorByUuid(userDTO.getUuid());
+                throw new BusinessException("用户名或密码错误");
+            } else {
+                // 清除密码错误次数
+                TStartUser user = new TStartUser();
+                user.setId(userDTO.getId());
+                user.setTrialErrorTimes(0);
+                userMapper.updateByPrimaryKeySelective(user);
             }
         }
         // 两步认证
         if (!BeanUtils.isEmpty(userDTO.getTotp())) {
             if (!GoogleAuthenticator.authcode(signInAo.getTOtp(), userDTO.getTotp())) {
-                throw new ServiceException("两步认证(U2F)失败，请重试");
+                throw new BusinessException("两步认证(U2F)失败，请重试");
             }
             // TODO 记录TOTP为已经使用
         }
@@ -120,7 +127,7 @@ public class UserServiceImpl extends BaseService implements UserService, UserDet
     }
 
     @Override
-    public void recordNumberOfPasswordErrorByUuid(String uuid) {
+    public int recordNumberOfPasswordErrorByUuid(String uuid) {
         TStartUserExample example = new TStartUserExample();
         TStartUserExample.Criteria criteria = example.createCriteria()
                 .andIsDeletedEqualTo(false)
@@ -133,5 +140,12 @@ public class UserServiceImpl extends BaseService implements UserService, UserDet
             user.setLockTime(DateUtils.nextMinutes((user.getTrialErrorTimes() - 3) * 10));
         }
         userMapper.updateByPrimaryKeySelective(user);
+        return user.getTrialErrorTimes();
+    }
+
+    @Override
+    public ListData<UserDTO> getUserList(UserDTO user, String userName, String email,
+                                         String phone, String pages, String rows) {
+        return null;
     }
 }

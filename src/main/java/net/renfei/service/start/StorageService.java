@@ -11,9 +11,9 @@ public interface StorageService {
      *
      * @param key        key
      * @param object     对象
-     * @param expiration 过期时间
+     * @param expiration 过期时间（毫秒）
      */
-    void set(String key, Object object, Long expiration);
+    void set(String key, String object, Long expiration);
 
     /**
      * 取出对象
@@ -22,5 +22,5 @@ public interface StorageService {
      * @param remove 是否移除
      * @return 对象
      */
-    Object get(String key, Boolean remove);
+    String get(String key, Boolean remove);
 }

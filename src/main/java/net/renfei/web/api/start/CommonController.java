@@ -72,7 +72,7 @@ public class CommonController extends BaseController {
         captcha.getArithmeticString();
         // 获取运算的结果：5
         captcha.text();
-        String key = UUID.randomUUID().toString();
+        String key = "CAPTCHA_" + UUID.randomUUID();
         // 将正确答案保存起来
         StorageService storageService = storageServiceFactory.getStorageService(request);
         storageService.set(key, captcha.text().toLowerCase(), 60000L);
