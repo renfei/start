@@ -23,11 +23,11 @@ import java.util.UUID;
  */
 @Controller
 @RequestMapping("/common")
-public class CommonController extends BaseController {
+public class CommonApiController extends BaseController {
     private final StorageServiceFactory storageServiceFactory;
 
-    public CommonController(SystemConfig systemConfig,
-                            StorageServiceFactory storageServiceFactory) {
+    public CommonApiController(SystemConfig systemConfig,
+                               StorageServiceFactory storageServiceFactory) {
         super(systemConfig);
         this.storageServiceFactory = storageServiceFactory;
     }
