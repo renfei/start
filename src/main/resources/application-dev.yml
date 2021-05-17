@@ -25,6 +25,12 @@ spring:
     port: 6379
     database: 0
     password: #默认为空
+  mail:
+    password: dd
+    username: dd@qq.com
+    reply-to: dd@qq.com
+    default-encoding: utf-8
+    host: smtp.qq.com
 # 自定义配置 #####################################
 system:
   active: dev
