@@ -230,6 +230,11 @@ public class UserServiceImpl extends BaseService implements UserService, UserDet
                 throw new BusinessException("电话号码已被占用");
             }
         }
+        if (userAo.getConfidentialRank() != null) {
+            checkMaxConfidentialRank(userAo.getConfidentialRank());
+            checkConfidentialRank(user.getConfidentialRank(), userAo.getConfidentialRank());
+            userDo.setConfidentialRank(userAo.getConfidentialRank().getRank());
+        }
         org.springframework.beans.BeanUtils.copyProperties(userAo, userDo);
         userDo.setCreateTime(new Date());
         userDo.setIsDeleted(false);
@@ -239,6 +244,63 @@ public class UserServiceImpl extends BaseService implements UserService, UserDet
         userDo.setStateCode(0);
         userDo.setConfidentialRank(0);
         userMapper.insertSelective(userDo);
+        if (!BeanUtils.isEmpty(userAo.getPassword())) {
+            // 记录密码历史记录
+            try {
+                userDo.setPassword(PasswordUtils.createHash(userAo.getPassword()));
+            } catch (PasswordUtils.CannotPerformOperationException e) {
+                log.error("CannotPerformOperationException", e);
+                throw new RuntimeException(e.getMessage());
+            }
+            TStartUserPasswordHistory passwordHistory = new TStartUserPasswordHistory();
+            passwordHistory.setPassword(userDo.getPassword());
+            passwordHistory.setSetTime(new Date());
+            passwordHistory.setSetUserId(user.getId());
+            passwordHistory.setSetUserName(user.getUsername());
+            passwordHistoryMapper.insertSelective(passwordHistory);
+        }
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void updateUser(UserDTO user, UserAO userAo) {
+        TStartUserExample example = new TStartUserExample();
+        example.createCriteria()
+                .andIsDeletedEqualTo(false)
+                .andIdEqualTo(userAo.getId());
+        UserDTO oldUser = ListUtils.getOne(selectByExample(example, "1", "1").getData());
+        if (oldUser == null) {
+            throw new BusinessException("根据【id】未找到要修改的数据");
+        }
+        if (oldUser.getEmail().equals(userAo.getEmail()) && !BeanUtils.isEmpty(userAo.getEmail())) {
+            example = new TStartUserExample();
+            example.createCriteria()
+                    .andIsDeletedEqualTo(false)
+                    .andEmailEqualTo(userAo.getEmail());
+            if (selectByExample(example, "1", "1").getTotal() > 0) {
+                throw new BusinessException("电子邮箱已被占用");
+            }
+            oldUser.setEmail(userAo.getEmail());
+        }
+        if (oldUser.getPhone().equals(userAo.getPhone()) && !BeanUtils.isEmpty(userAo.getPhone())) {
+            example = new TStartUserExample();
+            example.createCriteria()
+                    .andIsDeletedEqualTo(false)
+                    .andPhoneEqualTo(userAo.getPhone());
+            if (selectByExample(example, "1", "1").getTotal() > 0) {
+                throw new BusinessException("电话号码已被占用");
+            }
+            oldUser.setPhone(userAo.getPhone());
+        }
+        TStartUser userDo = new TStartUser();
+        if (userAo.getConfidentialRank() != null) {
+            checkMaxConfidentialRank(userAo.getConfidentialRank());
+            checkConfidentialRank(user.getConfidentialRank(), userAo.getConfidentialRank());
+            oldUser.setConfidentialRank(userAo.getConfidentialRank());
+            userDo.setConfidentialRank(userAo.getConfidentialRank().getRank());
+        }
+        org.springframework.beans.BeanUtils.copyProperties(userAo, userDo);
+        userMapper.updateByPrimaryKey(userDo);
         if (!BeanUtils.isEmpty(userAo.getPassword())) {
             // 记录密码历史记录
             try {

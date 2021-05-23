@@ -55,10 +55,19 @@ public interface UserService {
     /**
      * 添加用户
      *
+     * @param user    当前登录用户
+     * @param userAo  添加用户请求
+     * @param request 请求对象
+     */
+    void addUser(UserDTO user, UserAO userAo, HttpServletRequest request);
+
+    /**
+     * 修改用户资料
+     *
      * @param user   当前登录用户
      * @param userAo 添加用户请求
      */
-    void addUser(UserDTO user, UserAO userAo, HttpServletRequest request);
+    void updateUser(UserDTO user, UserAO userAo);
 
     /**
      * 修改当前登录用户的密码

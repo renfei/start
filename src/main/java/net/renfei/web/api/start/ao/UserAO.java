@@ -1,6 +1,7 @@
 package net.renfei.web.api.start.ao;
 
 import lombok.Data;
+import net.renfei.security.ConfidentialRankEnum;
 
 import java.io.Serializable;
 
@@ -18,4 +19,5 @@ public class UserAO implements Serializable {
     private String phone;
     private String lastName;
     private String firstName;
+    private ConfidentialRankEnum confidentialRank;
 }
