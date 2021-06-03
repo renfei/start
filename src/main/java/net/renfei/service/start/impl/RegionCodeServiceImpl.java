@@ -42,7 +42,13 @@ public class RegionCodeServiceImpl extends BaseService implements RegionCodeServ
         if (BeanUtils.isEmpty(regionCode)) {
             example.createCriteria().andRegionCodeLike("__0000");
         } else if (regionCode.endsWith("0000")) {
-            example.createCriteria().andRegionCodeLike(regionCode.substring(0, 2) + "__00");
+            // 直辖市 北京、天津、上海、重庆单独处理
+            if (regionCode.startsWith("110") || regionCode.startsWith("120")
+                    || regionCode.startsWith("310") || regionCode.startsWith("500")) {
+                example.createCriteria().andRegionCodeLike(regionCode.substring(0, 2) + "____");
+            } else {
+                example.createCriteria().andRegionCodeLike(regionCode.substring(0, 2) + "__00");
+            }
         } else if (regionCode.endsWith("00")) {
             example.createCriteria().andRegionCodeLike(regionCode.substring(0, 4) + "__");
         } else {
