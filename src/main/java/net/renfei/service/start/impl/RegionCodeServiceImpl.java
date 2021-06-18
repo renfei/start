@@ -39,12 +39,14 @@ public class RegionCodeServiceImpl extends BaseService implements RegionCodeServ
             regionCode = null;
         }
         TStartRegionExample example = new TStartRegionExample();
+        example.setOrderByClause("region_code");
         if (BeanUtils.isEmpty(regionCode)) {
             example.createCriteria().andRegionCodeLike("__0000");
         } else if (regionCode.endsWith("0000")) {
-            // 直辖市 北京、天津、上海、重庆单独处理
+            // 直辖市 北京、天津、上海、重庆、香港、澳门单独处理
             if (regionCode.startsWith("110") || regionCode.startsWith("120")
-                    || regionCode.startsWith("310") || regionCode.startsWith("500")) {
+                    || regionCode.startsWith("310") || regionCode.startsWith("500")
+                    || regionCode.startsWith("810") || regionCode.startsWith("820")) {
                 example.createCriteria().andRegionCodeLike(regionCode.substring(0, 2) + "____");
             } else {
                 example.createCriteria().andRegionCodeLike(regionCode.substring(0, 2) + "__00");
