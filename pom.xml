@@ -75,7 +75,7 @@
         <spring-cloud.version>2020.0.2</spring-cloud.version>
         <renfeisdk.version>1.0.15</renfeisdk.version>
         <swagger.version>3.0.0</swagger.version>
-        <druid.version>1.2.5</druid.version>
+        <druid.version>1.2.6</druid.version>
         <mybatis.version>2.1.4</mybatis.version>
         <aliyun.core.version>4.5.20</aliyun.core.version>
         <aliyun.oss.version>3.12.0</aliyun.oss.version>

@@ -13,13 +13,13 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 public class DruidConfig {
-    @Value("${spring.druid.login.username}")
+    @Value("${spring.datasource.druid.login.username}")
     private String loginUsername;
-    @Value("${spring.druid.login.password}")
+    @Value("${spring.datasource.druid.login.password}")
     private String loginPassword;
-    @Value("${spring.druid.allow}")
+    @Value("${spring.datasource.druid.allow}")
     private String allow;
-    @Value("${spring.druid.deny}")
+    @Value("${spring.datasource.druid.deny}")
     private String deny;
 
     @Bean
