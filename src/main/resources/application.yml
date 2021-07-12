@@ -22,6 +22,8 @@ spring:
       max-request-size: 64MB
   messages:
     basename: i18n/messages
+  datasource:
+    filters: stat,wall,slf4j,config
   druid:
     ## 连接池配置
     filters: wall
@@ -41,6 +43,11 @@ spring:
     filter:
       wall:
         enabled: true
+    login:
+      username: renfei
+      password: renfei
+    allow: 10.10.0.218
+    deny: 192.168.1.1
   ## freemarker 配置
   freemarker:
     template-loader-path: classpath:/templates
