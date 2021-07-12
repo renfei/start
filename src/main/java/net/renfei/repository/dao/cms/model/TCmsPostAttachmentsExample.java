@@ -1,34 +1,34 @@
-package net.renfei.repository.dao.start.model;
+package net.renfei.repository.dao.cms.model;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class TStartRoleExample {
+public class TCmsPostAttachmentsExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public TStartRoleExample() {
+    public TCmsPostAttachmentsExample() {
         oredCriteria = new ArrayList<>();
-    }
-
-    public void setOrderByClause(String orderByClause) {
-        this.orderByClause = orderByClause;
     }
 
     public String getOrderByClause() {
         return orderByClause;
     }
 
-    public void setDistinct(boolean distinct) {
-        this.distinct = distinct;
+    public void setOrderByClause(String orderByClause) {
+        this.orderByClause = orderByClause;
     }
 
     public boolean isDistinct() {
         return distinct;
+    }
+
+    public void setDistinct(boolean distinct) {
+        this.distinct = distinct;
     }
 
     public List<Criteria> getOredCriteria() {
@@ -162,6 +162,66 @@ public class TStartRoleExample {
 
         public Criteria andIdNotBetween(Long value1, Long value2) {
             addCriterion("`id` not between", value1, value2, "id");
+            return (Criteria) this;
+        }
+
+        public Criteria andPostIdIsNull() {
+            addCriterion("`post_id` is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPostIdIsNotNull() {
+            addCriterion("`post_id` is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPostIdEqualTo(Long value) {
+            addCriterion("`post_id` =", value, "postId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPostIdNotEqualTo(Long value) {
+            addCriterion("`post_id` <>", value, "postId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPostIdGreaterThan(Long value) {
+            addCriterion("`post_id` >", value, "postId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPostIdGreaterThanOrEqualTo(Long value) {
+            addCriterion("`post_id` >=", value, "postId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPostIdLessThan(Long value) {
+            addCriterion("`post_id` <", value, "postId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPostIdLessThanOrEqualTo(Long value) {
+            addCriterion("`post_id` <=", value, "postId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPostIdIn(List<Long> values) {
+            addCriterion("`post_id` in", values, "postId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPostIdNotIn(List<Long> values) {
+            addCriterion("`post_id` not in", values, "postId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPostIdBetween(Long value1, Long value2) {
+            addCriterion("`post_id` between", value1, value2, "postId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPostIdNotBetween(Long value1, Long value2) {
+            addCriterion("`post_id` not between", value1, value2, "postId");
             return (Criteria) this;
         }
 
@@ -415,273 +475,403 @@ public class TStartRoleExample {
             return (Criteria) this;
         }
 
-        public Criteria andRoleEnNameIsNull() {
-            addCriterion("`role_en_name` is null");
+        public Criteria andConfidentialRankIsNull() {
+            addCriterion("`confidential_rank` is null");
             return (Criteria) this;
         }
 
-        public Criteria andRoleEnNameIsNotNull() {
-            addCriterion("`role_en_name` is not null");
+        public Criteria andConfidentialRankIsNotNull() {
+            addCriterion("`confidential_rank` is not null");
             return (Criteria) this;
         }
 
-        public Criteria andRoleEnNameEqualTo(String value) {
-            addCriterion("`role_en_name` =", value, "roleEnName");
+        public Criteria andConfidentialRankEqualTo(Integer value) {
+            addCriterion("`confidential_rank` =", value, "confidentialRank");
             return (Criteria) this;
         }
 
-        public Criteria andRoleEnNameNotEqualTo(String value) {
-            addCriterion("`role_en_name` <>", value, "roleEnName");
+        public Criteria andConfidentialRankNotEqualTo(Integer value) {
+            addCriterion("`confidential_rank` <>", value, "confidentialRank");
             return (Criteria) this;
         }
 
-        public Criteria andRoleEnNameGreaterThan(String value) {
-            addCriterion("`role_en_name` >", value, "roleEnName");
+        public Criteria andConfidentialRankGreaterThan(Integer value) {
+            addCriterion("`confidential_rank` >", value, "confidentialRank");
             return (Criteria) this;
         }
 
-        public Criteria andRoleEnNameGreaterThanOrEqualTo(String value) {
-            addCriterion("`role_en_name` >=", value, "roleEnName");
+        public Criteria andConfidentialRankGreaterThanOrEqualTo(Integer value) {
+            addCriterion("`confidential_rank` >=", value, "confidentialRank");
             return (Criteria) this;
         }
 
-        public Criteria andRoleEnNameLessThan(String value) {
-            addCriterion("`role_en_name` <", value, "roleEnName");
+        public Criteria andConfidentialRankLessThan(Integer value) {
+            addCriterion("`confidential_rank` <", value, "confidentialRank");
             return (Criteria) this;
         }
 
-        public Criteria andRoleEnNameLessThanOrEqualTo(String value) {
-            addCriterion("`role_en_name` <=", value, "roleEnName");
+        public Criteria andConfidentialRankLessThanOrEqualTo(Integer value) {
+            addCriterion("`confidential_rank` <=", value, "confidentialRank");
             return (Criteria) this;
         }
 
-        public Criteria andRoleEnNameLike(String value) {
-            addCriterion("`role_en_name` like", value, "roleEnName");
+        public Criteria andConfidentialRankIn(List<Integer> values) {
+            addCriterion("`confidential_rank` in", values, "confidentialRank");
             return (Criteria) this;
         }
 
-        public Criteria andRoleEnNameNotLike(String value) {
-            addCriterion("`role_en_name` not like", value, "roleEnName");
+        public Criteria andConfidentialRankNotIn(List<Integer> values) {
+            addCriterion("`confidential_rank` not in", values, "confidentialRank");
             return (Criteria) this;
         }
 
-        public Criteria andRoleEnNameIn(List<String> values) {
-            addCriterion("`role_en_name` in", values, "roleEnName");
+        public Criteria andConfidentialRankBetween(Integer value1, Integer value2) {
+            addCriterion("`confidential_rank` between", value1, value2, "confidentialRank");
             return (Criteria) this;
         }
 
-        public Criteria andRoleEnNameNotIn(List<String> values) {
-            addCriterion("`role_en_name` not in", values, "roleEnName");
+        public Criteria andConfidentialRankNotBetween(Integer value1, Integer value2) {
+            addCriterion("`confidential_rank` not between", value1, value2, "confidentialRank");
             return (Criteria) this;
         }
 
-        public Criteria andRoleEnNameBetween(String value1, String value2) {
-            addCriterion("`role_en_name` between", value1, value2, "roleEnName");
+        public Criteria andFileNameIsNull() {
+            addCriterion("`file_name` is null");
             return (Criteria) this;
         }
 
-        public Criteria andRoleEnNameNotBetween(String value1, String value2) {
-            addCriterion("`role_en_name` not between", value1, value2, "roleEnName");
+        public Criteria andFileNameIsNotNull() {
+            addCriterion("`file_name` is not null");
             return (Criteria) this;
         }
 
-        public Criteria andRoleNameIsNull() {
-            addCriterion("`role_name` is null");
+        public Criteria andFileNameEqualTo(String value) {
+            addCriterion("`file_name` =", value, "fileName");
             return (Criteria) this;
         }
 
-        public Criteria andRoleNameIsNotNull() {
-            addCriterion("`role_name` is not null");
+        public Criteria andFileNameNotEqualTo(String value) {
+            addCriterion("`file_name` <>", value, "fileName");
             return (Criteria) this;
         }
 
-        public Criteria andRoleNameEqualTo(String value) {
-            addCriterion("`role_name` =", value, "roleName");
+        public Criteria andFileNameGreaterThan(String value) {
+            addCriterion("`file_name` >", value, "fileName");
             return (Criteria) this;
         }
 
-        public Criteria andRoleNameNotEqualTo(String value) {
-            addCriterion("`role_name` <>", value, "roleName");
+        public Criteria andFileNameGreaterThanOrEqualTo(String value) {
+            addCriterion("`file_name` >=", value, "fileName");
             return (Criteria) this;
         }
 
-        public Criteria andRoleNameGreaterThan(String value) {
-            addCriterion("`role_name` >", value, "roleName");
+        public Criteria andFileNameLessThan(String value) {
+            addCriterion("`file_name` <", value, "fileName");
             return (Criteria) this;
         }
 
-        public Criteria andRoleNameGreaterThanOrEqualTo(String value) {
-            addCriterion("`role_name` >=", value, "roleName");
+        public Criteria andFileNameLessThanOrEqualTo(String value) {
+            addCriterion("`file_name` <=", value, "fileName");
             return (Criteria) this;
         }
 
-        public Criteria andRoleNameLessThan(String value) {
-            addCriterion("`role_name` <", value, "roleName");
+        public Criteria andFileNameLike(String value) {
+            addCriterion("`file_name` like", value, "fileName");
             return (Criteria) this;
         }
 
-        public Criteria andRoleNameLessThanOrEqualTo(String value) {
-            addCriterion("`role_name` <=", value, "roleName");
+        public Criteria andFileNameNotLike(String value) {
+            addCriterion("`file_name` not like", value, "fileName");
             return (Criteria) this;
         }
 
-        public Criteria andRoleNameLike(String value) {
-            addCriterion("`role_name` like", value, "roleName");
+        public Criteria andFileNameIn(List<String> values) {
+            addCriterion("`file_name` in", values, "fileName");
             return (Criteria) this;
         }
 
-        public Criteria andRoleNameNotLike(String value) {
-            addCriterion("`role_name` not like", value, "roleName");
+        public Criteria andFileNameNotIn(List<String> values) {
+            addCriterion("`file_name` not in", values, "fileName");
             return (Criteria) this;
         }
 
-        public Criteria andRoleNameIn(List<String> values) {
-            addCriterion("`role_name` in", values, "roleName");
+        public Criteria andFileNameBetween(String value1, String value2) {
+            addCriterion("`file_name` between", value1, value2, "fileName");
             return (Criteria) this;
         }
 
-        public Criteria andRoleNameNotIn(List<String> values) {
-            addCriterion("`role_name` not in", values, "roleName");
+        public Criteria andFileNameNotBetween(String value1, String value2) {
+            addCriterion("`file_name` not between", value1, value2, "fileName");
             return (Criteria) this;
         }
 
-        public Criteria andRoleNameBetween(String value1, String value2) {
-            addCriterion("`role_name` between", value1, value2, "roleName");
+        public Criteria andFilePathIsNull() {
+            addCriterion("`file_path` is null");
             return (Criteria) this;
         }
 
-        public Criteria andRoleNameNotBetween(String value1, String value2) {
-            addCriterion("`role_name` not between", value1, value2, "roleName");
+        public Criteria andFilePathIsNotNull() {
+            addCriterion("`file_path` is not null");
             return (Criteria) this;
         }
 
-        public Criteria andParentUuidIsNull() {
-            addCriterion("`parent_uuid` is null");
+        public Criteria andFilePathEqualTo(String value) {
+            addCriterion("`file_path` =", value, "filePath");
             return (Criteria) this;
         }
 
-        public Criteria andParentUuidIsNotNull() {
-            addCriterion("`parent_uuid` is not null");
+        public Criteria andFilePathNotEqualTo(String value) {
+            addCriterion("`file_path` <>", value, "filePath");
             return (Criteria) this;
         }
 
-        public Criteria andParentUuidEqualTo(String value) {
-            addCriterion("`parent_uuid` =", value, "parentUuid");
+        public Criteria andFilePathGreaterThan(String value) {
+            addCriterion("`file_path` >", value, "filePath");
             return (Criteria) this;
         }
 
-        public Criteria andParentUuidNotEqualTo(String value) {
-            addCriterion("`parent_uuid` <>", value, "parentUuid");
+        public Criteria andFilePathGreaterThanOrEqualTo(String value) {
+            addCriterion("`file_path` >=", value, "filePath");
             return (Criteria) this;
         }
 
-        public Criteria andParentUuidGreaterThan(String value) {
-            addCriterion("`parent_uuid` >", value, "parentUuid");
+        public Criteria andFilePathLessThan(String value) {
+            addCriterion("`file_path` <", value, "filePath");
             return (Criteria) this;
         }
 
-        public Criteria andParentUuidGreaterThanOrEqualTo(String value) {
-            addCriterion("`parent_uuid` >=", value, "parentUuid");
+        public Criteria andFilePathLessThanOrEqualTo(String value) {
+            addCriterion("`file_path` <=", value, "filePath");
             return (Criteria) this;
         }
 
-        public Criteria andParentUuidLessThan(String value) {
-            addCriterion("`parent_uuid` <", value, "parentUuid");
+        public Criteria andFilePathLike(String value) {
+            addCriterion("`file_path` like", value, "filePath");
             return (Criteria) this;
         }
 
-        public Criteria andParentUuidLessThanOrEqualTo(String value) {
-            addCriterion("`parent_uuid` <=", value, "parentUuid");
+        public Criteria andFilePathNotLike(String value) {
+            addCriterion("`file_path` not like", value, "filePath");
             return (Criteria) this;
         }
 
-        public Criteria andParentUuidLike(String value) {
-            addCriterion("`parent_uuid` like", value, "parentUuid");
+        public Criteria andFilePathIn(List<String> values) {
+            addCriterion("`file_path` in", values, "filePath");
             return (Criteria) this;
         }
 
-        public Criteria andParentUuidNotLike(String value) {
-            addCriterion("`parent_uuid` not like", value, "parentUuid");
+        public Criteria andFilePathNotIn(List<String> values) {
+            addCriterion("`file_path` not in", values, "filePath");
             return (Criteria) this;
         }
 
-        public Criteria andParentUuidIn(List<String> values) {
-            addCriterion("`parent_uuid` in", values, "parentUuid");
+        public Criteria andFilePathBetween(String value1, String value2) {
+            addCriterion("`file_path` between", value1, value2, "filePath");
             return (Criteria) this;
         }
 
-        public Criteria andParentUuidNotIn(List<String> values) {
-            addCriterion("`parent_uuid` not in", values, "parentUuid");
+        public Criteria andFilePathNotBetween(String value1, String value2) {
+            addCriterion("`file_path` not between", value1, value2, "filePath");
             return (Criteria) this;
         }
 
-        public Criteria andParentUuidBetween(String value1, String value2) {
-            addCriterion("`parent_uuid` between", value1, value2, "parentUuid");
+        public Criteria andFileSizeIsNull() {
+            addCriterion("`file_size` is null");
             return (Criteria) this;
         }
 
-        public Criteria andParentUuidNotBetween(String value1, String value2) {
-            addCriterion("`parent_uuid` not between", value1, value2, "parentUuid");
+        public Criteria andFileSizeIsNotNull() {
+            addCriterion("`file_size` is not null");
             return (Criteria) this;
         }
 
-        public Criteria andIsBuiltInIsNull() {
-            addCriterion("`is_built_in` is null");
+        public Criteria andFileSizeEqualTo(String value) {
+            addCriterion("`file_size` =", value, "fileSize");
             return (Criteria) this;
         }
 
-        public Criteria andIsBuiltInIsNotNull() {
-            addCriterion("`is_built_in` is not null");
+        public Criteria andFileSizeNotEqualTo(String value) {
+            addCriterion("`file_size` <>", value, "fileSize");
             return (Criteria) this;
         }
 
-        public Criteria andIsBuiltInEqualTo(Boolean value) {
-            addCriterion("`is_built_in` =", value, "isBuiltIn");
+        public Criteria andFileSizeGreaterThan(String value) {
+            addCriterion("`file_size` >", value, "fileSize");
             return (Criteria) this;
         }
 
-        public Criteria andIsBuiltInNotEqualTo(Boolean value) {
-            addCriterion("`is_built_in` <>", value, "isBuiltIn");
+        public Criteria andFileSizeGreaterThanOrEqualTo(String value) {
+            addCriterion("`file_size` >=", value, "fileSize");
             return (Criteria) this;
         }
 
-        public Criteria andIsBuiltInGreaterThan(Boolean value) {
-            addCriterion("`is_built_in` >", value, "isBuiltIn");
+        public Criteria andFileSizeLessThan(String value) {
+            addCriterion("`file_size` <", value, "fileSize");
             return (Criteria) this;
         }
 
-        public Criteria andIsBuiltInGreaterThanOrEqualTo(Boolean value) {
-            addCriterion("`is_built_in` >=", value, "isBuiltIn");
+        public Criteria andFileSizeLessThanOrEqualTo(String value) {
+            addCriterion("`file_size` <=", value, "fileSize");
             return (Criteria) this;
         }
 
-        public Criteria andIsBuiltInLessThan(Boolean value) {
-            addCriterion("`is_built_in` <", value, "isBuiltIn");
+        public Criteria andFileSizeLike(String value) {
+            addCriterion("`file_size` like", value, "fileSize");
             return (Criteria) this;
         }
 
-        public Criteria andIsBuiltInLessThanOrEqualTo(Boolean value) {
-            addCriterion("`is_built_in` <=", value, "isBuiltIn");
+        public Criteria andFileSizeNotLike(String value) {
+            addCriterion("`file_size` not like", value, "fileSize");
             return (Criteria) this;
         }
 
-        public Criteria andIsBuiltInIn(List<Boolean> values) {
-            addCriterion("`is_built_in` in", values, "isBuiltIn");
+        public Criteria andFileSizeIn(List<String> values) {
+            addCriterion("`file_size` in", values, "fileSize");
             return (Criteria) this;
         }
 
-        public Criteria andIsBuiltInNotIn(List<Boolean> values) {
-            addCriterion("`is_built_in` not in", values, "isBuiltIn");
+        public Criteria andFileSizeNotIn(List<String> values) {
+            addCriterion("`file_size` not in", values, "fileSize");
             return (Criteria) this;
         }
 
-        public Criteria andIsBuiltInBetween(Boolean value1, Boolean value2) {
-            addCriterion("`is_built_in` between", value1, value2, "isBuiltIn");
+        public Criteria andFileSizeBetween(String value1, String value2) {
+            addCriterion("`file_size` between", value1, value2, "fileSize");
             return (Criteria) this;
         }
 
-        public Criteria andIsBuiltInNotBetween(Boolean value1, Boolean value2) {
-            addCriterion("`is_built_in` not between", value1, value2, "isBuiltIn");
+        public Criteria andFileSizeNotBetween(String value1, String value2) {
+            addCriterion("`file_size` not between", value1, value2, "fileSize");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileTypeIsNull() {
+            addCriterion("`file_type` is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileTypeIsNotNull() {
+            addCriterion("`file_type` is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileTypeEqualTo(String value) {
+            addCriterion("`file_type` =", value, "fileType");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileTypeNotEqualTo(String value) {
+            addCriterion("`file_type` <>", value, "fileType");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileTypeGreaterThan(String value) {
+            addCriterion("`file_type` >", value, "fileType");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileTypeGreaterThanOrEqualTo(String value) {
+            addCriterion("`file_type` >=", value, "fileType");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileTypeLessThan(String value) {
+            addCriterion("`file_type` <", value, "fileType");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileTypeLessThanOrEqualTo(String value) {
+            addCriterion("`file_type` <=", value, "fileType");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileTypeLike(String value) {
+            addCriterion("`file_type` like", value, "fileType");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileTypeNotLike(String value) {
+            addCriterion("`file_type` not like", value, "fileType");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileTypeIn(List<String> values) {
+            addCriterion("`file_type` in", values, "fileType");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileTypeNotIn(List<String> values) {
+            addCriterion("`file_type` not in", values, "fileType");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileTypeBetween(String value1, String value2) {
+            addCriterion("`file_type` between", value1, value2, "fileType");
+            return (Criteria) this;
+        }
+
+        public Criteria andFileTypeNotBetween(String value1, String value2) {
+            addCriterion("`file_type` not between", value1, value2, "fileType");
+            return (Criteria) this;
+        }
+
+        public Criteria andDownNumberIsNull() {
+            addCriterion("`down_number` is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDownNumberIsNotNull() {
+            addCriterion("`down_number` is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDownNumberEqualTo(Integer value) {
+            addCriterion("`down_number` =", value, "downNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andDownNumberNotEqualTo(Integer value) {
+            addCriterion("`down_number` <>", value, "downNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andDownNumberGreaterThan(Integer value) {
+            addCriterion("`down_number` >", value, "downNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andDownNumberGreaterThanOrEqualTo(Integer value) {
+            addCriterion("`down_number` >=", value, "downNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andDownNumberLessThan(Integer value) {
+            addCriterion("`down_number` <", value, "downNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andDownNumberLessThanOrEqualTo(Integer value) {
+            addCriterion("`down_number` <=", value, "downNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andDownNumberIn(List<Integer> values) {
+            addCriterion("`down_number` in", values, "downNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andDownNumberNotIn(List<Integer> values) {
+            addCriterion("`down_number` not in", values, "downNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andDownNumberBetween(Integer value1, Integer value2) {
+            addCriterion("`down_number` between", value1, value2, "downNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andDownNumberNotBetween(Integer value1, Integer value2) {
+            addCriterion("`down_number` not between", value1, value2, "downNumber");
             return (Criteria) this;
         }
     }
@@ -694,52 +884,13 @@ public class TStartRoleExample {
 
     public static class Criterion {
         private final String condition;
-
-        private Object value;
-
-        private Object secondValue;
-
-        private boolean noValue;
-
-        private boolean singleValue;
-
-        private boolean betweenValue;
-
-        private boolean listValue;
-
         private final String typeHandler;
-
-        public String getCondition() {
-            return condition;
-        }
-
-        public Object getValue() {
-            return value;
-        }
-
-        public Object getSecondValue() {
-            return secondValue;
-        }
-
-        public boolean isNoValue() {
-            return noValue;
-        }
-
-        public boolean isSingleValue() {
-            return singleValue;
-        }
-
-        public boolean isBetweenValue() {
-            return betweenValue;
-        }
-
-        public boolean isListValue() {
-            return listValue;
-        }
-
-        public String getTypeHandler() {
-            return typeHandler;
-        }
+        private Object value;
+        private Object secondValue;
+        private boolean noValue;
+        private boolean singleValue;
+        private boolean betweenValue;
+        private boolean listValue;
 
         protected Criterion(String condition) {
             super();
@@ -775,6 +926,38 @@ public class TStartRoleExample {
 
         protected Criterion(String condition, Object value, Object secondValue) {
             this(condition, value, secondValue, null);
+        }
+
+        public String getCondition() {
+            return condition;
+        }
+
+        public Object getValue() {
+            return value;
+        }
+
+        public Object getSecondValue() {
+            return secondValue;
+        }
+
+        public boolean isNoValue() {
+            return noValue;
+        }
+
+        public boolean isSingleValue() {
+            return singleValue;
+        }
+
+        public boolean isBetweenValue() {
+            return betweenValue;
+        }
+
+        public boolean isListValue() {
+            return listValue;
+        }
+
+        public String getTypeHandler() {
+            return typeHandler;
         }
     }
 }

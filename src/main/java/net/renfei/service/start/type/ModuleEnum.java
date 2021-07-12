@@ -9,7 +9,8 @@ public enum ModuleEnum {
     /**
      * 未知模块
      */
-    UNKNOWN("未知");
+    UNKNOWN("未知"),
+    CMS("CMS内容管理模块");
     private final String describe;
 
     ModuleEnum(String describe) {

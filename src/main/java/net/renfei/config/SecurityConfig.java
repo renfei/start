@@ -2,6 +2,7 @@ package net.renfei.config;
 
 import net.renfei.security.filter.JwtTokenFilter;
 import net.renfei.security.handler.AccessDeniedHandlerImpl;
+import net.renfei.security.handler.AuthenticationEntryPointImpl;
 import net.renfei.security.interceptor.AccessDecisionManagerImpl;
 import net.renfei.security.interceptor.FilterInvocationSecurityMetadataSourceImpl;
 import org.springframework.context.annotation.Configuration;
@@ -11,9 +12,9 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 
 /**
  * Spring Security 的安全配置
@@ -53,11 +54,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         // rest 接口不用 CSRF
-        http.csrf().csrfTokenRepository(new HttpSessionCsrfTokenRepository())
-                .ignoringAntMatchers("/api/**")
-                .and()
-                .headers()
+        http.csrf().disable();
+        http.headers()
                 .frameOptions().sameOrigin()
                 .and()
                 .authorizeRequests()
@@ -73,7 +73,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     }
                 })
                 .anyRequest().permitAll()
-                .and().exceptionHandling().accessDeniedHandler(new AccessDeniedHandlerImpl());
+                .and().exceptionHandling()
+                .accessDeniedHandler(new AccessDeniedHandlerImpl())
+                .authenticationEntryPoint(new AuthenticationEntryPointImpl());
         http.addFilterBefore(
                 jwtTokenFilter,
                 UsernamePasswordAuthenticationFilter.class

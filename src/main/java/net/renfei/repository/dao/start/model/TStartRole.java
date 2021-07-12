@@ -20,6 +20,8 @@ public class TStartRole implements Serializable {
 
     private String parentUuid;
 
+    private Boolean isBuiltIn;
+
     private static final long serialVersionUID = 1L;
 
     public Long getId() {
@@ -86,6 +88,14 @@ public class TStartRole implements Serializable {
         this.parentUuid = parentUuid;
     }
 
+    public Boolean getIsBuiltIn() {
+        return isBuiltIn;
+    }
+
+    public void setIsBuiltIn(Boolean isBuiltIn) {
+        this.isBuiltIn = isBuiltIn;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -100,6 +110,7 @@ public class TStartRole implements Serializable {
         sb.append(", roleEnName=").append(roleEnName);
         sb.append(", roleName=").append(roleName);
         sb.append(", parentUuid=").append(parentUuid);
+        sb.append(", isBuiltIn=").append(isBuiltIn);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

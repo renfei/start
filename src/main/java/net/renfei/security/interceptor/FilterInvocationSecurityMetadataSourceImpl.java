@@ -51,14 +51,16 @@ public class FilterInvocationSecurityMetadataSourceImpl implements FilterInvocat
     public Collection<ConfigAttribute> getAttributes(Object object) throws IllegalArgumentException {
         FilterInvocation filterInvocation = (FilterInvocation) object;
         HttpServletRequest request = filterInvocation.getHttpRequest();
-        String requestUrl = request.getMethod().toLowerCase() + ":" + filterInvocation.getRequestUrl();
+        String requestMethod = request.getMethod().toLowerCase();
+        String requestUrl = filterInvocation.getRequest().getRequestURI();
         if (permissionList != null && !permissionList.isEmpty()) {
             List<ConfigAttribute> configAttributes = new CopyOnWriteArrayList<>();
             for (PermissionDTO permission : permissionList
             ) {
                 // 遍历系统所有的资源进行匹配
-                String url = permission.getRequestMethod().toLowerCase() + ":" + permission.getResourceUrl();
-                if (antPathMatcher.match(url, requestUrl)) {
+                String method = permission.getRequestMethod().toLowerCase();
+                String url = permission.getResourceUrl();
+                if (requestMethod.equals(method) && antPathMatcher.match(url, requestUrl)) {
                     // 匹配命中了，将访问此资源需要的角色添加到 List<ConfigAttribute>
                     configAttributes.addAll(permissionService.getRoleListByPermission(permission));
                 }

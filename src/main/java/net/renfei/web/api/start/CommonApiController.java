@@ -23,11 +23,11 @@ import java.util.UUID;
  */
 @Controller
 @RequestMapping("/common")
-public class CommonController extends BaseController {
+public class CommonApiController extends BaseController {
     private final StorageServiceFactory storageServiceFactory;
 
-    public CommonController(SystemConfig systemConfig,
-                            StorageServiceFactory storageServiceFactory) {
+    public CommonApiController(SystemConfig systemConfig,
+                               StorageServiceFactory storageServiceFactory) {
         super(systemConfig);
         this.storageServiceFactory = storageServiceFactory;
     }
@@ -72,7 +72,7 @@ public class CommonController extends BaseController {
         captcha.getArithmeticString();
         // 获取运算的结果：5
         captcha.text();
-        String key = UUID.randomUUID().toString();
+        String key = "CAPTCHA_" + UUID.randomUUID();
         // 将正确答案保存起来
         StorageService storageService = storageServiceFactory.getStorageService(request);
         storageService.set(key, captcha.text().toLowerCase(), 60000L);

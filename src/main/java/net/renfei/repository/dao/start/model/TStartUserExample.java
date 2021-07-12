@@ -1361,6 +1361,66 @@ public class TStartUserExample {
             addCriterion("`confidential_rank` not between", value1, value2, "confidentialRank");
             return (Criteria) this;
         }
+
+        public Criteria andIsBuiltInIsNull() {
+            addCriterion("`is_built_in` is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsBuiltInIsNotNull() {
+            addCriterion("`is_built_in` is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsBuiltInEqualTo(Boolean value) {
+            addCriterion("`is_built_in` =", value, "isBuiltIn");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsBuiltInNotEqualTo(Boolean value) {
+            addCriterion("`is_built_in` <>", value, "isBuiltIn");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsBuiltInGreaterThan(Boolean value) {
+            addCriterion("`is_built_in` >", value, "isBuiltIn");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsBuiltInGreaterThanOrEqualTo(Boolean value) {
+            addCriterion("`is_built_in` >=", value, "isBuiltIn");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsBuiltInLessThan(Boolean value) {
+            addCriterion("`is_built_in` <", value, "isBuiltIn");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsBuiltInLessThanOrEqualTo(Boolean value) {
+            addCriterion("`is_built_in` <=", value, "isBuiltIn");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsBuiltInIn(List<Boolean> values) {
+            addCriterion("`is_built_in` in", values, "isBuiltIn");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsBuiltInNotIn(List<Boolean> values) {
+            addCriterion("`is_built_in` not in", values, "isBuiltIn");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsBuiltInBetween(Boolean value1, Boolean value2) {
+            addCriterion("`is_built_in` between", value1, value2, "isBuiltIn");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsBuiltInNotBetween(Boolean value1, Boolean value2) {
+            addCriterion("`is_built_in` not between", value1, value2, "isBuiltIn");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

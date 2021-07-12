@@ -7,12 +7,12 @@ import net.renfei.service.start.StorageService;
  */
 public class RedisStorageServiceImpl implements StorageService {
     @Override
-    public void set(String key, Object object, Long expiration) {
+    public void set(String key, String object, Long expiration) {
 
     }
 
     @Override
-    public Object get(String key, Boolean remove) {
+    public String get(String key, Boolean remove) {
         return null;
     }
 }

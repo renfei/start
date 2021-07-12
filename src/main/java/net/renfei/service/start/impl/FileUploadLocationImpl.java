@@ -33,7 +33,7 @@ public class FileUploadLocationImpl extends BaseService implements FileUploadSer
 
     @Override
     public String uploadFile(MultipartFile file, String path, String newPath) {
-        if (file.isEmpty()) {
+        if (file == null || file.isEmpty()) {
             throw new BusinessException("文件为空!");
         }
         // 文件名

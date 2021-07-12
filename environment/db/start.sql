@@ -53,6 +53,33 @@ BEGIN;
 COMMIT;
 
 -- ----------------------------
+-- Table structure for t_cms_post_attachments
+-- ----------------------------
+DROP TABLE IF EXISTS `t_cms_post_attachments`;
+CREATE TABLE `t_cms_post_attachments`
+(
+    `id`                bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+    `post_id`           bigint(20) unsigned NOT NULL COMMENT '文章ID',
+    `create_time`       datetime    NOT NULL COMMENT '创建时间',
+    `update_time`       datetime     DEFAULT NULL COMMENT '更新时间',
+    `is_deleted`        tinyint(1) unsigned NOT NULL DEFAULT 0 COMMENT '是否删除',
+    `uuid`              varchar(36) NOT NULL COMMENT '全局唯一ID',
+    `confidential_rank` int(11) NOT NULL DEFAULT 0 COMMENT '保密等级',
+    `file_name`         varchar(255) DEFAULT NULL COMMENT '文件名',
+    `file_path`         varchar(255) DEFAULT NULL COMMENT '文件保存路径',
+    `file_size`         varchar(255) DEFAULT NULL COMMENT '文件大小',
+    `file_type`         varchar(255) DEFAULT NULL COMMENT '文件类型（后缀）',
+    `down_number`       int(11) DEFAULT NULL COMMENT '下载次数',
+    PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='文章附件列表';
+
+-- ----------------------------
+-- Records of t_cms_post_attachments
+-- ----------------------------
+BEGIN;
+COMMIT;
+
+-- ----------------------------
 -- Table structure for t_cms_post_tag
 -- ----------------------------
 DROP TABLE IF EXISTS `t_cms_post_tag`;
@@ -128,6 +155,25 @@ CREATE TABLE `t_cms_tag`
 
 -- ----------------------------
 -- Records of t_cms_tag
+-- ----------------------------
+BEGIN;
+COMMIT;
+
+-- ----------------------------
+-- Table structure for t_start_kv_storage
+-- ----------------------------
+DROP TABLE IF EXISTS `t_start_kv_storage`;
+CREATE TABLE `t_start_kv_storage`
+(
+    `id`         bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+    `keys`       varchar(255) NOT NULL COMMENT '键值',
+    `values`     text         NOT NULL COMMENT '内容',
+    `expiration` date         NOT NULL COMMENT '过期时间',
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='基于数据实现KV存储';
+
+-- ----------------------------
+-- Records of t_start_kv_storage
 -- ----------------------------
 BEGIN;
 COMMIT;
@@ -7096,6 +7142,7 @@ CREATE TABLE `t_start_role`
     `role_en_name` varchar(255) DEFAULT NULL COMMENT '代码中角色名',
     `role_name`    varchar(255) DEFAULT NULL COMMENT '角色名称',
     `parent_uuid`  varchar(36)  DEFAULT NULL COMMENT '父级角色UUID',
+    `is_built_in`  tinyint(1) unsigned NOT NULL DEFAULT 0 COMMENT '是否系统内置',
     PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='系统角色（用户组）';
 
@@ -7104,9 +7151,10 @@ CREATE TABLE `t_start_role`
 -- ----------------------------
 BEGIN;
 INSERT INTO `t_start_role`
-VALUES (1, '2021-04-29 15:46:12', NULL, 0, '3F6D6191-E510-47E2-ACEA-BB2ACA1EF49C', 'ROLE_TESTER', '单元测试员', NULL);
+VALUES (1, '2021-04-29 15:46:12', NULL, 0, '3F6D6191-E510-47E2-ACEA-BB2ACA1EF49C', 'ROLE_TESTER', '单元测试员', NULL, 0);
 INSERT INTO `t_start_role`
-VALUES (2, '2021-04-29 15:56:44', NULL, 0, '629CB1F3-3F69-456A-BDEF-23267DD053C0', 'ROLE_TESTER_TWO', '单元测试员二号', NULL);
+VALUES (2, '2021-04-29 15:56:44', NULL, 0, '629CB1F3-3F69-456A-BDEF-23267DD053C0', 'ROLE_TESTER_TWO', '单元测试员二号', NULL,
+        0);
 COMMIT;
 
 -- ----------------------------
@@ -7184,6 +7232,7 @@ CREATE TABLE `t_start_user`
     `first_name`        varchar(255) CHARACTER SET utf8mb4                            DEFAULT NULL COMMENT '名字',
     `last_login`        date                                                          DEFAULT NULL COMMENT '最后登录时间',
     `confidential_rank` int(11) NOT NULL DEFAULT 0 COMMENT '保密等级',
+    `is_built_in`       tinyint(1) unsigned NOT NULL DEFAULT 0 COMMENT '是否系统内置',
     PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='用户表';
 
@@ -7194,7 +7243,7 @@ BEGIN;
 INSERT INTO `t_start_user`
 VALUES (1, '2021-04-28 11:42:57', NULL, 0, 'BBAD927D-CF9F-4C39-825F-A4935E4524AC', 'tester',
         'sha256:64000:18:vWLIwAgt1Q5SzrYDdIgQzTxi+PIpC08H:XddskjIqWV77/Yr5KtzjEPlw', 'i@renfei.net', NULL,
-        '2021-04-28 11:44:05', NULL, '127.0.0.1', 0, NULL, 1, NULL, NULL, NULL, 0);
+        '2021-04-28 11:44:05', NULL, '127.0.0.1', 0, NULL, 1, NULL, NULL, NULL, 0, 0);
 COMMIT;
 
 -- ----------------------------

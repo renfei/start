@@ -42,6 +42,8 @@ public class TStartUser implements Serializable {
 
     private Integer confidentialRank;
 
+    private Boolean isBuiltIn;
+
     private static final long serialVersionUID = 1L;
 
     public Long getId() {
@@ -196,6 +198,14 @@ public class TStartUser implements Serializable {
         this.confidentialRank = confidentialRank;
     }
 
+    public Boolean getIsBuiltIn() {
+        return isBuiltIn;
+    }
+
+    public void setIsBuiltIn(Boolean isBuiltIn) {
+        this.isBuiltIn = isBuiltIn;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -221,6 +231,7 @@ public class TStartUser implements Serializable {
         sb.append(", firstName=").append(firstName);
         sb.append(", lastLogin=").append(lastLogin);
         sb.append(", confidentialRank=").append(confidentialRank);
+        sb.append(", isBuiltIn=").append(isBuiltIn);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

@@ -229,6 +229,48 @@ public class CmsPostServiceImpl extends BaseService implements CmsPostService {
     }
 
     /**
+     * 根据条件获取文章列表
+     *
+     * @param user             登陆的用户
+     * @param category         分类
+     * @param confidentialRank 密级
+     * @param startDate        开始时间
+     * @param endDate          结束时间
+     * @param pages            页码
+     * @param rows             每页行数
+     * @return
+     */
+    @Override
+    public ListData<PostDTO> getPostList(UserDTO user, Long category, ConfidentialRankEnum confidentialRank,
+                                         Date startDate, Date endDate, String pages, String rows) {
+        TCmsPostsExample example = new TCmsPostsExample();
+        example.setOrderByClause("release_time DESC");
+        TCmsPostsExample.Criteria criteria = example.createCriteria()
+                .andReleaseTimeLessThanOrEqualTo(new Date())
+                .andIsDeleteEqualTo(false);
+        if (user != null) {
+            criteria.andConfidentialRankLessThanOrEqualTo(user.getConfidentialRank().getRank());
+        } else {
+            criteria.andConfidentialRankEqualTo(0);
+        }
+        if (category != null) {
+            criteria.andCategoryIdEqualTo(category);
+        }
+        if (confidentialRank != null) {
+            assert user != null;
+            checkConfidentialRank(user.getConfidentialRank(), confidentialRank);
+            criteria.andConfidentialRankEqualTo(confidentialRank.getRank());
+        }
+        if (startDate != null) {
+            criteria.andReleaseTimeGreaterThanOrEqualTo(startDate);
+        }
+        if (endDate != null) {
+            criteria.andReleaseTimeLessThanOrEqualTo(endDate);
+        }
+        return selectByExample(example, pages, rows);
+    }
+
+    /**
      * 获取全部文章列表
      *
      * @param user  登陆用户
@@ -248,7 +290,7 @@ public class CmsPostServiceImpl extends BaseService implements CmsPostService {
         } else {
             criteria.andConfidentialRankEqualTo(0);
         }
-        return selectByExample(example, pages, rows);
+        return getPostList(user, null, null, null, null, pages, rows);
     }
 
     /**

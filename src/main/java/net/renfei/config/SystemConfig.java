@@ -28,6 +28,7 @@ public class SystemConfig {
     private String buildTime;
     private String totpSecret;
     private String authMode;
+    private String kvStorage;
     private String fileUploadPath;
     private String fileUploadMode;
     private Integer fileEncryptionXor;

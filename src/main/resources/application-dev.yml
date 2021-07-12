@@ -25,11 +25,17 @@ spring:
     port: 6379
     database: 0
     password: #默认为空
+  mail:
+    password: dd
+    username: dd@qq.com
+    reply-to: dd@qq.com
+    default-encoding: utf-8
+    host: smtp.qq.com
 # 自定义配置 #####################################
 system:
   active: dev
   version: @project.version@
-  siteName: 任霏的博客
+  siteName: 站点名称
   domain: http://localhost:8099
   staticDomain: https://cdn.renfei.net
   ipv4DataPath: /opt/RenFeiNet/IPDATA.BIN
@@ -37,6 +43,7 @@ system:
   buildTime: @buildtimestamp@
   totpSecret: <totpSecret>
   authMode: RESET
+  kvStorage: DataBase
   fileUploadPath: /opt/RenFeiNet/
   #  fileUploadMode: ALIYUNOSS
   fileUploadMode: LOCAL

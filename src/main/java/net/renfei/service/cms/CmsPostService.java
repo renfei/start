@@ -1,9 +1,12 @@
 package net.renfei.service.cms;
 
 import net.renfei.sdk.entity.ListData;
+import net.renfei.security.ConfidentialRankEnum;
 import net.renfei.service.cms.dto.PostDTO;
 import net.renfei.service.start.dto.UserDTO;
 import net.renfei.web.api.cms.ao.PostAO;
+
+import java.util.Date;
 
 /**
  * 文章服务
@@ -40,6 +43,21 @@ public interface CmsPostService {
      * @return 文章列表
      */
     ListData<PostDTO> getAllPost(String pages, String rows);
+
+    /**
+     * 根据条件获取文章列表
+     *
+     * @param user             登陆的用户
+     * @param category         分类
+     * @param confidentialRank 密级
+     * @param startDate        开始时间
+     * @param endDate          结束时间
+     * @param pages            页码
+     * @param rows             每页行数
+     * @return
+     */
+    ListData<PostDTO> getPostList(UserDTO user, Long category, ConfidentialRankEnum confidentialRank,
+                                  Date startDate, Date endDate, String pages, String rows);
 
     /**
      * 获取全部文章列表

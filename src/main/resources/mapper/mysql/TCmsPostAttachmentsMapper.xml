@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="net.renfei.repository.dao.start.TStartRoleMapper">
-    <resultMap id="BaseResultMap" type="net.renfei.repository.dao.start.model.TStartRole">
+<mapper namespace="net.renfei.repository.dao.cms.TCmsPostAttachmentsMapper">
+    <resultMap id="BaseResultMap" type="net.renfei.repository.dao.cms.model.TCmsPostAttachments">
         <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="post_id" jdbcType="BIGINT" property="postId"/>
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
         <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
         <result column="is_deleted" jdbcType="BIT" property="isDeleted"/>
         <result column="uuid" jdbcType="VARCHAR" property="uuid"/>
-        <result column="role_en_name" jdbcType="VARCHAR" property="roleEnName"/>
-        <result column="role_name" jdbcType="VARCHAR" property="roleName"/>
-        <result column="parent_uuid" jdbcType="VARCHAR" property="parentUuid"/>
-        <result column="is_built_in" jdbcType="BIT" property="isBuiltIn"/>
+        <result column="confidential_rank" jdbcType="INTEGER" property="confidentialRank"/>
+        <result column="file_name" jdbcType="VARCHAR" property="fileName"/>
+        <result column="file_path" jdbcType="VARCHAR" property="filePath"/>
+        <result column="file_size" jdbcType="VARCHAR" property="fileSize"/>
+        <result column="file_type" jdbcType="VARCHAR" property="fileType"/>
+        <result column="down_number" jdbcType="INTEGER" property="downNumber"/>
     </resultMap>
     <sql id="Example_Where_Clause">
         <where>
@@ -74,17 +77,17 @@
     </sql>
     <sql id="Base_Column_List">
         `id`
-        , `create_time`, `update_time`, `is_deleted`, `uuid`, `role_en_name`, `role_name`,
-    `parent_uuid`, `is_built_in`
+        , `post_id`, `create_time`, `update_time`, `is_deleted`, `uuid`, `confidential_rank`,
+    `file_name`, `file_path`, `file_size`, `file_type`, `down_number`
     </sql>
-    <select id="selectByExample" parameterType="net.renfei.repository.dao.start.model.TStartRoleExample"
+    <select id="selectByExample" parameterType="net.renfei.repository.dao.cms.model.TCmsPostAttachmentsExample"
             resultMap="BaseResultMap">
         select
         <if test="distinct">
             distinct
         </if>
         <include refid="Base_Column_List"/>
-        from t_start_role
+        from t_cms_post_attachments
         <if test="_parameter != null">
             <include refid="Example_Where_Clause"/>
         </if>
@@ -95,33 +98,38 @@
     <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
-        from t_start_role
+        from t_cms_post_attachments
         where `id` = #{id,jdbcType=BIGINT}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
         delete
-        from t_start_role
+        from t_cms_post_attachments
         where `id` = #{id,jdbcType=BIGINT}
     </delete>
-    <delete id="deleteByExample" parameterType="net.renfei.repository.dao.start.model.TStartRoleExample">
-        delete from t_start_role
+    <delete id="deleteByExample" parameterType="net.renfei.repository.dao.cms.model.TCmsPostAttachmentsExample">
+        delete from t_cms_post_attachments
         <if test="_parameter != null">
             <include refid="Example_Where_Clause"/>
         </if>
     </delete>
-    <insert id="insert" parameterType="net.renfei.repository.dao.start.model.TStartRole">
-        insert into t_start_role (`id`, `create_time`, `update_time`,
-                                  `is_deleted`, `uuid`, `role_en_name`,
-                                  `role_name`, `parent_uuid`, `is_built_in`)
-        values (#{id,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP},
-                #{isDeleted,jdbcType=BIT}, #{uuid,jdbcType=VARCHAR}, #{roleEnName,jdbcType=VARCHAR},
-                #{roleName,jdbcType=VARCHAR}, #{parentUuid,jdbcType=VARCHAR}, #{isBuiltIn,jdbcType=BIT})
+    <insert id="insert" parameterType="net.renfei.repository.dao.cms.model.TCmsPostAttachments">
+        insert into t_cms_post_attachments (`id`, `post_id`, `create_time`,
+                                            `update_time`, `is_deleted`, `uuid`,
+                                            `confidential_rank`, `file_name`, `file_path`,
+                                            `file_size`, `file_type`, `down_number`)
+        values (#{id,jdbcType=BIGINT}, #{postId,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP},
+                #{updateTime,jdbcType=TIMESTAMP}, #{isDeleted,jdbcType=BIT}, #{uuid,jdbcType=VARCHAR},
+                #{confidentialRank,jdbcType=INTEGER}, #{fileName,jdbcType=VARCHAR}, #{filePath,jdbcType=VARCHAR},
+                #{fileSize,jdbcType=VARCHAR}, #{fileType,jdbcType=VARCHAR}, #{downNumber,jdbcType=INTEGER})
     </insert>
-    <insert id="insertSelective" parameterType="net.renfei.repository.dao.start.model.TStartRole">
-        insert into t_start_role
+    <insert id="insertSelective" parameterType="net.renfei.repository.dao.cms.model.TCmsPostAttachments">
+        insert into t_cms_post_attachments
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
                 `id`,
+            </if>
+            <if test="postId != null">
+                `post_id`,
             </if>
             <if test="createTime != null">
                 `create_time`,
@@ -135,22 +143,31 @@
             <if test="uuid != null">
                 `uuid`,
             </if>
-            <if test="roleEnName != null">
-                `role_en_name`,
+            <if test="confidentialRank != null">
+                `confidential_rank`,
             </if>
-            <if test="roleName != null">
-                `role_name`,
+            <if test="fileName != null">
+                `file_name`,
             </if>
-            <if test="parentUuid != null">
-                `parent_uuid`,
+            <if test="filePath != null">
+                `file_path`,
             </if>
-            <if test="isBuiltIn != null">
-                `is_built_in`,
+            <if test="fileSize != null">
+                `file_size`,
+            </if>
+            <if test="fileType != null">
+                `file_type`,
+            </if>
+            <if test="downNumber != null">
+                `down_number`,
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">
                 #{id,jdbcType=BIGINT},
+            </if>
+            <if test="postId != null">
+                #{postId,jdbcType=BIGINT},
             </if>
             <if test="createTime != null">
                 #{createTime,jdbcType=TIMESTAMP},
@@ -164,32 +181,41 @@
             <if test="uuid != null">
                 #{uuid,jdbcType=VARCHAR},
             </if>
-            <if test="roleEnName != null">
-                #{roleEnName,jdbcType=VARCHAR},
+            <if test="confidentialRank != null">
+                #{confidentialRank,jdbcType=INTEGER},
             </if>
-            <if test="roleName != null">
-                #{roleName,jdbcType=VARCHAR},
+            <if test="fileName != null">
+                #{fileName,jdbcType=VARCHAR},
             </if>
-            <if test="parentUuid != null">
-                #{parentUuid,jdbcType=VARCHAR},
+            <if test="filePath != null">
+                #{filePath,jdbcType=VARCHAR},
             </if>
-            <if test="isBuiltIn != null">
-                #{isBuiltIn,jdbcType=BIT},
+            <if test="fileSize != null">
+                #{fileSize,jdbcType=VARCHAR},
+            </if>
+            <if test="fileType != null">
+                #{fileType,jdbcType=VARCHAR},
+            </if>
+            <if test="downNumber != null">
+                #{downNumber,jdbcType=INTEGER},
             </if>
         </trim>
     </insert>
-    <select id="countByExample" parameterType="net.renfei.repository.dao.start.model.TStartRoleExample"
+    <select id="countByExample" parameterType="net.renfei.repository.dao.cms.model.TCmsPostAttachmentsExample"
             resultType="java.lang.Long">
-        select count(*) from t_start_role
+        select count(*) from t_cms_post_attachments
         <if test="_parameter != null">
             <include refid="Example_Where_Clause"/>
         </if>
     </select>
     <update id="updateByExampleSelective" parameterType="map">
-        update t_start_role
+        update t_cms_post_attachments
         <set>
             <if test="record.id != null">
                 `id` = #{record.id,jdbcType=BIGINT},
+            </if>
+            <if test="record.postId != null">
+                `post_id` = #{record.postId,jdbcType=BIGINT},
             </if>
             <if test="record.createTime != null">
                 `create_time` = #{record.createTime,jdbcType=TIMESTAMP},
@@ -203,17 +229,23 @@
             <if test="record.uuid != null">
                 `uuid` = #{record.uuid,jdbcType=VARCHAR},
             </if>
-            <if test="record.roleEnName != null">
-                `role_en_name` = #{record.roleEnName,jdbcType=VARCHAR},
+            <if test="record.confidentialRank != null">
+                `confidential_rank` = #{record.confidentialRank,jdbcType=INTEGER},
             </if>
-            <if test="record.roleName != null">
-                `role_name` = #{record.roleName,jdbcType=VARCHAR},
+            <if test="record.fileName != null">
+                `file_name` = #{record.fileName,jdbcType=VARCHAR},
             </if>
-            <if test="record.parentUuid != null">
-                `parent_uuid` = #{record.parentUuid,jdbcType=VARCHAR},
+            <if test="record.filePath != null">
+                `file_path` = #{record.filePath,jdbcType=VARCHAR},
             </if>
-            <if test="record.isBuiltIn != null">
-                `is_built_in` = #{record.isBuiltIn,jdbcType=BIT},
+            <if test="record.fileSize != null">
+                `file_size` = #{record.fileSize,jdbcType=VARCHAR},
+            </if>
+            <if test="record.fileType != null">
+                `file_type` = #{record.fileType,jdbcType=VARCHAR},
+            </if>
+            <if test="record.downNumber != null">
+                `down_number` = #{record.downNumber,jdbcType=INTEGER},
             </if>
         </set>
         <if test="_parameter != null">
@@ -221,23 +253,29 @@
         </if>
     </update>
     <update id="updateByExample" parameterType="map">
-        update t_start_role
+        update t_cms_post_attachments
         set `id` = #{record.id,jdbcType=BIGINT},
+        `post_id` = #{record.postId,jdbcType=BIGINT},
         `create_time` = #{record.createTime,jdbcType=TIMESTAMP},
         `update_time` = #{record.updateTime,jdbcType=TIMESTAMP},
         `is_deleted` = #{record.isDeleted,jdbcType=BIT},
         `uuid` = #{record.uuid,jdbcType=VARCHAR},
-        `role_en_name` = #{record.roleEnName,jdbcType=VARCHAR},
-        `role_name` = #{record.roleName,jdbcType=VARCHAR},
-        `parent_uuid` = #{record.parentUuid,jdbcType=VARCHAR},
-        `is_built_in` = #{record.isBuiltIn,jdbcType=BIT}
+        `confidential_rank` = #{record.confidentialRank,jdbcType=INTEGER},
+        `file_name` = #{record.fileName,jdbcType=VARCHAR},
+        `file_path` = #{record.filePath,jdbcType=VARCHAR},
+        `file_size` = #{record.fileSize,jdbcType=VARCHAR},
+        `file_type` = #{record.fileType,jdbcType=VARCHAR},
+        `down_number` = #{record.downNumber,jdbcType=INTEGER}
         <if test="_parameter != null">
             <include refid="Update_By_Example_Where_Clause"/>
         </if>
     </update>
-    <update id="updateByPrimaryKeySelective" parameterType="net.renfei.repository.dao.start.model.TStartRole">
-        update t_start_role
+    <update id="updateByPrimaryKeySelective" parameterType="net.renfei.repository.dao.cms.model.TCmsPostAttachments">
+        update t_cms_post_attachments
         <set>
+            <if test="postId != null">
+                `post_id` = #{postId,jdbcType=BIGINT},
+            </if>
             <if test="createTime != null">
                 `create_time` = #{createTime,jdbcType=TIMESTAMP},
             </if>
@@ -250,31 +288,40 @@
             <if test="uuid != null">
                 `uuid` = #{uuid,jdbcType=VARCHAR},
             </if>
-            <if test="roleEnName != null">
-                `role_en_name` = #{roleEnName,jdbcType=VARCHAR},
+            <if test="confidentialRank != null">
+                `confidential_rank` = #{confidentialRank,jdbcType=INTEGER},
             </if>
-            <if test="roleName != null">
-                `role_name` = #{roleName,jdbcType=VARCHAR},
+            <if test="fileName != null">
+                `file_name` = #{fileName,jdbcType=VARCHAR},
             </if>
-            <if test="parentUuid != null">
-                `parent_uuid` = #{parentUuid,jdbcType=VARCHAR},
+            <if test="filePath != null">
+                `file_path` = #{filePath,jdbcType=VARCHAR},
             </if>
-            <if test="isBuiltIn != null">
-                `is_built_in` = #{isBuiltIn,jdbcType=BIT},
+            <if test="fileSize != null">
+                `file_size` = #{fileSize,jdbcType=VARCHAR},
+            </if>
+            <if test="fileType != null">
+                `file_type` = #{fileType,jdbcType=VARCHAR},
+            </if>
+            <if test="downNumber != null">
+                `down_number` = #{downNumber,jdbcType=INTEGER},
             </if>
         </set>
         where `id` = #{id,jdbcType=BIGINT}
     </update>
-    <update id="updateByPrimaryKey" parameterType="net.renfei.repository.dao.start.model.TStartRole">
-        update t_start_role
-        set `create_time`  = #{createTime,jdbcType=TIMESTAMP},
-            `update_time`  = #{updateTime,jdbcType=TIMESTAMP},
-            `is_deleted`   = #{isDeleted,jdbcType=BIT},
-            `uuid`         = #{uuid,jdbcType=VARCHAR},
-            `role_en_name` = #{roleEnName,jdbcType=VARCHAR},
-            `role_name`    = #{roleName,jdbcType=VARCHAR},
-            `parent_uuid`  = #{parentUuid,jdbcType=VARCHAR},
-            `is_built_in`  = #{isBuiltIn,jdbcType=BIT}
+    <update id="updateByPrimaryKey" parameterType="net.renfei.repository.dao.cms.model.TCmsPostAttachments">
+        update t_cms_post_attachments
+        set `post_id`           = #{postId,jdbcType=BIGINT},
+            `create_time`       = #{createTime,jdbcType=TIMESTAMP},
+            `update_time`       = #{updateTime,jdbcType=TIMESTAMP},
+            `is_deleted`        = #{isDeleted,jdbcType=BIT},
+            `uuid`              = #{uuid,jdbcType=VARCHAR},
+            `confidential_rank` = #{confidentialRank,jdbcType=INTEGER},
+            `file_name`         = #{fileName,jdbcType=VARCHAR},
+            `file_path`         = #{filePath,jdbcType=VARCHAR},
+            `file_size`         = #{fileSize,jdbcType=VARCHAR},
+            `file_type`         = #{fileType,jdbcType=VARCHAR},
+            `down_number`       = #{downNumber,jdbcType=INTEGER}
         where `id` = #{id,jdbcType=BIGINT}
     </update>
 </mapper>
