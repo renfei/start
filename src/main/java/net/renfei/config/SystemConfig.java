@@ -42,6 +42,7 @@ public class SystemConfig {
     private UCenter uCenter;
     private Cloudflare cloudflare;
     private LetsEncrypt letsEncrypt;
+    private SignAuth signAuth;
 
     @Data
     public static class DataCahe {
@@ -127,5 +128,11 @@ public class SystemConfig {
     public static class LetsEncrypt {
         private String email;
         private String dirPath;
+    }
+
+    @Data
+    public static class SignAuth {
+        List<String> ignoreSignUri;
+        Integer signTimeout;
     }
 }

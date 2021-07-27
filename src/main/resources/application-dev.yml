@@ -96,3 +96,7 @@ system:
   letsEncrypt:
     email: i@renfei.net
     dirPath: /Users/renfei/Downloads/letsencrypt
+  signAuth:
+    ignoreSignUri:
+      - /api/auth/secretKey
+    signTimeout: 60
