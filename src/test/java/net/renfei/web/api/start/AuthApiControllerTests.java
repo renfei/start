@@ -23,7 +23,7 @@ class AuthApiControllerTests extends ApplicationTests {
     @Test
     public void getMyInfo() throws Exception {
         if (TOKEN != null) {
-            MockHttpServletRequestBuilder requestBuilder = get("/api/auth/myInfo")
+            MockHttpServletRequestBuilder requestBuilder = get("/api/auth/myInfo" + getSignature())
                     .contentType(MediaType.APPLICATION_JSON)
                     .session(SESSION);
             requestBuilder.header("Authorization", "Bearer " + TOKEN);

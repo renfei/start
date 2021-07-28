@@ -99,4 +99,5 @@ system:
   signAuth:
     ignoreSignUri:
       - /api/auth/secretKey
+      - /api/regionCode
     signTimeout: 60
