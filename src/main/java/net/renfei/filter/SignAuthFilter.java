@@ -90,7 +90,7 @@ public class SignAuthFilter implements Filter {
                 return;
             }
             // 重放攻击检查
-            long serverTimestamp = DateUtils.getUnixTimestamp();
+            long serverTimestamp = DateUtils.getUnixTimestamp() + 1;
             long difference = serverTimestamp - Long.parseLong(timestamp);
             if (Long.parseLong(timestamp) > serverTimestamp ||
                     difference > systemConfig.getSignAuth().getSignTimeout()) {
@@ -111,7 +111,7 @@ public class SignAuthFilter implements Filter {
                         .build(), servletResponse);
                 return;
             }
-            String serverSignature = StringUtils.signature(secretKeyDTO.getPublicKey(), timestamp, nonce);
+            String serverSignature = StringUtils.signature(secretKeyDTO.getPrivateKey(), timestamp, nonce);
             if (!serverSignature.equals(signature)) {
                 sendResult(APIResult.builder()
                         .code(StateCode.Failure)
