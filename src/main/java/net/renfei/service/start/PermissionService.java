@@ -1,5 +1,6 @@
 package net.renfei.service.start;
 
+import net.renfei.sdk.entity.ListData;
 import net.renfei.service.start.dto.PermissionDTO;
 import net.renfei.service.start.dto.RoleDTO;
 import net.renfei.service.start.dto.UserDTO;
@@ -46,6 +47,15 @@ public interface PermissionService {
      * @return 全部资源列表
      */
     List<PermissionDTO> getAllPermissionList(ResourceTypeEnum resourceTypeEnum);
+
+    /**
+     * 获取全部资源列表
+     *
+     * @param page 页码
+     * @param rows 每页容量
+     * @return 全部资源列表
+     */
+    ListData<PermissionDTO> getAllPermissionList(int page, int rows);
 
     /**
      * 根据资源反查角色

@@ -1,11 +1,14 @@
 package net.renfei.service.start.impl;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import net.renfei.config.SystemConfig;
 import net.renfei.repository.dao.start.TStartPermissionMapper;
 import net.renfei.repository.dao.start.TStartRoleMapper;
 import net.renfei.repository.dao.start.TStartRolePermissionMapper;
 import net.renfei.repository.dao.start.TStartUserRoleMapper;
 import net.renfei.repository.dao.start.model.*;
+import net.renfei.sdk.entity.ListData;
 import net.renfei.sdk.utils.BeanUtils;
 import net.renfei.service.BaseService;
 import net.renfei.service.start.PermissionService;
@@ -165,6 +168,25 @@ public class PermissionServiceImpl extends BaseService implements PermissionServ
             }
         }
         return permissions;
+    }
+
+    @Override
+    public ListData<PermissionDTO> getAllPermissionList(int pages, int rows) {
+        TStartPermissionExample permissionExample = new TStartPermissionExample();
+        permissionExample.createCriteria()
+                .andIsDeletedEqualTo(false);
+        Page<TStartPermission> page = PageHelper.startPage(pages, rows);
+        permissionMapper.selectByExample(permissionExample);
+        List<PermissionDTO> permissions = new CopyOnWriteArrayList<>();
+        if (!BeanUtils.isEmpty(page.getResult())) {
+            for (TStartPermission permission : page.getResult()
+            ) {
+                PermissionDTO permissionDTO = new PermissionDTO();
+                org.springframework.beans.BeanUtils.copyProperties(permission, permissionDTO);
+                permissions.add(permissionDTO);
+            }
+        }
+        return new ListData<>(permissions, page.getTotal(), page.getPageNum(), page.getPageSize(), page.getPages());
     }
 
     @Override

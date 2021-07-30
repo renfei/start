@@ -19,6 +19,10 @@ import javax.servlet.http.HttpServletRequest;
 public abstract class BaseController {
     public static final String SESSION_KEY = "signedUserSession";
     protected final SystemConfig systemConfig;
+    /**
+     * vuetifyjs 的表格组件，查全部是 -1
+     */
+    protected final static String VUETIFYJS_ALL_ROWS = "-1";
     @Autowired
     protected HttpServletRequest request;
 

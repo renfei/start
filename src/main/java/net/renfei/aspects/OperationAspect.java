@@ -135,6 +135,9 @@ public class OperationAspect {
         }
         int pos = Modifier.isStatic(ctMethod.getModifiers()) ? 0 : 1;
         for (int i = 0; i < ctMethod.getParameterTypes().length; i++) {
+            if (args[i] == null) {
+                continue;
+            }
             map.put(attribute.variableName(i + pos), args[i]);
         }
         return map;
