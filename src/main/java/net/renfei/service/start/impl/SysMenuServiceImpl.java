@@ -49,6 +49,9 @@ public class SysMenuServiceImpl extends BaseService implements SysMenuService {
     @Override
     public List<MenuDTO> getMenuByUser(UserDTO userDTO) {
         List<Long> ids = getMenuIdByUser(userDTO);
+        if (net.renfei.sdk.utils.BeanUtils.isEmpty(ids)) {
+            return null;
+        }
         TStartSysMenuExample example = new TStartSysMenuExample();
         example.setOrderByClause("order_num ASC");
         example.createCriteria()
