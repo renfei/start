@@ -5,6 +5,7 @@ import net.renfei.service.start.dto.PermissionDTO;
 import net.renfei.service.start.dto.RoleDTO;
 import net.renfei.service.start.dto.UserDTO;
 import net.renfei.service.start.type.ResourceTypeEnum;
+import net.renfei.web.api.start.ao.SysPermissionAO;
 import org.springframework.security.core.GrantedAuthority;
 
 import java.util.List;
@@ -64,4 +65,8 @@ public interface PermissionService {
      * @return 角色：{@link RoleDTO}
      */
     List<RoleDTO> getRoleListByPermission(PermissionDTO permission);
+
+    void editPermission(SysPermissionAO permissionAO);
+
+    void deletePermissionById(Long id);
 }
