@@ -1,7 +1,9 @@
 package net.renfei.service.start;
 
+import net.renfei.sdk.entity.ListData;
 import net.renfei.service.start.dto.MenuDTO;
 import net.renfei.service.start.dto.UserDTO;
+import net.renfei.web.api.start.ao.SysMenuAO;
 
 import java.util.List;
 
@@ -18,6 +20,12 @@ public interface SysMenuService {
      * @return
      */
     List<MenuDTO> getMenuByUser(UserDTO userDTO);
+
+    ListData<MenuDTO> getAllMenu(int pages, int rows);
+
+    void editMenu(SysMenuAO menuAO);
+
+    void deleteMenuById(Long id);
 
     /**
      * 递归查询子菜单

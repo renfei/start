@@ -1,20 +1,26 @@
 package net.renfei.service.start.impl;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import net.renfei.config.SystemConfig;
+import net.renfei.exception.BusinessException;
 import net.renfei.repository.dao.start.TStartPermissionMapper;
 import net.renfei.repository.dao.start.TStartRolePermissionMapper;
 import net.renfei.repository.dao.start.TStartSysMenuMapper;
 import net.renfei.repository.dao.start.TStartUserRoleMapper;
 import net.renfei.repository.dao.start.model.*;
+import net.renfei.sdk.entity.ListData;
 import net.renfei.service.BaseService;
 import net.renfei.service.start.SysMenuService;
 import net.renfei.service.start.dto.MenuDTO;
 import net.renfei.service.start.dto.UserDTO;
+import net.renfei.web.api.start.ao.SysMenuAO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * 系统后台菜单服务
@@ -70,6 +76,53 @@ public class SysMenuServiceImpl extends BaseService implements SysMenuService {
             menuDTOS.add(menuDTO);
         }
         return menuDTOS;
+    }
+
+    @Override
+    public ListData<MenuDTO> getAllMenu(int pages, int rows) {
+        TStartSysMenuExample example = new TStartSysMenuExample();
+        example.setOrderByClause("order_num ASC");
+        example.createCriteria();
+        Page<TStartSysMenu> page = PageHelper.startPage(pages, rows);
+        menuMapper.selectByExample(example);
+        List<MenuDTO> permissions = new CopyOnWriteArrayList<>();
+        if (!net.renfei.sdk.utils.BeanUtils.isEmpty(page.getResult())) {
+            for (TStartSysMenu permission : page.getResult()
+            ) {
+                MenuDTO permissionDTO = new MenuDTO();
+                org.springframework.beans.BeanUtils.copyProperties(permission, permissionDTO);
+                permissions.add(permissionDTO);
+            }
+        }
+        return new ListData<>(permissions, page.getTotal(), page.getPageNum(), page.getPageSize(), page.getPages());
+    }
+
+    @Override
+    public void editMenu(SysMenuAO menuAO) {
+        TStartSysMenu startSysMenu = new TStartSysMenu();
+        if (menuAO.getId() == null || menuAO.getId() == -1) {
+            // 新增
+            BeanUtils.copyProperties(menuAO, startSysMenu);
+            startSysMenu.setId(null);
+            menuMapper.insertSelective(startSysMenu);
+        } else {
+            // 修改
+            startSysMenu = menuMapper.selectByPrimaryKey(menuAO.getId());
+            if (startSysMenu == null) {
+                throw new BusinessException("根据ID未找到资源信息，请查正。");
+            }
+            BeanUtils.copyProperties(menuAO, startSysMenu);
+            menuMapper.updateByPrimaryKeySelective(startSysMenu);
+        }
+    }
+
+    @Override
+    public void deleteMenuById(Long id) {
+        TStartSysMenu startSysMenu = menuMapper.selectByPrimaryKey(id);
+        if (startSysMenu == null) {
+            throw new BusinessException("根据ID未找到资源信息，请查正。");
+        }
+        menuMapper.deleteByPrimaryKey(id);
     }
 
     /**
