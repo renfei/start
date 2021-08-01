@@ -3,6 +3,7 @@ package net.renfei.security.interceptor;
 import lombok.extern.slf4j.Slf4j;
 import net.renfei.service.start.PermissionService;
 import net.renfei.service.start.dto.PermissionDTO;
+import net.renfei.service.start.dto.RoleDTO;
 import net.renfei.service.start.type.ResourceTypeEnum;
 import org.springframework.security.access.ConfigAttribute;
 import org.springframework.security.access.SecurityConfig;
@@ -62,7 +63,10 @@ public class FilterInvocationSecurityMetadataSourceImpl implements FilterInvocat
                 String url = permission.getResourceUrl();
                 if (requestMethod.equals(method) && antPathMatcher.match(url, requestUrl)) {
                     // 匹配命中了，将访问此资源需要的角色添加到 List<ConfigAttribute>
-                    configAttributes.addAll(permissionService.getRoleListByPermission(permission));
+                    List<RoleDTO> roleDTOList = permissionService.getRoleListByPermission(permission);
+                    if (roleDTOList != null) {
+                        configAttributes.addAll(roleDTOList);
+                    }
                 }
             }
             if (!configAttributes.isEmpty()) {
