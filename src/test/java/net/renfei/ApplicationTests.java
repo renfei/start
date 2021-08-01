@@ -5,7 +5,9 @@ import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
 import net.renfei.config.SystemConfig;
 import net.renfei.sdk.utils.AESUtil;
+import net.renfei.sdk.utils.DateUtils;
 import net.renfei.sdk.utils.RSAUtils;
+import net.renfei.sdk.utils.StringUtils;
 import net.renfei.web.api.start.ao.ReportPublicKeyAO;
 import net.renfei.web.api.start.ao.SignInAO;
 import net.renfei.web.api.start.vo.SecretKeyVO;
@@ -32,6 +34,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 public class ApplicationTests {
     protected static String TOKEN;
+    protected static String AES_KEY;
+    protected static String AES_KEY_ID;
     protected MockHttpSession SESSION = new MockHttpSession();
     @Autowired
     protected MockMvc mockMvc;
@@ -101,6 +105,8 @@ public class ApplicationTests {
         assert secretKeys != null;
         // 解密 AES 秘钥
         String aes = RSAUtils.decrypt(secretKeys.getPublicKey(), privateKey);
+        AES_KEY_ID = secretKeys.getKeyId();
+        AES_KEY = aes;
         log.info("秘钥ID：{}", secretKeys.getKeyId());
         log.info("秘钥：{}", aes);
         secretKeys.setPublicKey(aes);
@@ -109,7 +115,7 @@ public class ApplicationTests {
     }
 
     public SignInVO signIn(SignInAO signInAo) throws Exception {
-        String result = mockMvc.perform(post("/api/auth/signIn")
+        String result = mockMvc.perform(post("/api/auth/signIn" + getSignature())
                 .content(JSON.toJSONString(signInAo))
                 .contentType(MediaType.APPLICATION_JSON)
                 .session(SESSION))
@@ -121,5 +127,13 @@ public class ApplicationTests {
         SignInVO signInVO = apiResult.getObject("data", SignInVO.class);
         assert signInVO != null;
         return signInVO;
+    }
+
+    public String getSignature() {
+        String timestamp = DateUtils.getUnixTimestamp() + "";
+        String nonce = StringUtils.getRandomNumber(6);
+        String aesKeyId = AES_KEY_ID;
+        String signature = StringUtils.signature(timestamp, nonce, AES_KEY);
+        return "?timestamp=" + timestamp + "&nonce=" + nonce + "&aesKeyId=" + aesKeyId + "&signature=" + signature;
     }
 }

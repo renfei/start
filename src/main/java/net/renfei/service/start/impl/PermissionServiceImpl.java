@@ -1,11 +1,15 @@
 package net.renfei.service.start.impl;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import net.renfei.config.SystemConfig;
+import net.renfei.exception.BusinessException;
 import net.renfei.repository.dao.start.TStartPermissionMapper;
 import net.renfei.repository.dao.start.TStartRoleMapper;
 import net.renfei.repository.dao.start.TStartRolePermissionMapper;
 import net.renfei.repository.dao.start.TStartUserRoleMapper;
 import net.renfei.repository.dao.start.model.*;
+import net.renfei.sdk.entity.ListData;
 import net.renfei.sdk.utils.BeanUtils;
 import net.renfei.service.BaseService;
 import net.renfei.service.start.PermissionService;
@@ -13,11 +17,14 @@ import net.renfei.service.start.dto.PermissionDTO;
 import net.renfei.service.start.dto.RoleDTO;
 import net.renfei.service.start.dto.UserDTO;
 import net.renfei.service.start.type.ResourceTypeEnum;
+import net.renfei.web.api.start.ao.SysPermissionAO;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Service;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
@@ -168,6 +175,25 @@ public class PermissionServiceImpl extends BaseService implements PermissionServ
     }
 
     @Override
+    public ListData<PermissionDTO> getAllPermissionList(int pages, int rows) {
+        TStartPermissionExample permissionExample = new TStartPermissionExample();
+        permissionExample.createCriteria()
+                .andIsDeletedEqualTo(false);
+        Page<TStartPermission> page = PageHelper.startPage(pages, rows);
+        permissionMapper.selectByExample(permissionExample);
+        List<PermissionDTO> permissions = new CopyOnWriteArrayList<>();
+        if (!BeanUtils.isEmpty(page.getResult())) {
+            for (TStartPermission permission : page.getResult()
+            ) {
+                PermissionDTO permissionDTO = new PermissionDTO();
+                org.springframework.beans.BeanUtils.copyProperties(permission, permissionDTO);
+                permissions.add(permissionDTO);
+            }
+        }
+        return new ListData<>(permissions, page.getTotal(), page.getPageNum(), page.getPageSize(), page.getPages());
+    }
+
+    @Override
     public List<RoleDTO> getRoleListByPermission(PermissionDTO permission) {
         TStartRolePermissionExample rolePermissionExample = new TStartRolePermissionExample();
         rolePermissionExample.createCriteria()
@@ -195,6 +221,42 @@ public class PermissionServiceImpl extends BaseService implements PermissionServ
             }
         }
         return roleList;
+    }
+
+    @Override
+    public void editPermission(SysPermissionAO permissionAO) {
+        TStartPermission permission = new TStartPermission();
+        if (permissionAO.getId() == null || permissionAO.getId() == -1) {
+            // 新增
+            permission.setUuid(UUID.randomUUID().toString());
+            permission.setCreateTime(new Date());
+            permission.setIsDeleted(false);
+            permission.setRequestMethod(permissionAO.getRequestMethod().toString());
+            permission.setResourceName(permissionAO.getResourceName());
+            permission.setResourceType(permissionAO.getResourceType().toString());
+            permission.setResourceUrl(permissionAO.getResourceUrl());
+            permissionMapper.insertSelective(permission);
+        } else {
+            // 修改
+            permission = permissionMapper.selectByPrimaryKey(permissionAO.getId());
+            if (permission == null) {
+                throw new BusinessException("根据ID未找到资源信息，请查正。");
+            }
+            permission.setRequestMethod(permissionAO.getRequestMethod().toString());
+            permission.setResourceName(permissionAO.getResourceName());
+            permission.setResourceType(permissionAO.getResourceType().toString());
+            permission.setResourceUrl(permissionAO.getResourceUrl());
+            permission.setUpdateTime(new Date());
+            permissionMapper.updateByPrimaryKey(permission);
+        }
+    }
+
+    @Override
+    public void deletePermissionById(Long id) {
+        if (permissionMapper.selectByPrimaryKey(id) == null) {
+            throw new BusinessException("根据ID未找到资源信息，请查正。");
+        }
+        permissionMapper.deleteByPrimaryKey(id);
     }
 
     /**

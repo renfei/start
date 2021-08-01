@@ -122,6 +122,7 @@ public class AuthApiController extends BaseController {
         }
         UserVO userVO = new UserVO();
         org.springframework.beans.BeanUtils.copyProperties(userDTO, userVO);
+        userVO.setUserName(userDTO.getUsername());
         return new APIResult<>(userVO);
     }
 }

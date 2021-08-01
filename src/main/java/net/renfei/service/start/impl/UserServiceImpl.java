@@ -75,6 +75,9 @@ public class UserServiceImpl extends BaseService implements UserService, UserDet
             criteria.andUserNameEqualTo(userName);
         }
         TStartUser user = ListUtils.getOne(userMapper.selectByExample(example));
+        if (user == null) {
+            return null;
+        }
         UserDTO userDTO = new UserDTO(permissionService);
         org.springframework.beans.BeanUtils.copyProperties(user, userDTO);
         userDTO.setConfidentialRank(ConfidentialRankEnum.parse(user.getConfidentialRank()));
