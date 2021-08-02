@@ -1,7 +1,9 @@
 ---
-layout: page title:  "Start 项目简介"
+layout: page
+title: "后端 Start 项目简介"
 subtitle: "任霏的基线代码项目"
-date:   2021-04-23 15:41:35 +0800 categories: ["general"]
+date: 2021-04-23 15:41:35 +0800
+categories: ["general"]
 ---
 ![start](/assets/img/social.jpg)
 
@@ -13,3 +15,8 @@ date:   2021-04-23 15:41:35 +0800 categories: ["general"]
 
 比如：项目A要实现微信登陆，后面项目B也需要微信登陆，如果直接复制粘贴，那么就又产生了一个支线版本，如果我在基线项目中实现微信登陆，其他项目只需要将基线代码合并进来就具备了微信登陆的功能。这就是这个基线项目存在的出发点。
 
+## 项目代码仓库
+
+- Github: [https://github.com/renfei/start](https://github.com/renfei/start)
+- Gitee: [https://gitee.com/rnf/start](https://gitee.com/rnf/start)
+- Gitlab: [https://gitlab.com/renfei/start](https://gitlab.com/renfei/start)
