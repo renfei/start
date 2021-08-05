@@ -70,8 +70,8 @@
         </where>
     </sql>
     <sql id="Base_Column_List">
-        'id'
-        , 'tag_id', 'target_id', 'create_time', 'update_time', 'is_deleted'
+        id
+        , tag_id, target_id, create_time, update_time, is_deleted
     </sql>
     <select id="selectByExample" parameterType="net.renfei.repository.dao.cms.model.TCmsPostTagExample"
             resultMap="BaseResultMap">
@@ -92,12 +92,12 @@
         select
         <include refid="Base_Column_List"/>
         from start_schema.t_cms_post_tag
-        where 'id' = #{id,jdbcType=BIGINT}
+        where id = #{id,jdbcType=BIGINT}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
         delete
         from start_schema.t_cms_post_tag
-        where 'id' = #{id,jdbcType=BIGINT}
+        where id = #{id,jdbcType=BIGINT}
     </delete>
     <delete id="deleteByExample" parameterType="net.renfei.repository.dao.cms.model.TCmsPostTagExample">
         delete from start_schema.t_cms_post_tag
@@ -106,8 +106,8 @@
         </if>
     </delete>
     <insert id="insert" parameterType="net.renfei.repository.dao.cms.model.TCmsPostTag">
-        insert into start_schema.t_cms_post_tag ('id', 'tag_id', 'target_id',
-            'create_time', 'update_time', 'is_deleted')
+        insert into start_schema.t_cms_post_tag (id, tag_id, target_id,
+                                                 create_time, update_time, is_deleted)
         values (#{id,jdbcType=BIGINT}, #{tagId,jdbcType=BIGINT}, #{targetId,jdbcType=BIGINT},
                 #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{isDeleted,jdbcType=BIT})
     </insert>
@@ -115,22 +115,22 @@
         insert into start_schema.t_cms_post_tag
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
-                'id',
+                id,
             </if>
             <if test="tagId != null">
-                'tag_id',
+                tag_id,
             </if>
             <if test="targetId != null">
-                'target_id',
+                target_id,
             </if>
             <if test="createTime != null">
-                'create_time',
+                create_time,
             </if>
             <if test="updateTime != null">
-                'update_time',
+                update_time,
             </if>
             <if test="isDeleted != null">
-                'is_deleted',
+                is_deleted,
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -165,22 +165,22 @@
         update start_schema.t_cms_post_tag
         <set>
             <if test="record.id != null">
-                'id' = #{record.id,jdbcType=BIGINT},
+                id = #{record.id,jdbcType=BIGINT},
             </if>
             <if test="record.tagId != null">
-                'tag_id' = #{record.tagId,jdbcType=BIGINT},
+                tag_id = #{record.tagId,jdbcType=BIGINT},
             </if>
             <if test="record.targetId != null">
-                'target_id' = #{record.targetId,jdbcType=BIGINT},
+                target_id = #{record.targetId,jdbcType=BIGINT},
             </if>
             <if test="record.createTime != null">
-                'create_time' = #{record.createTime,jdbcType=TIMESTAMP},
+                create_time = #{record.createTime,jdbcType=TIMESTAMP},
             </if>
             <if test="record.updateTime != null">
-                'update_time' = #{record.updateTime,jdbcType=TIMESTAMP},
+                update_time = #{record.updateTime,jdbcType=TIMESTAMP},
             </if>
             <if test="record.isDeleted != null">
-                'is_deleted' = #{record.isDeleted,jdbcType=BIT},
+                is_deleted = #{record.isDeleted,jdbcType=BIT},
             </if>
         </set>
         <if test="_parameter != null">
@@ -189,12 +189,12 @@
     </update>
     <update id="updateByExample" parameterType="map">
         update start_schema.t_cms_post_tag
-        set 'id' = #{record.id,jdbcType=BIGINT},
-        'tag_id' = #{record.tagId,jdbcType=BIGINT},
-        'target_id' = #{record.targetId,jdbcType=BIGINT},
-        'create_time' = #{record.createTime,jdbcType=TIMESTAMP},
-        'update_time' = #{record.updateTime,jdbcType=TIMESTAMP},
-        'is_deleted' = #{record.isDeleted,jdbcType=BIT}
+        set id = #{record.id,jdbcType=BIGINT},
+        tag_id = #{record.tagId,jdbcType=BIGINT},
+        target_id = #{record.targetId,jdbcType=BIGINT},
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+        is_deleted = #{record.isDeleted,jdbcType=BIT}
         <if test="_parameter != null">
             <include refid="Update_By_Example_Where_Clause"/>
         </if>
@@ -203,30 +203,30 @@
         update start_schema.t_cms_post_tag
         <set>
             <if test="tagId != null">
-                'tag_id' = #{tagId,jdbcType=BIGINT},
+                tag_id = #{tagId,jdbcType=BIGINT},
             </if>
             <if test="targetId != null">
-                'target_id' = #{targetId,jdbcType=BIGINT},
+                target_id = #{targetId,jdbcType=BIGINT},
             </if>
             <if test="createTime != null">
-                'create_time' = #{createTime,jdbcType=TIMESTAMP},
+                create_time = #{createTime,jdbcType=TIMESTAMP},
             </if>
             <if test="updateTime != null">
-                'update_time' = #{updateTime,jdbcType=TIMESTAMP},
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
             </if>
             <if test="isDeleted != null">
-                'is_deleted' = #{isDeleted,jdbcType=BIT},
+                is_deleted = #{isDeleted,jdbcType=BIT},
             </if>
         </set>
-        where 'id' = #{id,jdbcType=BIGINT}
+        where id = #{id,jdbcType=BIGINT}
     </update>
     <update id="updateByPrimaryKey" parameterType="net.renfei.repository.dao.cms.model.TCmsPostTag">
         update start_schema.t_cms_post_tag
-        set 'tag_id' = #{tagId,jdbcType=BIGINT},
-            'target_id' = #{targetId,jdbcType=BIGINT},
-            'create_time' = #{createTime,jdbcType=TIMESTAMP},
-            'update_time' = #{updateTime,jdbcType=TIMESTAMP},
-            'is_deleted' = #{isDeleted,jdbcType=BIT}
-        where 'id' = #{id,jdbcType=BIGINT}
+        set tag_id      = #{tagId,jdbcType=BIGINT},
+            target_id   = #{targetId,jdbcType=BIGINT},
+            create_time = #{createTime,jdbcType=TIMESTAMP},
+            update_time = #{updateTime,jdbcType=TIMESTAMP},
+            is_deleted  = #{isDeleted,jdbcType=BIT}
+        where id = #{id,jdbcType=BIGINT}
     </update>
 </mapper>

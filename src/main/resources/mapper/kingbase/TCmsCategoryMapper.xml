@@ -74,11 +74,11 @@
         </where>
     </sql>
     <sql id="Base_Column_List">
-        'id'
-        , 'en_name', 'zh_name', 'create_time', 'update_time', 'is_deleted', 'confidential_rank'
+        id
+        , en_name, zh_name, create_time, update_time, is_deleted, confidential_rank
     </sql>
     <sql id="Blob_Column_List">
-        'featured_image'
+        featured_image
     </sql>
     <select id="selectByExampleWithBLOBs" parameterType="net.renfei.repository.dao.cms.model.TCmsCategoryExample"
             resultMap="ResultMapWithBLOBs">
@@ -118,12 +118,12 @@
         ,
         <include refid="Blob_Column_List"/>
         from start_schema.t_cms_category
-        where 'id' = #{id,jdbcType=BIGINT}
+        where id = #{id,jdbcType=BIGINT}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
         delete
         from start_schema.t_cms_category
-        where 'id' = #{id,jdbcType=BIGINT}
+        where id = #{id,jdbcType=BIGINT}
     </delete>
     <delete id="deleteByExample" parameterType="net.renfei.repository.dao.cms.model.TCmsCategoryExample">
         delete from start_schema.t_cms_category
@@ -132,9 +132,9 @@
         </if>
     </delete>
     <insert id="insert" parameterType="net.renfei.repository.dao.cms.model.TCmsCategory">
-        insert into start_schema.t_cms_category ('id', 'en_name', 'zh_name',
-            'create_time', 'update_time', 'is_deleted',
-            'confidential_rank', 'featured_image')
+        insert into start_schema.t_cms_category (id, en_name, zh_name,
+                                                 create_time, update_time, is_deleted,
+                                                 confidential_rank, featured_image)
         values (#{id,jdbcType=BIGINT}, #{enName,jdbcType=VARCHAR}, #{zhName,jdbcType=VARCHAR},
                 #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{isDeleted,jdbcType=BIT},
                 #{confidentialRank,jdbcType=INTEGER}, #{featuredImage,jdbcType=LONGVARCHAR})
@@ -143,28 +143,28 @@
         insert into start_schema.t_cms_category
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
-                'id',
+                id,
             </if>
             <if test="enName != null">
-                'en_name',
+                en_name,
             </if>
             <if test="zhName != null">
-                'zh_name',
+                zh_name,
             </if>
             <if test="createTime != null">
-                'create_time',
+                create_time,
             </if>
             <if test="updateTime != null">
-                'update_time',
+                update_time,
             </if>
             <if test="isDeleted != null">
-                'is_deleted',
+                is_deleted,
             </if>
             <if test="confidentialRank != null">
-                'confidential_rank',
+                confidential_rank,
             </if>
             <if test="featuredImage != null">
-                'featured_image',
+                featured_image,
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -205,28 +205,28 @@
         update start_schema.t_cms_category
         <set>
             <if test="record.id != null">
-                'id' = #{record.id,jdbcType=BIGINT},
+                id = #{record.id,jdbcType=BIGINT},
             </if>
             <if test="record.enName != null">
-                'en_name' = #{record.enName,jdbcType=VARCHAR},
+                en_name = #{record.enName,jdbcType=VARCHAR},
             </if>
             <if test="record.zhName != null">
-                'zh_name' = #{record.zhName,jdbcType=VARCHAR},
+                zh_name = #{record.zhName,jdbcType=VARCHAR},
             </if>
             <if test="record.createTime != null">
-                'create_time' = #{record.createTime,jdbcType=TIMESTAMP},
+                create_time = #{record.createTime,jdbcType=TIMESTAMP},
             </if>
             <if test="record.updateTime != null">
-                'update_time' = #{record.updateTime,jdbcType=TIMESTAMP},
+                update_time = #{record.updateTime,jdbcType=TIMESTAMP},
             </if>
             <if test="record.isDeleted != null">
-                'is_deleted' = #{record.isDeleted,jdbcType=BIT},
+                is_deleted = #{record.isDeleted,jdbcType=BIT},
             </if>
             <if test="record.confidentialRank != null">
-                'confidential_rank' = #{record.confidentialRank,jdbcType=INTEGER},
+                confidential_rank = #{record.confidentialRank,jdbcType=INTEGER},
             </if>
             <if test="record.featuredImage != null">
-                'featured_image' = #{record.featuredImage,jdbcType=LONGVARCHAR},
+                featured_image = #{record.featuredImage,jdbcType=LONGVARCHAR},
             </if>
         </set>
         <if test="_parameter != null">
@@ -235,27 +235,27 @@
     </update>
     <update id="updateByExampleWithBLOBs" parameterType="map">
         update start_schema.t_cms_category
-        set 'id' = #{record.id,jdbcType=BIGINT},
-        'en_name' = #{record.enName,jdbcType=VARCHAR},
-        'zh_name' = #{record.zhName,jdbcType=VARCHAR},
-        'create_time' = #{record.createTime,jdbcType=TIMESTAMP},
-        'update_time' = #{record.updateTime,jdbcType=TIMESTAMP},
-        'is_deleted' = #{record.isDeleted,jdbcType=BIT},
-        'confidential_rank' = #{record.confidentialRank,jdbcType=INTEGER},
-        'featured_image' = #{record.featuredImage,jdbcType=LONGVARCHAR}
+        set id = #{record.id,jdbcType=BIGINT},
+        en_name = #{record.enName,jdbcType=VARCHAR},
+        zh_name = #{record.zhName,jdbcType=VARCHAR},
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+        is_deleted = #{record.isDeleted,jdbcType=BIT},
+        confidential_rank = #{record.confidentialRank,jdbcType=INTEGER},
+        featured_image = #{record.featuredImage,jdbcType=LONGVARCHAR}
         <if test="_parameter != null">
             <include refid="Update_By_Example_Where_Clause"/>
         </if>
     </update>
     <update id="updateByExample" parameterType="map">
         update start_schema.t_cms_category
-        set 'id' = #{record.id,jdbcType=BIGINT},
-        'en_name' = #{record.enName,jdbcType=VARCHAR},
-        'zh_name' = #{record.zhName,jdbcType=VARCHAR},
-        'create_time' = #{record.createTime,jdbcType=TIMESTAMP},
-        'update_time' = #{record.updateTime,jdbcType=TIMESTAMP},
-        'is_deleted' = #{record.isDeleted,jdbcType=BIT},
-        'confidential_rank' = #{record.confidentialRank,jdbcType=INTEGER}
+        set id = #{record.id,jdbcType=BIGINT},
+        en_name = #{record.enName,jdbcType=VARCHAR},
+        zh_name = #{record.zhName,jdbcType=VARCHAR},
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+        is_deleted = #{record.isDeleted,jdbcType=BIT},
+        confidential_rank = #{record.confidentialRank,jdbcType=INTEGER}
         <if test="_parameter != null">
             <include refid="Update_By_Example_Where_Clause"/>
         </if>
@@ -264,48 +264,48 @@
         update start_schema.t_cms_category
         <set>
             <if test="enName != null">
-                'en_name' = #{enName,jdbcType=VARCHAR},
+                en_name = #{enName,jdbcType=VARCHAR},
             </if>
             <if test="zhName != null">
-                'zh_name' = #{zhName,jdbcType=VARCHAR},
+                zh_name = #{zhName,jdbcType=VARCHAR},
             </if>
             <if test="createTime != null">
-                'create_time' = #{createTime,jdbcType=TIMESTAMP},
+                create_time = #{createTime,jdbcType=TIMESTAMP},
             </if>
             <if test="updateTime != null">
-                'update_time' = #{updateTime,jdbcType=TIMESTAMP},
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
             </if>
             <if test="isDeleted != null">
-                'is_deleted' = #{isDeleted,jdbcType=BIT},
+                is_deleted = #{isDeleted,jdbcType=BIT},
             </if>
             <if test="confidentialRank != null">
-                'confidential_rank' = #{confidentialRank,jdbcType=INTEGER},
+                confidential_rank = #{confidentialRank,jdbcType=INTEGER},
             </if>
             <if test="featuredImage != null">
-                'featured_image' = #{featuredImage,jdbcType=LONGVARCHAR},
+                featured_image = #{featuredImage,jdbcType=LONGVARCHAR},
             </if>
         </set>
-        where 'id' = #{id,jdbcType=BIGINT}
+        where id = #{id,jdbcType=BIGINT}
     </update>
     <update id="updateByPrimaryKeyWithBLOBs" parameterType="net.renfei.repository.dao.cms.model.TCmsCategory">
         update start_schema.t_cms_category
-        set 'en_name' = #{enName,jdbcType=VARCHAR},
-            'zh_name' = #{zhName,jdbcType=VARCHAR},
-            'create_time' = #{createTime,jdbcType=TIMESTAMP},
-            'update_time' = #{updateTime,jdbcType=TIMESTAMP},
-            'is_deleted' = #{isDeleted,jdbcType=BIT},
-            'confidential_rank' = #{confidentialRank,jdbcType=INTEGER},
-            'featured_image' = #{featuredImage,jdbcType=LONGVARCHAR}
-        where 'id' = #{id,jdbcType=BIGINT}
+        set en_name           = #{enName,jdbcType=VARCHAR},
+            zh_name           = #{zhName,jdbcType=VARCHAR},
+            create_time       = #{createTime,jdbcType=TIMESTAMP},
+            update_time       = #{updateTime,jdbcType=TIMESTAMP},
+            is_deleted        = #{isDeleted,jdbcType=BIT},
+            confidential_rank = #{confidentialRank,jdbcType=INTEGER},
+            featured_image    = #{featuredImage,jdbcType=LONGVARCHAR}
+        where id = #{id,jdbcType=BIGINT}
     </update>
     <update id="updateByPrimaryKey" parameterType="net.renfei.repository.dao.cms.model.TCmsCategory">
         update start_schema.t_cms_category
-        set 'en_name' = #{enName,jdbcType=VARCHAR},
-            'zh_name' = #{zhName,jdbcType=VARCHAR},
-            'create_time' = #{createTime,jdbcType=TIMESTAMP},
-            'update_time' = #{updateTime,jdbcType=TIMESTAMP},
-            'is_deleted' = #{isDeleted,jdbcType=BIT},
-            'confidential_rank' = #{confidentialRank,jdbcType=INTEGER}
-        where 'id' = #{id,jdbcType=BIGINT}
+        set en_name           = #{enName,jdbcType=VARCHAR},
+            zh_name           = #{zhName,jdbcType=VARCHAR},
+            create_time       = #{createTime,jdbcType=TIMESTAMP},
+            update_time       = #{updateTime,jdbcType=TIMESTAMP},
+            is_deleted        = #{isDeleted,jdbcType=BIT},
+            confidential_rank = #{confidentialRank,jdbcType=INTEGER}
+        where id = #{id,jdbcType=BIGINT}
     </update>
 </mapper>

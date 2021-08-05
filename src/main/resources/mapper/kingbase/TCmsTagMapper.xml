@@ -73,11 +73,11 @@
         </where>
     </sql>
     <sql id="Base_Column_List">
-        'id'
-        , 'en_name', 'zh_name', 'create_time', 'update_time', 'is_deleted'
+        id
+        , en_name, zh_name, create_time, update_time, is_deleted
     </sql>
     <sql id="Blob_Column_List">
-        'describe'
+        describe
     </sql>
     <select id="selectByExampleWithBLOBs" parameterType="net.renfei.repository.dao.cms.model.TCmsTagExample"
             resultMap="ResultMapWithBLOBs">
@@ -117,12 +117,12 @@
         ,
         <include refid="Blob_Column_List"/>
         from start_schema.t_cms_tag
-        where 'id' = #{id,jdbcType=BIGINT}
+        where id = #{id,jdbcType=BIGINT}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
         delete
         from start_schema.t_cms_tag
-        where 'id' = #{id,jdbcType=BIGINT}
+        where id = #{id,jdbcType=BIGINT}
     </delete>
     <delete id="deleteByExample" parameterType="net.renfei.repository.dao.cms.model.TCmsTagExample">
         delete from start_schema.t_cms_tag
@@ -131,9 +131,9 @@
         </if>
     </delete>
     <insert id="insert" parameterType="net.renfei.repository.dao.cms.model.TCmsTag">
-        insert into start_schema.t_cms_tag ('id', 'en_name', 'zh_name',
-            'create_time', 'update_time', 'is_deleted',
-            'describe')
+        insert into start_schema.t_cms_tag (id, en_name, zh_name,
+                                            create_time, update_time, is_deleted,
+                                            describe)
         values (#{id,jdbcType=BIGINT}, #{enName,jdbcType=VARCHAR}, #{zhName,jdbcType=VARCHAR},
                 #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{isDeleted,jdbcType=BIT},
                 #{describe,jdbcType=LONGVARCHAR})
@@ -142,25 +142,25 @@
         insert into start_schema.t_cms_tag
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
-                'id',
+                id,
             </if>
             <if test="enName != null">
-                'en_name',
+                en_name,
             </if>
             <if test="zhName != null">
-                'zh_name',
+                zh_name,
             </if>
             <if test="createTime != null">
-                'create_time',
+                create_time,
             </if>
             <if test="updateTime != null">
-                'update_time',
+                update_time,
             </if>
             <if test="isDeleted != null">
-                'is_deleted',
+                is_deleted,
             </if>
             <if test="describe != null">
-                'describe',
+                describe,
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -198,25 +198,25 @@
         update start_schema.t_cms_tag
         <set>
             <if test="record.id != null">
-                'id' = #{record.id,jdbcType=BIGINT},
+                id = #{record.id,jdbcType=BIGINT},
             </if>
             <if test="record.enName != null">
-                'en_name' = #{record.enName,jdbcType=VARCHAR},
+                en_name = #{record.enName,jdbcType=VARCHAR},
             </if>
             <if test="record.zhName != null">
-                'zh_name' = #{record.zhName,jdbcType=VARCHAR},
+                zh_name = #{record.zhName,jdbcType=VARCHAR},
             </if>
             <if test="record.createTime != null">
-                'create_time' = #{record.createTime,jdbcType=TIMESTAMP},
+                create_time = #{record.createTime,jdbcType=TIMESTAMP},
             </if>
             <if test="record.updateTime != null">
-                'update_time' = #{record.updateTime,jdbcType=TIMESTAMP},
+                update_time = #{record.updateTime,jdbcType=TIMESTAMP},
             </if>
             <if test="record.isDeleted != null">
-                'is_deleted' = #{record.isDeleted,jdbcType=BIT},
+                is_deleted = #{record.isDeleted,jdbcType=BIT},
             </if>
             <if test="record.describe != null">
-                'describe' = #{record.describe,jdbcType=LONGVARCHAR},
+                describe = #{record.describe,jdbcType=LONGVARCHAR},
             </if>
         </set>
         <if test="_parameter != null">
@@ -225,25 +225,25 @@
     </update>
     <update id="updateByExampleWithBLOBs" parameterType="map">
         update start_schema.t_cms_tag
-        set 'id' = #{record.id,jdbcType=BIGINT},
-        'en_name' = #{record.enName,jdbcType=VARCHAR},
-        'zh_name' = #{record.zhName,jdbcType=VARCHAR},
-        'create_time' = #{record.createTime,jdbcType=TIMESTAMP},
-        'update_time' = #{record.updateTime,jdbcType=TIMESTAMP},
-        'is_deleted' = #{record.isDeleted,jdbcType=BIT},
-        'describe' = #{record.describe,jdbcType=LONGVARCHAR}
+        set id = #{record.id,jdbcType=BIGINT},
+        en_name = #{record.enName,jdbcType=VARCHAR},
+        zh_name = #{record.zhName,jdbcType=VARCHAR},
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+        is_deleted = #{record.isDeleted,jdbcType=BIT},
+        describe = #{record.describe,jdbcType=LONGVARCHAR}
         <if test="_parameter != null">
             <include refid="Update_By_Example_Where_Clause"/>
         </if>
     </update>
     <update id="updateByExample" parameterType="map">
         update start_schema.t_cms_tag
-        set 'id' = #{record.id,jdbcType=BIGINT},
-        'en_name' = #{record.enName,jdbcType=VARCHAR},
-        'zh_name' = #{record.zhName,jdbcType=VARCHAR},
-        'create_time' = #{record.createTime,jdbcType=TIMESTAMP},
-        'update_time' = #{record.updateTime,jdbcType=TIMESTAMP},
-        'is_deleted' = #{record.isDeleted,jdbcType=BIT}
+        set id = #{record.id,jdbcType=BIGINT},
+        en_name = #{record.enName,jdbcType=VARCHAR},
+        zh_name = #{record.zhName,jdbcType=VARCHAR},
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+        is_deleted = #{record.isDeleted,jdbcType=BIT}
         <if test="_parameter != null">
             <include refid="Update_By_Example_Where_Clause"/>
         </if>
@@ -252,43 +252,43 @@
         update start_schema.t_cms_tag
         <set>
             <if test="enName != null">
-                'en_name' = #{enName,jdbcType=VARCHAR},
+                en_name = #{enName,jdbcType=VARCHAR},
             </if>
             <if test="zhName != null">
-                'zh_name' = #{zhName,jdbcType=VARCHAR},
+                zh_name = #{zhName,jdbcType=VARCHAR},
             </if>
             <if test="createTime != null">
-                'create_time' = #{createTime,jdbcType=TIMESTAMP},
+                create_time = #{createTime,jdbcType=TIMESTAMP},
             </if>
             <if test="updateTime != null">
-                'update_time' = #{updateTime,jdbcType=TIMESTAMP},
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
             </if>
             <if test="isDeleted != null">
-                'is_deleted' = #{isDeleted,jdbcType=BIT},
+                is_deleted = #{isDeleted,jdbcType=BIT},
             </if>
             <if test="describe != null">
-                'describe' = #{describe,jdbcType=LONGVARCHAR},
+                describe = #{describe,jdbcType=LONGVARCHAR},
             </if>
         </set>
-        where 'id' = #{id,jdbcType=BIGINT}
+        where id = #{id,jdbcType=BIGINT}
     </update>
     <update id="updateByPrimaryKeyWithBLOBs" parameterType="net.renfei.repository.dao.cms.model.TCmsTag">
         update start_schema.t_cms_tag
-        set 'en_name' = #{enName,jdbcType=VARCHAR},
-            'zh_name' = #{zhName,jdbcType=VARCHAR},
-            'create_time' = #{createTime,jdbcType=TIMESTAMP},
-            'update_time' = #{updateTime,jdbcType=TIMESTAMP},
-            'is_deleted' = #{isDeleted,jdbcType=BIT},
-            'describe' = #{describe,jdbcType=LONGVARCHAR}
-        where 'id' = #{id,jdbcType=BIGINT}
+        set en_name     = #{enName,jdbcType=VARCHAR},
+            zh_name     = #{zhName,jdbcType=VARCHAR},
+            create_time = #{createTime,jdbcType=TIMESTAMP},
+            update_time = #{updateTime,jdbcType=TIMESTAMP},
+            is_deleted  = #{isDeleted,jdbcType=BIT},
+            describe    = #{describe,jdbcType=LONGVARCHAR}
+        where id = #{id,jdbcType=BIGINT}
     </update>
     <update id="updateByPrimaryKey" parameterType="net.renfei.repository.dao.cms.model.TCmsTag">
         update start_schema.t_cms_tag
-        set 'en_name' = #{enName,jdbcType=VARCHAR},
-            'zh_name' = #{zhName,jdbcType=VARCHAR},
-            'create_time' = #{createTime,jdbcType=TIMESTAMP},
-            'update_time' = #{updateTime,jdbcType=TIMESTAMP},
-            'is_deleted' = #{isDeleted,jdbcType=BIT}
-        where 'id' = #{id,jdbcType=BIGINT}
+        set en_name     = #{enName,jdbcType=VARCHAR},
+            zh_name     = #{zhName,jdbcType=VARCHAR},
+            create_time = #{createTime,jdbcType=TIMESTAMP},
+            update_time = #{updateTime,jdbcType=TIMESTAMP},
+            is_deleted  = #{isDeleted,jdbcType=BIT}
+        where id = #{id,jdbcType=BIGINT}
     </update>
 </mapper>

@@ -71,11 +71,11 @@
         </where>
     </sql>
     <sql id="Base_Column_List">
-        'id'
-        , 'keys', 'expiration'
+        id
+        , keys, expiration
     </sql>
     <sql id="Blob_Column_List">
-        'values'
+        values
     </sql>
     <select id="selectByExampleWithBLOBs" parameterType="net.renfei.repository.dao.start.model.TStartKvStorageExample"
             resultMap="ResultMapWithBLOBs">
@@ -115,12 +115,12 @@
         ,
         <include refid="Blob_Column_List"/>
         from start_schema.t_start_kv_storage
-        where 'id' = #{id,jdbcType=BIGINT}
+        where id = #{id,jdbcType=BIGINT}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
         delete
         from start_schema.t_start_kv_storage
-        where 'id' = #{id,jdbcType=BIGINT}
+        where id = #{id,jdbcType=BIGINT}
     </delete>
     <delete id="deleteByExample" parameterType="net.renfei.repository.dao.start.model.TStartKvStorageExample">
         delete from start_schema.t_start_kv_storage
@@ -129,8 +129,8 @@
         </if>
     </delete>
     <insert id="insert" parameterType="net.renfei.repository.dao.start.model.TStartKvStorage">
-        insert into start_schema.t_start_kv_storage ('id', 'keys', 'expiration',
-            'values')
+        insert into start_schema.t_start_kv_storage (id, keys, expiration,
+                                                     values)
         values (#{id,jdbcType=BIGINT}, #{keys,jdbcType=VARCHAR}, #{expiration,jdbcType=DATE},
                 #{values,jdbcType=LONGVARCHAR})
     </insert>
@@ -138,16 +138,16 @@
         insert into start_schema.t_start_kv_storage
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
-                'id',
+                id,
             </if>
             <if test="keys != null">
-                'keys',
+                keys,
             </if>
             <if test="expiration != null">
-                'expiration',
+                expiration,
             </if>
             <if test="values != null">
-                'values',
+                values,
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -176,16 +176,16 @@
         update start_schema.t_start_kv_storage
         <set>
             <if test="record.id != null">
-                'id' = #{record.id,jdbcType=BIGINT},
+                id = #{record.id,jdbcType=BIGINT},
             </if>
             <if test="record.keys != null">
-                'keys' = #{record.keys,jdbcType=VARCHAR},
+                keys = #{record.keys,jdbcType=VARCHAR},
             </if>
             <if test="record.expiration != null">
-                'expiration' = #{record.expiration,jdbcType=DATE},
+                expiration = #{record.expiration,jdbcType=DATE},
             </if>
             <if test="record.values != null">
-                'values' = #{record.values,jdbcType=LONGVARCHAR},
+                values = #{record.values,jdbcType=LONGVARCHAR},
             </if>
         </set>
         <if test="_parameter != null">
@@ -194,19 +194,19 @@
     </update>
     <update id="updateByExampleWithBLOBs" parameterType="map">
         update start_schema.t_start_kv_storage
-        set 'id' = #{record.id,jdbcType=BIGINT},
-        'keys' = #{record.keys,jdbcType=VARCHAR},
-        'expiration' = #{record.expiration,jdbcType=DATE},
-        'values' = #{record.values,jdbcType=LONGVARCHAR}
+        set id = #{record.id,jdbcType=BIGINT},
+        keys = #{record.keys,jdbcType=VARCHAR},
+        expiration = #{record.expiration,jdbcType=DATE},
+        values = #{record.values,jdbcType=LONGVARCHAR}
         <if test="_parameter != null">
             <include refid="Update_By_Example_Where_Clause"/>
         </if>
     </update>
     <update id="updateByExample" parameterType="map">
         update start_schema.t_start_kv_storage
-        set 'id' = #{record.id,jdbcType=BIGINT},
-        'keys' = #{record.keys,jdbcType=VARCHAR},
-        'expiration' = #{record.expiration,jdbcType=DATE}
+        set id = #{record.id,jdbcType=BIGINT},
+        keys = #{record.keys,jdbcType=VARCHAR},
+        expiration = #{record.expiration,jdbcType=DATE}
         <if test="_parameter != null">
             <include refid="Update_By_Example_Where_Clause"/>
         </if>
@@ -215,28 +215,28 @@
         update start_schema.t_start_kv_storage
         <set>
             <if test="keys != null">
-                'keys' = #{keys,jdbcType=VARCHAR},
+                keys = #{keys,jdbcType=VARCHAR},
             </if>
             <if test="expiration != null">
-                'expiration' = #{expiration,jdbcType=DATE},
+                expiration = #{expiration,jdbcType=DATE},
             </if>
             <if test="values != null">
-                'values' = #{values,jdbcType=LONGVARCHAR},
+                values = #{values,jdbcType=LONGVARCHAR},
             </if>
         </set>
-        where 'id' = #{id,jdbcType=BIGINT}
+        where id = #{id,jdbcType=BIGINT}
     </update>
     <update id="updateByPrimaryKeyWithBLOBs" parameterType="net.renfei.repository.dao.start.model.TStartKvStorage">
         update start_schema.t_start_kv_storage
-        set 'keys' = #{keys,jdbcType=VARCHAR},
-            'expiration' = #{expiration,jdbcType=DATE},
-            'values' = #{values,jdbcType=LONGVARCHAR}
-        where 'id' = #{id,jdbcType=BIGINT}
+        set keys       = #{keys,jdbcType=VARCHAR},
+            expiration = #{expiration,jdbcType=DATE},
+            values     = #{values,jdbcType=LONGVARCHAR}
+        where id = #{id,jdbcType=BIGINT}
     </update>
     <update id="updateByPrimaryKey" parameterType="net.renfei.repository.dao.start.model.TStartKvStorage">
         update start_schema.t_start_kv_storage
-        set 'keys' = #{keys,jdbcType=VARCHAR},
-            'expiration' = #{expiration,jdbcType=DATE}
-        where 'id' = #{id,jdbcType=BIGINT}
+        set keys       = #{keys,jdbcType=VARCHAR},
+            expiration = #{expiration,jdbcType=DATE}
+        where id = #{id,jdbcType=BIGINT}
     </update>
 </mapper>

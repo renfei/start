@@ -68,8 +68,8 @@
         </where>
     </sql>
     <sql id="Base_Column_List">
-        'id'
-        , 'uuid', 'region_code', 'region_name'
+        id
+        , uuid, region_code, region_name
     </sql>
     <select id="selectByExample" parameterType="net.renfei.repository.dao.start.model.TStartRegionExample"
             resultMap="BaseResultMap">
@@ -90,12 +90,12 @@
         select
         <include refid="Base_Column_List"/>
         from start_schema.t_start_region
-        where 'id' = #{id,jdbcType=BIGINT}
+        where id = #{id,jdbcType=BIGINT}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
         delete
         from start_schema.t_start_region
-        where 'id' = #{id,jdbcType=BIGINT}
+        where id = #{id,jdbcType=BIGINT}
     </delete>
     <delete id="deleteByExample" parameterType="net.renfei.repository.dao.start.model.TStartRegionExample">
         delete from start_schema.t_start_region
@@ -104,8 +104,8 @@
         </if>
     </delete>
     <insert id="insert" parameterType="net.renfei.repository.dao.start.model.TStartRegion">
-        insert into start_schema.t_start_region ('id', 'uuid', 'region_code',
-            'region_name')
+        insert into start_schema.t_start_region (id, uuid, region_code,
+                                                 region_name)
         values (#{id,jdbcType=BIGINT}, #{uuid,jdbcType=VARCHAR}, #{regionCode,jdbcType=CHAR},
                 #{regionName,jdbcType=VARCHAR})
     </insert>
@@ -113,16 +113,16 @@
         insert into start_schema.t_start_region
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
-                'id',
+                id,
             </if>
             <if test="uuid != null">
-                'uuid',
+                uuid,
             </if>
             <if test="regionCode != null">
-                'region_code',
+                region_code,
             </if>
             <if test="regionName != null">
-                'region_name',
+                region_name,
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -151,16 +151,16 @@
         update start_schema.t_start_region
         <set>
             <if test="record.id != null">
-                'id' = #{record.id,jdbcType=BIGINT},
+                id = #{record.id,jdbcType=BIGINT},
             </if>
             <if test="record.uuid != null">
-                'uuid' = #{record.uuid,jdbcType=VARCHAR},
+                uuid = #{record.uuid,jdbcType=VARCHAR},
             </if>
             <if test="record.regionCode != null">
-                'region_code' = #{record.regionCode,jdbcType=CHAR},
+                region_code = #{record.regionCode,jdbcType=CHAR},
             </if>
             <if test="record.regionName != null">
-                'region_name' = #{record.regionName,jdbcType=VARCHAR},
+                region_name = #{record.regionName,jdbcType=VARCHAR},
             </if>
         </set>
         <if test="_parameter != null">
@@ -169,10 +169,10 @@
     </update>
     <update id="updateByExample" parameterType="map">
         update start_schema.t_start_region
-        set 'id' = #{record.id,jdbcType=BIGINT},
-        'uuid' = #{record.uuid,jdbcType=VARCHAR},
-        'region_code' = #{record.regionCode,jdbcType=CHAR},
-        'region_name' = #{record.regionName,jdbcType=VARCHAR}
+        set id = #{record.id,jdbcType=BIGINT},
+        uuid = #{record.uuid,jdbcType=VARCHAR},
+        region_code = #{record.regionCode,jdbcType=CHAR},
+        region_name = #{record.regionName,jdbcType=VARCHAR}
         <if test="_parameter != null">
             <include refid="Update_By_Example_Where_Clause"/>
         </if>
@@ -181,22 +181,22 @@
         update start_schema.t_start_region
         <set>
             <if test="uuid != null">
-                'uuid' = #{uuid,jdbcType=VARCHAR},
+                uuid = #{uuid,jdbcType=VARCHAR},
             </if>
             <if test="regionCode != null">
-                'region_code' = #{regionCode,jdbcType=CHAR},
+                region_code = #{regionCode,jdbcType=CHAR},
             </if>
             <if test="regionName != null">
-                'region_name' = #{regionName,jdbcType=VARCHAR},
+                region_name = #{regionName,jdbcType=VARCHAR},
             </if>
         </set>
-        where 'id' = #{id,jdbcType=BIGINT}
+        where id = #{id,jdbcType=BIGINT}
     </update>
     <update id="updateByPrimaryKey" parameterType="net.renfei.repository.dao.start.model.TStartRegion">
         update start_schema.t_start_region
-        set 'uuid' = #{uuid,jdbcType=VARCHAR},
-            'region_code' = #{regionCode,jdbcType=CHAR},
-            'region_name' = #{regionName,jdbcType=VARCHAR}
-        where 'id' = #{id,jdbcType=BIGINT}
+        set uuid        = #{uuid,jdbcType=VARCHAR},
+            region_code = #{regionCode,jdbcType=CHAR},
+            region_name = #{regionName,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=BIGINT}
     </update>
 </mapper>

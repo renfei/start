@@ -73,9 +73,9 @@
         </where>
     </sql>
     <sql id="Base_Column_List">
-        'id'
-        , 'create_time', 'update_time', 'is_deleted', 'uuid', 'resource_name', 'request_method',
-    'resource_url', 'resource_type'
+        id
+        , create_time, update_time, is_deleted, uuid, resource_name, request_method,
+    resource_url, resource_type
     </sql>
     <select id="selectByExample" parameterType="net.renfei.repository.dao.start.model.TStartPermissionExample"
             resultMap="BaseResultMap">
@@ -96,12 +96,12 @@
         select
         <include refid="Base_Column_List"/>
         from start_schema.t_start_permission
-        where 'id' = #{id,jdbcType=BIGINT}
+        where id = #{id,jdbcType=BIGINT}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
         delete
         from start_schema.t_start_permission
-        where 'id' = #{id,jdbcType=BIGINT}
+        where id = #{id,jdbcType=BIGINT}
     </delete>
     <delete id="deleteByExample" parameterType="net.renfei.repository.dao.start.model.TStartPermissionExample">
         delete from start_schema.t_start_permission
@@ -110,9 +110,9 @@
         </if>
     </delete>
     <insert id="insert" parameterType="net.renfei.repository.dao.start.model.TStartPermission">
-        insert into start_schema.t_start_permission ('id', 'create_time', 'update_time',
-            'is_deleted', 'uuid', 'resource_name',
-            'request_method', 'resource_url', 'resource_type')
+        insert into start_schema.t_start_permission (id, create_time, update_time,
+                                                     is_deleted, uuid, resource_name,
+                                                     request_method, resource_url, resource_type)
         values (#{id,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP},
                 #{isDeleted,jdbcType=BIT}, #{uuid,jdbcType=VARCHAR}, #{resourceName,jdbcType=VARCHAR},
                 #{requestMethod,jdbcType=VARCHAR}, #{resourceUrl,jdbcType=VARCHAR}, #{resourceType,jdbcType=VARCHAR})
@@ -121,31 +121,31 @@
         insert into start_schema.t_start_permission
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
-                'id',
+                id,
             </if>
             <if test="createTime != null">
-                'create_time',
+                create_time,
             </if>
             <if test="updateTime != null">
-                'update_time',
+                update_time,
             </if>
             <if test="isDeleted != null">
-                'is_deleted',
+                is_deleted,
             </if>
             <if test="uuid != null">
-                'uuid',
+                uuid,
             </if>
             <if test="resourceName != null">
-                'resource_name',
+                resource_name,
             </if>
             <if test="requestMethod != null">
-                'request_method',
+                request_method,
             </if>
             <if test="resourceUrl != null">
-                'resource_url',
+                resource_url,
             </if>
             <if test="resourceType != null">
-                'resource_type',
+                resource_type,
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -189,31 +189,31 @@
         update start_schema.t_start_permission
         <set>
             <if test="record.id != null">
-                'id' = #{record.id,jdbcType=BIGINT},
+                id = #{record.id,jdbcType=BIGINT},
             </if>
             <if test="record.createTime != null">
-                'create_time' = #{record.createTime,jdbcType=TIMESTAMP},
+                create_time = #{record.createTime,jdbcType=TIMESTAMP},
             </if>
             <if test="record.updateTime != null">
-                'update_time' = #{record.updateTime,jdbcType=TIMESTAMP},
+                update_time = #{record.updateTime,jdbcType=TIMESTAMP},
             </if>
             <if test="record.isDeleted != null">
-                'is_deleted' = #{record.isDeleted,jdbcType=BIT},
+                is_deleted = #{record.isDeleted,jdbcType=BIT},
             </if>
             <if test="record.uuid != null">
-                'uuid' = #{record.uuid,jdbcType=VARCHAR},
+                uuid = #{record.uuid,jdbcType=VARCHAR},
             </if>
             <if test="record.resourceName != null">
-                'resource_name' = #{record.resourceName,jdbcType=VARCHAR},
+                resource_name = #{record.resourceName,jdbcType=VARCHAR},
             </if>
             <if test="record.requestMethod != null">
-                'request_method' = #{record.requestMethod,jdbcType=VARCHAR},
+                request_method = #{record.requestMethod,jdbcType=VARCHAR},
             </if>
             <if test="record.resourceUrl != null">
-                'resource_url' = #{record.resourceUrl,jdbcType=VARCHAR},
+                resource_url = #{record.resourceUrl,jdbcType=VARCHAR},
             </if>
             <if test="record.resourceType != null">
-                'resource_type' = #{record.resourceType,jdbcType=VARCHAR},
+                resource_type = #{record.resourceType,jdbcType=VARCHAR},
             </if>
         </set>
         <if test="_parameter != null">
@@ -222,15 +222,15 @@
     </update>
     <update id="updateByExample" parameterType="map">
         update start_schema.t_start_permission
-        set 'id' = #{record.id,jdbcType=BIGINT},
-        'create_time' = #{record.createTime,jdbcType=TIMESTAMP},
-        'update_time' = #{record.updateTime,jdbcType=TIMESTAMP},
-        'is_deleted' = #{record.isDeleted,jdbcType=BIT},
-        'uuid' = #{record.uuid,jdbcType=VARCHAR},
-        'resource_name' = #{record.resourceName,jdbcType=VARCHAR},
-        'request_method' = #{record.requestMethod,jdbcType=VARCHAR},
-        'resource_url' = #{record.resourceUrl,jdbcType=VARCHAR},
-        'resource_type' = #{record.resourceType,jdbcType=VARCHAR}
+        set id = #{record.id,jdbcType=BIGINT},
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+        is_deleted = #{record.isDeleted,jdbcType=BIT},
+        uuid = #{record.uuid,jdbcType=VARCHAR},
+        resource_name = #{record.resourceName,jdbcType=VARCHAR},
+        request_method = #{record.requestMethod,jdbcType=VARCHAR},
+        resource_url = #{record.resourceUrl,jdbcType=VARCHAR},
+        resource_type = #{record.resourceType,jdbcType=VARCHAR}
         <if test="_parameter != null">
             <include refid="Update_By_Example_Where_Clause"/>
         </if>
@@ -239,42 +239,42 @@
         update start_schema.t_start_permission
         <set>
             <if test="createTime != null">
-                'create_time' = #{createTime,jdbcType=TIMESTAMP},
+                create_time = #{createTime,jdbcType=TIMESTAMP},
             </if>
             <if test="updateTime != null">
-                'update_time' = #{updateTime,jdbcType=TIMESTAMP},
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
             </if>
             <if test="isDeleted != null">
-                'is_deleted' = #{isDeleted,jdbcType=BIT},
+                is_deleted = #{isDeleted,jdbcType=BIT},
             </if>
             <if test="uuid != null">
-                'uuid' = #{uuid,jdbcType=VARCHAR},
+                uuid = #{uuid,jdbcType=VARCHAR},
             </if>
             <if test="resourceName != null">
-                'resource_name' = #{resourceName,jdbcType=VARCHAR},
+                resource_name = #{resourceName,jdbcType=VARCHAR},
             </if>
             <if test="requestMethod != null">
-                'request_method' = #{requestMethod,jdbcType=VARCHAR},
+                request_method = #{requestMethod,jdbcType=VARCHAR},
             </if>
             <if test="resourceUrl != null">
-                'resource_url' = #{resourceUrl,jdbcType=VARCHAR},
+                resource_url = #{resourceUrl,jdbcType=VARCHAR},
             </if>
             <if test="resourceType != null">
-                'resource_type' = #{resourceType,jdbcType=VARCHAR},
+                resource_type = #{resourceType,jdbcType=VARCHAR},
             </if>
         </set>
-        where 'id' = #{id,jdbcType=BIGINT}
+        where id = #{id,jdbcType=BIGINT}
     </update>
     <update id="updateByPrimaryKey" parameterType="net.renfei.repository.dao.start.model.TStartPermission">
         update start_schema.t_start_permission
-        set 'create_time' = #{createTime,jdbcType=TIMESTAMP},
-            'update_time' = #{updateTime,jdbcType=TIMESTAMP},
-            'is_deleted' = #{isDeleted,jdbcType=BIT},
-            'uuid' = #{uuid,jdbcType=VARCHAR},
-            'resource_name' = #{resourceName,jdbcType=VARCHAR},
-            'request_method' = #{requestMethod,jdbcType=VARCHAR},
-            'resource_url' = #{resourceUrl,jdbcType=VARCHAR},
-            'resource_type' = #{resourceType,jdbcType=VARCHAR}
-        where 'id' = #{id,jdbcType=BIGINT}
+        set create_time    = #{createTime,jdbcType=TIMESTAMP},
+            update_time    = #{updateTime,jdbcType=TIMESTAMP},
+            is_deleted     = #{isDeleted,jdbcType=BIT},
+            uuid           = #{uuid,jdbcType=VARCHAR},
+            resource_name  = #{resourceName,jdbcType=VARCHAR},
+            request_method = #{requestMethod,jdbcType=VARCHAR},
+            resource_url   = #{resourceUrl,jdbcType=VARCHAR},
+            resource_type  = #{resourceType,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=BIGINT}
     </update>
 </mapper>

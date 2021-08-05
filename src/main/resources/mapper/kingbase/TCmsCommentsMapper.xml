@@ -79,12 +79,12 @@
         </where>
     </sql>
     <sql id="Base_Column_List">
-        'id'
-        , 'target_id', 'addtime', 'is_delete', 'parent_id', 'is_owner'
+        id
+        , target_id, addtime, is_delete, parent_id, is_owner
     </sql>
     <sql id="Blob_Column_List">
-        'author'
-        , 'author_email', 'author_url', 'author_IP', 'author_address', 'content'
+        author
+        , author_email, author_url, author_IP, author_address, content
     </sql>
     <select id="selectByExampleWithBLOBs" parameterType="net.renfei.repository.dao.cms.model.TCmsCommentsExample"
             resultMap="ResultMapWithBLOBs">
@@ -124,12 +124,12 @@
         ,
         <include refid="Blob_Column_List"/>
         from start_schema.t_cms_comments
-        where 'id' = #{id,jdbcType=BIGINT}
+        where id = #{id,jdbcType=BIGINT}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
         delete
         from start_schema.t_cms_comments
-        where 'id' = #{id,jdbcType=BIGINT}
+        where id = #{id,jdbcType=BIGINT}
     </delete>
     <delete id="deleteByExample" parameterType="net.renfei.repository.dao.cms.model.TCmsCommentsExample">
         delete from start_schema.t_cms_comments
@@ -138,10 +138,10 @@
         </if>
     </delete>
     <insert id="insert" parameterType="net.renfei.repository.dao.cms.model.TCmsCommentsWithBLOBs">
-        insert into start_schema.t_cms_comments ('id', 'target_id', 'addtime',
-            'is_delete', 'parent_id', 'is_owner',
-            'author', 'author_email', 'author_url',
-            'author_IP', 'author_address', 'content')
+        insert into start_schema.t_cms_comments (id, target_id, addtime,
+                                                 is_delete, parent_id, is_owner,
+                                                 author, author_email, author_url,
+                                                 author_IP, author_address, content)
         values (#{id,jdbcType=BIGINT}, #{targetId,jdbcType=BIGINT}, #{addtime,jdbcType=TIMESTAMP},
                 #{isDelete,jdbcType=BIT}, #{parentId,jdbcType=BIGINT}, #{isOwner,jdbcType=BIT},
                 #{author,jdbcType=LONGVARCHAR}, #{authorEmail,jdbcType=LONGVARCHAR}, #{authorUrl,jdbcType=LONGVARCHAR},
@@ -152,40 +152,40 @@
         insert into start_schema.t_cms_comments
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
-                'id',
+                id,
             </if>
             <if test="targetId != null">
-                'target_id',
+                target_id,
             </if>
             <if test="addtime != null">
-                'addtime',
+                addtime,
             </if>
             <if test="isDelete != null">
-                'is_delete',
+                is_delete,
             </if>
             <if test="parentId != null">
-                'parent_id',
+                parent_id,
             </if>
             <if test="isOwner != null">
-                'is_owner',
+                is_owner,
             </if>
             <if test="author != null">
-                'author',
+                author,
             </if>
             <if test="authorEmail != null">
-                'author_email',
+                author_email,
             </if>
             <if test="authorUrl != null">
-                'author_url',
+                author_url,
             </if>
             <if test="authorIp != null">
-                'author_IP',
+                author_IP,
             </if>
             <if test="authorAddress != null">
-                'author_address',
+                author_address,
             </if>
             <if test="content != null">
-                'content',
+                content,
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -238,40 +238,40 @@
         update start_schema.t_cms_comments
         <set>
             <if test="record.id != null">
-                'id' = #{record.id,jdbcType=BIGINT},
+                id = #{record.id,jdbcType=BIGINT},
             </if>
             <if test="record.targetId != null">
-                'target_id' = #{record.targetId,jdbcType=BIGINT},
+                target_id = #{record.targetId,jdbcType=BIGINT},
             </if>
             <if test="record.addtime != null">
-                'addtime' = #{record.addtime,jdbcType=TIMESTAMP},
+                addtime = #{record.addtime,jdbcType=TIMESTAMP},
             </if>
             <if test="record.isDelete != null">
-                'is_delete' = #{record.isDelete,jdbcType=BIT},
+                is_delete = #{record.isDelete,jdbcType=BIT},
             </if>
             <if test="record.parentId != null">
-                'parent_id' = #{record.parentId,jdbcType=BIGINT},
+                parent_id = #{record.parentId,jdbcType=BIGINT},
             </if>
             <if test="record.isOwner != null">
-                'is_owner' = #{record.isOwner,jdbcType=BIT},
+                is_owner = #{record.isOwner,jdbcType=BIT},
             </if>
             <if test="record.author != null">
-                'author' = #{record.author,jdbcType=LONGVARCHAR},
+                author = #{record.author,jdbcType=LONGVARCHAR},
             </if>
             <if test="record.authorEmail != null">
-                'author_email' = #{record.authorEmail,jdbcType=LONGVARCHAR},
+                author_email = #{record.authorEmail,jdbcType=LONGVARCHAR},
             </if>
             <if test="record.authorUrl != null">
-                'author_url' = #{record.authorUrl,jdbcType=LONGVARCHAR},
+                author_url = #{record.authorUrl,jdbcType=LONGVARCHAR},
             </if>
             <if test="record.authorIp != null">
-                'author_IP' = #{record.authorIp,jdbcType=LONGVARCHAR},
+                author_IP = #{record.authorIp,jdbcType=LONGVARCHAR},
             </if>
             <if test="record.authorAddress != null">
-                'author_address' = #{record.authorAddress,jdbcType=LONGVARCHAR},
+                author_address = #{record.authorAddress,jdbcType=LONGVARCHAR},
             </if>
             <if test="record.content != null">
-                'content' = #{record.content,jdbcType=LONGVARCHAR},
+                content = #{record.content,jdbcType=LONGVARCHAR},
             </if>
         </set>
         <if test="_parameter != null">
@@ -280,30 +280,30 @@
     </update>
     <update id="updateByExampleWithBLOBs" parameterType="map">
         update start_schema.t_cms_comments
-        set 'id' = #{record.id,jdbcType=BIGINT},
-        'target_id' = #{record.targetId,jdbcType=BIGINT},
-        'addtime' = #{record.addtime,jdbcType=TIMESTAMP},
-        'is_delete' = #{record.isDelete,jdbcType=BIT},
-        'parent_id' = #{record.parentId,jdbcType=BIGINT},
-        'is_owner' = #{record.isOwner,jdbcType=BIT},
-        'author' = #{record.author,jdbcType=LONGVARCHAR},
-        'author_email' = #{record.authorEmail,jdbcType=LONGVARCHAR},
-        'author_url' = #{record.authorUrl,jdbcType=LONGVARCHAR},
-        'author_IP' = #{record.authorIp,jdbcType=LONGVARCHAR},
-        'author_address' = #{record.authorAddress,jdbcType=LONGVARCHAR},
-        'content' = #{record.content,jdbcType=LONGVARCHAR}
+        set id = #{record.id,jdbcType=BIGINT},
+        target_id = #{record.targetId,jdbcType=BIGINT},
+        addtime = #{record.addtime,jdbcType=TIMESTAMP},
+        is_delete = #{record.isDelete,jdbcType=BIT},
+        parent_id = #{record.parentId,jdbcType=BIGINT},
+        is_owner = #{record.isOwner,jdbcType=BIT},
+        author = #{record.author,jdbcType=LONGVARCHAR},
+        author_email = #{record.authorEmail,jdbcType=LONGVARCHAR},
+        author_url = #{record.authorUrl,jdbcType=LONGVARCHAR},
+        author_IP = #{record.authorIp,jdbcType=LONGVARCHAR},
+        author_address = #{record.authorAddress,jdbcType=LONGVARCHAR},
+        content = #{record.content,jdbcType=LONGVARCHAR}
         <if test="_parameter != null">
             <include refid="Update_By_Example_Where_Clause"/>
         </if>
     </update>
     <update id="updateByExample" parameterType="map">
         update start_schema.t_cms_comments
-        set 'id' = #{record.id,jdbcType=BIGINT},
-        'target_id' = #{record.targetId,jdbcType=BIGINT},
-        'addtime' = #{record.addtime,jdbcType=TIMESTAMP},
-        'is_delete' = #{record.isDelete,jdbcType=BIT},
-        'parent_id' = #{record.parentId,jdbcType=BIGINT},
-        'is_owner' = #{record.isOwner,jdbcType=BIT}
+        set id = #{record.id,jdbcType=BIGINT},
+        target_id = #{record.targetId,jdbcType=BIGINT},
+        addtime = #{record.addtime,jdbcType=TIMESTAMP},
+        is_delete = #{record.isDelete,jdbcType=BIT},
+        parent_id = #{record.parentId,jdbcType=BIGINT},
+        is_owner = #{record.isOwner,jdbcType=BIT}
         <if test="_parameter != null">
             <include refid="Update_By_Example_Where_Clause"/>
         </if>
@@ -312,63 +312,63 @@
         update start_schema.t_cms_comments
         <set>
             <if test="targetId != null">
-                'target_id' = #{targetId,jdbcType=BIGINT},
+                target_id = #{targetId,jdbcType=BIGINT},
             </if>
             <if test="addtime != null">
-                'addtime' = #{addtime,jdbcType=TIMESTAMP},
+                addtime = #{addtime,jdbcType=TIMESTAMP},
             </if>
             <if test="isDelete != null">
-                'is_delete' = #{isDelete,jdbcType=BIT},
+                is_delete = #{isDelete,jdbcType=BIT},
             </if>
             <if test="parentId != null">
-                'parent_id' = #{parentId,jdbcType=BIGINT},
+                parent_id = #{parentId,jdbcType=BIGINT},
             </if>
             <if test="isOwner != null">
-                'is_owner' = #{isOwner,jdbcType=BIT},
+                is_owner = #{isOwner,jdbcType=BIT},
             </if>
             <if test="author != null">
-                'author' = #{author,jdbcType=LONGVARCHAR},
+                author = #{author,jdbcType=LONGVARCHAR},
             </if>
             <if test="authorEmail != null">
-                'author_email' = #{authorEmail,jdbcType=LONGVARCHAR},
+                author_email = #{authorEmail,jdbcType=LONGVARCHAR},
             </if>
             <if test="authorUrl != null">
-                'author_url' = #{authorUrl,jdbcType=LONGVARCHAR},
+                author_url = #{authorUrl,jdbcType=LONGVARCHAR},
             </if>
             <if test="authorIp != null">
-                'author_IP' = #{authorIp,jdbcType=LONGVARCHAR},
+                author_IP = #{authorIp,jdbcType=LONGVARCHAR},
             </if>
             <if test="authorAddress != null">
-                'author_address' = #{authorAddress,jdbcType=LONGVARCHAR},
+                author_address = #{authorAddress,jdbcType=LONGVARCHAR},
             </if>
             <if test="content != null">
-                'content' = #{content,jdbcType=LONGVARCHAR},
+                content = #{content,jdbcType=LONGVARCHAR},
             </if>
         </set>
-        where 'id' = #{id,jdbcType=BIGINT}
+        where id = #{id,jdbcType=BIGINT}
     </update>
     <update id="updateByPrimaryKeyWithBLOBs" parameterType="net.renfei.repository.dao.cms.model.TCmsCommentsWithBLOBs">
         update start_schema.t_cms_comments
-        set 'target_id' = #{targetId,jdbcType=BIGINT},
-            'addtime' = #{addtime,jdbcType=TIMESTAMP},
-            'is_delete' = #{isDelete,jdbcType=BIT},
-            'parent_id' = #{parentId,jdbcType=BIGINT},
-            'is_owner' = #{isOwner,jdbcType=BIT},
-            'author' = #{author,jdbcType=LONGVARCHAR},
-            'author_email' = #{authorEmail,jdbcType=LONGVARCHAR},
-            'author_url' = #{authorUrl,jdbcType=LONGVARCHAR},
-            'author_IP' = #{authorIp,jdbcType=LONGVARCHAR},
-            'author_address' = #{authorAddress,jdbcType=LONGVARCHAR},
-            'content' = #{content,jdbcType=LONGVARCHAR}
-        where 'id' = #{id,jdbcType=BIGINT}
+        set target_id      = #{targetId,jdbcType=BIGINT},
+            addtime        = #{addtime,jdbcType=TIMESTAMP},
+            is_delete      = #{isDelete,jdbcType=BIT},
+            parent_id      = #{parentId,jdbcType=BIGINT},
+            is_owner       = #{isOwner,jdbcType=BIT},
+            author         = #{author,jdbcType=LONGVARCHAR},
+            author_email   = #{authorEmail,jdbcType=LONGVARCHAR},
+            author_url     = #{authorUrl,jdbcType=LONGVARCHAR},
+            author_IP      = #{authorIp,jdbcType=LONGVARCHAR},
+            author_address = #{authorAddress,jdbcType=LONGVARCHAR},
+            content        = #{content,jdbcType=LONGVARCHAR}
+        where id = #{id,jdbcType=BIGINT}
     </update>
     <update id="updateByPrimaryKey" parameterType="net.renfei.repository.dao.cms.model.TCmsComments">
         update start_schema.t_cms_comments
-        set 'target_id' = #{targetId,jdbcType=BIGINT},
-            'addtime' = #{addtime,jdbcType=TIMESTAMP},
-            'is_delete' = #{isDelete,jdbcType=BIT},
-            'parent_id' = #{parentId,jdbcType=BIGINT},
-            'is_owner' = #{isOwner,jdbcType=BIT}
-        where 'id' = #{id,jdbcType=BIGINT}
+        set target_id = #{targetId,jdbcType=BIGINT},
+            addtime   = #{addtime,jdbcType=TIMESTAMP},
+            is_delete = #{isDelete,jdbcType=BIT},
+            parent_id = #{parentId,jdbcType=BIGINT},
+            is_owner  = #{isOwner,jdbcType=BIT}
+        where id = #{id,jdbcType=BIGINT}
     </update>
 </mapper>

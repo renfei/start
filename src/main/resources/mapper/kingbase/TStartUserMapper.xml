@@ -84,11 +84,11 @@
         </where>
     </sql>
     <sql id="Base_Column_List">
-        'id'
-        , 'create_time', 'update_time', 'is_deleted', 'uuid', 'user_name', 'password',
-    'email', 'phone', 'registration_date', 'totp', 'registration_ip', 'trial_error_times', 
-    'lock_time', 'state_code', 'last_name', 'first_name', 'last_login', 'confidential_rank', 
-    'is_built_in'
+        id
+        , create_time, update_time, is_deleted, uuid, user_name, password,
+    email, phone, registration_date, totp, registration_ip, trial_error_times,
+    lock_time, state_code, last_name, first_name, last_login, confidential_rank,
+    is_built_in
     </sql>
     <select id="selectByExample" parameterType="net.renfei.repository.dao.start.model.TStartUserExample"
             resultMap="BaseResultMap">
@@ -109,12 +109,12 @@
         select
         <include refid="Base_Column_List"/>
         from start_schema.t_start_user
-        where 'id' = #{id,jdbcType=BIGINT}
+        where id = #{id,jdbcType=BIGINT}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
         delete
         from start_schema.t_start_user
-        where 'id' = #{id,jdbcType=BIGINT}
+        where id = #{id,jdbcType=BIGINT}
     </delete>
     <delete id="deleteByExample" parameterType="net.renfei.repository.dao.start.model.TStartUserExample">
         delete from start_schema.t_start_user
@@ -123,13 +123,13 @@
         </if>
     </delete>
     <insert id="insert" parameterType="net.renfei.repository.dao.start.model.TStartUser">
-        insert into start_schema.t_start_user ('id', 'create_time', 'update_time',
-            'is_deleted', 'uuid', 'user_name',
-            'password', 'email', 'phone',
-            'registration_date', 'totp', 'registration_ip',
-            'trial_error_times', 'lock_time', 'state_code',
-            'last_name', 'first_name', 'last_login',
-            'confidential_rank', 'is_built_in')
+        insert into start_schema.t_start_user (id, create_time, update_time,
+                                               is_deleted, uuid, user_name,
+                                               password, email, phone,
+                                               registration_date, totp, registration_ip,
+                                               trial_error_times, lock_time, state_code,
+                                               last_name, first_name, last_login,
+                                               confidential_rank, is_built_in)
         values (#{id,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP},
                 #{isDeleted,jdbcType=BIT}, #{uuid,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR},
                 #{password,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR},
@@ -142,64 +142,64 @@
         insert into start_schema.t_start_user
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
-                'id',
+                id,
             </if>
             <if test="createTime != null">
-                'create_time',
+                create_time,
             </if>
             <if test="updateTime != null">
-                'update_time',
+                update_time,
             </if>
             <if test="isDeleted != null">
-                'is_deleted',
+                is_deleted,
             </if>
             <if test="uuid != null">
-                'uuid',
+                uuid,
             </if>
             <if test="userName != null">
-                'user_name',
+                user_name,
             </if>
             <if test="password != null">
-                'password',
+                password,
             </if>
             <if test="email != null">
-                'email',
+                email,
             </if>
             <if test="phone != null">
-                'phone',
+                phone,
             </if>
             <if test="registrationDate != null">
-                'registration_date',
+                registration_date,
             </if>
             <if test="totp != null">
-                'totp',
+                totp,
             </if>
             <if test="registrationIp != null">
-                'registration_ip',
+                registration_ip,
             </if>
             <if test="trialErrorTimes != null">
-                'trial_error_times',
+                trial_error_times,
             </if>
             <if test="lockTime != null">
-                'lock_time',
+                lock_time,
             </if>
             <if test="stateCode != null">
-                'state_code',
+                state_code,
             </if>
             <if test="lastName != null">
-                'last_name',
+                last_name,
             </if>
             <if test="firstName != null">
-                'first_name',
+                first_name,
             </if>
             <if test="lastLogin != null">
-                'last_login',
+                last_login,
             </if>
             <if test="confidentialRank != null">
-                'confidential_rank',
+                confidential_rank,
             </if>
             <if test="isBuiltIn != null">
-                'is_built_in',
+                is_built_in,
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -276,64 +276,64 @@
         update start_schema.t_start_user
         <set>
             <if test="record.id != null">
-                'id' = #{record.id,jdbcType=BIGINT},
+                id = #{record.id,jdbcType=BIGINT},
             </if>
             <if test="record.createTime != null">
-                'create_time' = #{record.createTime,jdbcType=TIMESTAMP},
+                create_time = #{record.createTime,jdbcType=TIMESTAMP},
             </if>
             <if test="record.updateTime != null">
-                'update_time' = #{record.updateTime,jdbcType=TIMESTAMP},
+                update_time = #{record.updateTime,jdbcType=TIMESTAMP},
             </if>
             <if test="record.isDeleted != null">
-                'is_deleted' = #{record.isDeleted,jdbcType=BIT},
+                is_deleted = #{record.isDeleted,jdbcType=BIT},
             </if>
             <if test="record.uuid != null">
-                'uuid' = #{record.uuid,jdbcType=VARCHAR},
+                uuid = #{record.uuid,jdbcType=VARCHAR},
             </if>
             <if test="record.userName != null">
-                'user_name' = #{record.userName,jdbcType=VARCHAR},
+                user_name = #{record.userName,jdbcType=VARCHAR},
             </if>
             <if test="record.password != null">
-                'password' = #{record.password,jdbcType=VARCHAR},
+                password = #{record.password,jdbcType=VARCHAR},
             </if>
             <if test="record.email != null">
-                'email' = #{record.email,jdbcType=VARCHAR},
+                email = #{record.email,jdbcType=VARCHAR},
             </if>
             <if test="record.phone != null">
-                'phone' = #{record.phone,jdbcType=VARCHAR},
+                phone = #{record.phone,jdbcType=VARCHAR},
             </if>
             <if test="record.registrationDate != null">
-                'registration_date' = #{record.registrationDate,jdbcType=TIMESTAMP},
+                registration_date = #{record.registrationDate,jdbcType=TIMESTAMP},
             </if>
             <if test="record.totp != null">
-                'totp' = #{record.totp,jdbcType=VARCHAR},
+                totp = #{record.totp,jdbcType=VARCHAR},
             </if>
             <if test="record.registrationIp != null">
-                'registration_ip' = #{record.registrationIp,jdbcType=VARCHAR},
+                registration_ip = #{record.registrationIp,jdbcType=VARCHAR},
             </if>
             <if test="record.trialErrorTimes != null">
-                'trial_error_times' = #{record.trialErrorTimes,jdbcType=INTEGER},
+                trial_error_times = #{record.trialErrorTimes,jdbcType=INTEGER},
             </if>
             <if test="record.lockTime != null">
-                'lock_time' = #{record.lockTime,jdbcType=TIMESTAMP},
+                lock_time = #{record.lockTime,jdbcType=TIMESTAMP},
             </if>
             <if test="record.stateCode != null">
-                'state_code' = #{record.stateCode,jdbcType=INTEGER},
+                state_code = #{record.stateCode,jdbcType=INTEGER},
             </if>
             <if test="record.lastName != null">
-                'last_name' = #{record.lastName,jdbcType=VARCHAR},
+                last_name = #{record.lastName,jdbcType=VARCHAR},
             </if>
             <if test="record.firstName != null">
-                'first_name' = #{record.firstName,jdbcType=VARCHAR},
+                first_name = #{record.firstName,jdbcType=VARCHAR},
             </if>
             <if test="record.lastLogin != null">
-                'last_login' = #{record.lastLogin,jdbcType=DATE},
+                last_login = #{record.lastLogin,jdbcType=DATE},
             </if>
             <if test="record.confidentialRank != null">
-                'confidential_rank' = #{record.confidentialRank,jdbcType=INTEGER},
+                confidential_rank = #{record.confidentialRank,jdbcType=INTEGER},
             </if>
             <if test="record.isBuiltIn != null">
-                'is_built_in' = #{record.isBuiltIn,jdbcType=BIT},
+                is_built_in = #{record.isBuiltIn,jdbcType=BIT},
             </if>
         </set>
         <if test="_parameter != null">
@@ -342,26 +342,26 @@
     </update>
     <update id="updateByExample" parameterType="map">
         update start_schema.t_start_user
-        set 'id' = #{record.id,jdbcType=BIGINT},
-        'create_time' = #{record.createTime,jdbcType=TIMESTAMP},
-        'update_time' = #{record.updateTime,jdbcType=TIMESTAMP},
-        'is_deleted' = #{record.isDeleted,jdbcType=BIT},
-        'uuid' = #{record.uuid,jdbcType=VARCHAR},
-        'user_name' = #{record.userName,jdbcType=VARCHAR},
-        'password' = #{record.password,jdbcType=VARCHAR},
-        'email' = #{record.email,jdbcType=VARCHAR},
-        'phone' = #{record.phone,jdbcType=VARCHAR},
-        'registration_date' = #{record.registrationDate,jdbcType=TIMESTAMP},
-        'totp' = #{record.totp,jdbcType=VARCHAR},
-        'registration_ip' = #{record.registrationIp,jdbcType=VARCHAR},
-        'trial_error_times' = #{record.trialErrorTimes,jdbcType=INTEGER},
-        'lock_time' = #{record.lockTime,jdbcType=TIMESTAMP},
-        'state_code' = #{record.stateCode,jdbcType=INTEGER},
-        'last_name' = #{record.lastName,jdbcType=VARCHAR},
-        'first_name' = #{record.firstName,jdbcType=VARCHAR},
-        'last_login' = #{record.lastLogin,jdbcType=DATE},
-        'confidential_rank' = #{record.confidentialRank,jdbcType=INTEGER},
-        'is_built_in' = #{record.isBuiltIn,jdbcType=BIT}
+        set id = #{record.id,jdbcType=BIGINT},
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+        is_deleted = #{record.isDeleted,jdbcType=BIT},
+        uuid = #{record.uuid,jdbcType=VARCHAR},
+        user_name = #{record.userName,jdbcType=VARCHAR},
+        password = #{record.password,jdbcType=VARCHAR},
+        email = #{record.email,jdbcType=VARCHAR},
+        phone = #{record.phone,jdbcType=VARCHAR},
+        registration_date = #{record.registrationDate,jdbcType=TIMESTAMP},
+        totp = #{record.totp,jdbcType=VARCHAR},
+        registration_ip = #{record.registrationIp,jdbcType=VARCHAR},
+        trial_error_times = #{record.trialErrorTimes,jdbcType=INTEGER},
+        lock_time = #{record.lockTime,jdbcType=TIMESTAMP},
+        state_code = #{record.stateCode,jdbcType=INTEGER},
+        last_name = #{record.lastName,jdbcType=VARCHAR},
+        first_name = #{record.firstName,jdbcType=VARCHAR},
+        last_login = #{record.lastLogin,jdbcType=DATE},
+        confidential_rank = #{record.confidentialRank,jdbcType=INTEGER},
+        is_built_in = #{record.isBuiltIn,jdbcType=BIT}
         <if test="_parameter != null">
             <include refid="Update_By_Example_Where_Clause"/>
         </if>
@@ -370,86 +370,86 @@
         update start_schema.t_start_user
         <set>
             <if test="createTime != null">
-                'create_time' = #{createTime,jdbcType=TIMESTAMP},
+                create_time = #{createTime,jdbcType=TIMESTAMP},
             </if>
             <if test="updateTime != null">
-                'update_time' = #{updateTime,jdbcType=TIMESTAMP},
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
             </if>
             <if test="isDeleted != null">
-                'is_deleted' = #{isDeleted,jdbcType=BIT},
+                is_deleted = #{isDeleted,jdbcType=BIT},
             </if>
             <if test="uuid != null">
-                'uuid' = #{uuid,jdbcType=VARCHAR},
+                uuid = #{uuid,jdbcType=VARCHAR},
             </if>
             <if test="userName != null">
-                'user_name' = #{userName,jdbcType=VARCHAR},
+                user_name = #{userName,jdbcType=VARCHAR},
             </if>
             <if test="password != null">
-                'password' = #{password,jdbcType=VARCHAR},
+                password = #{password,jdbcType=VARCHAR},
             </if>
             <if test="email != null">
-                'email' = #{email,jdbcType=VARCHAR},
+                email = #{email,jdbcType=VARCHAR},
             </if>
             <if test="phone != null">
-                'phone' = #{phone,jdbcType=VARCHAR},
+                phone = #{phone,jdbcType=VARCHAR},
             </if>
             <if test="registrationDate != null">
-                'registration_date' = #{registrationDate,jdbcType=TIMESTAMP},
+                registration_date = #{registrationDate,jdbcType=TIMESTAMP},
             </if>
             <if test="totp != null">
-                'totp' = #{totp,jdbcType=VARCHAR},
+                totp = #{totp,jdbcType=VARCHAR},
             </if>
             <if test="registrationIp != null">
-                'registration_ip' = #{registrationIp,jdbcType=VARCHAR},
+                registration_ip = #{registrationIp,jdbcType=VARCHAR},
             </if>
             <if test="trialErrorTimes != null">
-                'trial_error_times' = #{trialErrorTimes,jdbcType=INTEGER},
+                trial_error_times = #{trialErrorTimes,jdbcType=INTEGER},
             </if>
             <if test="lockTime != null">
-                'lock_time' = #{lockTime,jdbcType=TIMESTAMP},
+                lock_time = #{lockTime,jdbcType=TIMESTAMP},
             </if>
             <if test="stateCode != null">
-                'state_code' = #{stateCode,jdbcType=INTEGER},
+                state_code = #{stateCode,jdbcType=INTEGER},
             </if>
             <if test="lastName != null">
-                'last_name' = #{lastName,jdbcType=VARCHAR},
+                last_name = #{lastName,jdbcType=VARCHAR},
             </if>
             <if test="firstName != null">
-                'first_name' = #{firstName,jdbcType=VARCHAR},
+                first_name = #{firstName,jdbcType=VARCHAR},
             </if>
             <if test="lastLogin != null">
-                'last_login' = #{lastLogin,jdbcType=DATE},
+                last_login = #{lastLogin,jdbcType=DATE},
             </if>
             <if test="confidentialRank != null">
-                'confidential_rank' = #{confidentialRank,jdbcType=INTEGER},
+                confidential_rank = #{confidentialRank,jdbcType=INTEGER},
             </if>
             <if test="isBuiltIn != null">
-                'is_built_in' = #{isBuiltIn,jdbcType=BIT},
+                is_built_in = #{isBuiltIn,jdbcType=BIT},
             </if>
         </set>
-        where 'id' = #{id,jdbcType=BIGINT}
+        where id = #{id,jdbcType=BIGINT}
     </update>
     <update id="updateByPrimaryKey" parameterType="net.renfei.repository.dao.start.model.TStartUser">
         update start_schema.t_start_user
-        set 'create_time' = #{createTime,jdbcType=TIMESTAMP},
-            'update_time' = #{updateTime,jdbcType=TIMESTAMP},
-            'is_deleted' = #{isDeleted,jdbcType=BIT},
-            'uuid' = #{uuid,jdbcType=VARCHAR},
-            'user_name' = #{userName,jdbcType=VARCHAR},
-            'password' = #{password,jdbcType=VARCHAR},
-            'email' = #{email,jdbcType=VARCHAR},
-            'phone' = #{phone,jdbcType=VARCHAR},
-            'registration_date' = #{registrationDate,jdbcType=TIMESTAMP},
-            'totp' = #{totp,jdbcType=VARCHAR},
-            'registration_ip' = #{registrationIp,jdbcType=VARCHAR},
-            'trial_error_times' = #{trialErrorTimes,jdbcType=INTEGER},
-            'lock_time' = #{lockTime,jdbcType=TIMESTAMP},
-            'state_code' = #{stateCode,jdbcType=INTEGER},
-            'last_name' = #{lastName,jdbcType=VARCHAR},
-            'first_name' = #{firstName,jdbcType=VARCHAR},
-            'last_login' = #{lastLogin,jdbcType=DATE},
-            'confidential_rank' = #{confidentialRank,jdbcType=INTEGER},
-            'is_built_in' = #{isBuiltIn,jdbcType=BIT}
-        where 'id' = #{id,jdbcType=BIGINT}
+        set create_time       = #{createTime,jdbcType=TIMESTAMP},
+            update_time       = #{updateTime,jdbcType=TIMESTAMP},
+            is_deleted        = #{isDeleted,jdbcType=BIT},
+            uuid              = #{uuid,jdbcType=VARCHAR},
+            user_name         = #{userName,jdbcType=VARCHAR},
+            password          = #{password,jdbcType=VARCHAR},
+            email             = #{email,jdbcType=VARCHAR},
+            phone             = #{phone,jdbcType=VARCHAR},
+            registration_date = #{registrationDate,jdbcType=TIMESTAMP},
+            totp              = #{totp,jdbcType=VARCHAR},
+            registration_ip   = #{registrationIp,jdbcType=VARCHAR},
+            trial_error_times = #{trialErrorTimes,jdbcType=INTEGER},
+            lock_time         = #{lockTime,jdbcType=TIMESTAMP},
+            state_code        = #{stateCode,jdbcType=INTEGER},
+            last_name         = #{lastName,jdbcType=VARCHAR},
+            first_name        = #{firstName,jdbcType=VARCHAR},
+            last_login        = #{lastLogin,jdbcType=DATE},
+            confidential_rank = #{confidentialRank,jdbcType=INTEGER},
+            is_built_in       = #{isBuiltIn,jdbcType=BIT}
+        where id = #{id,jdbcType=BIGINT}
     </update>
 </mapper>

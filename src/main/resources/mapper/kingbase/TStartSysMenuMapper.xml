@@ -71,8 +71,8 @@
         </where>
     </sql>
     <sql id="Base_Column_List">
-        'id'
-        , 'menu_name', 'menu_link', 'order_num', 'menu_icon', 'is_new_window', 'parent_id'
+        id
+        , menu_name, menu_link, order_num, menu_icon, is_new_window, parent_id
     </sql>
     <select id="selectByExample" parameterType="net.renfei.repository.dao.start.model.TStartSysMenuExample"
             resultMap="BaseResultMap">
@@ -93,12 +93,12 @@
         select
         <include refid="Base_Column_List"/>
         from start_schema.t_start_sys_menu
-        where 'id' = #{id,jdbcType=BIGINT}
+        where id = #{id,jdbcType=BIGINT}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
         delete
         from start_schema.t_start_sys_menu
-        where 'id' = #{id,jdbcType=BIGINT}
+        where id = #{id,jdbcType=BIGINT}
     </delete>
     <delete id="deleteByExample" parameterType="net.renfei.repository.dao.start.model.TStartSysMenuExample">
         delete from start_schema.t_start_sys_menu
@@ -107,9 +107,9 @@
         </if>
     </delete>
     <insert id="insert" parameterType="net.renfei.repository.dao.start.model.TStartSysMenu">
-        insert into start_schema.t_start_sys_menu ('id', 'menu_name', 'menu_link',
-            'order_num', 'menu_icon', 'is_new_window',
-            'parent_id')
+        insert into start_schema.t_start_sys_menu (id, menu_name, menu_link,
+                                                   order_num, menu_icon, is_new_window,
+                                                   parent_id)
         values (#{id,jdbcType=BIGINT}, #{menuName,jdbcType=VARCHAR}, #{menuLink,jdbcType=VARCHAR},
                 #{orderNum,jdbcType=INTEGER}, #{menuIcon,jdbcType=VARCHAR}, #{isNewWindow,jdbcType=BIT},
                 #{parentId,jdbcType=BIGINT})
@@ -118,25 +118,25 @@
         insert into start_schema.t_start_sys_menu
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
-                'id',
+                id,
             </if>
             <if test="menuName != null">
-                'menu_name',
+                menu_name,
             </if>
             <if test="menuLink != null">
-                'menu_link',
+                menu_link,
             </if>
             <if test="orderNum != null">
-                'order_num',
+                order_num,
             </if>
             <if test="menuIcon != null">
-                'menu_icon',
+                menu_icon,
             </if>
             <if test="isNewWindow != null">
-                'is_new_window',
+                is_new_window,
             </if>
             <if test="parentId != null">
-                'parent_id',
+                parent_id,
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -174,25 +174,25 @@
         update start_schema.t_start_sys_menu
         <set>
             <if test="record.id != null">
-                'id' = #{record.id,jdbcType=BIGINT},
+                id = #{record.id,jdbcType=BIGINT},
             </if>
             <if test="record.menuName != null">
-                'menu_name' = #{record.menuName,jdbcType=VARCHAR},
+                menu_name = #{record.menuName,jdbcType=VARCHAR},
             </if>
             <if test="record.menuLink != null">
-                'menu_link' = #{record.menuLink,jdbcType=VARCHAR},
+                menu_link = #{record.menuLink,jdbcType=VARCHAR},
             </if>
             <if test="record.orderNum != null">
-                'order_num' = #{record.orderNum,jdbcType=INTEGER},
+                order_num = #{record.orderNum,jdbcType=INTEGER},
             </if>
             <if test="record.menuIcon != null">
-                'menu_icon' = #{record.menuIcon,jdbcType=VARCHAR},
+                menu_icon = #{record.menuIcon,jdbcType=VARCHAR},
             </if>
             <if test="record.isNewWindow != null">
-                'is_new_window' = #{record.isNewWindow,jdbcType=BIT},
+                is_new_window = #{record.isNewWindow,jdbcType=BIT},
             </if>
             <if test="record.parentId != null">
-                'parent_id' = #{record.parentId,jdbcType=BIGINT},
+                parent_id = #{record.parentId,jdbcType=BIGINT},
             </if>
         </set>
         <if test="_parameter != null">
@@ -201,13 +201,13 @@
     </update>
     <update id="updateByExample" parameterType="map">
         update start_schema.t_start_sys_menu
-        set 'id' = #{record.id,jdbcType=BIGINT},
-        'menu_name' = #{record.menuName,jdbcType=VARCHAR},
-        'menu_link' = #{record.menuLink,jdbcType=VARCHAR},
-        'order_num' = #{record.orderNum,jdbcType=INTEGER},
-        'menu_icon' = #{record.menuIcon,jdbcType=VARCHAR},
-        'is_new_window' = #{record.isNewWindow,jdbcType=BIT},
-        'parent_id' = #{record.parentId,jdbcType=BIGINT}
+        set id = #{record.id,jdbcType=BIGINT},
+        menu_name = #{record.menuName,jdbcType=VARCHAR},
+        menu_link = #{record.menuLink,jdbcType=VARCHAR},
+        order_num = #{record.orderNum,jdbcType=INTEGER},
+        menu_icon = #{record.menuIcon,jdbcType=VARCHAR},
+        is_new_window = #{record.isNewWindow,jdbcType=BIT},
+        parent_id = #{record.parentId,jdbcType=BIGINT}
         <if test="_parameter != null">
             <include refid="Update_By_Example_Where_Clause"/>
         </if>
@@ -216,34 +216,34 @@
         update start_schema.t_start_sys_menu
         <set>
             <if test="menuName != null">
-                'menu_name' = #{menuName,jdbcType=VARCHAR},
+                menu_name = #{menuName,jdbcType=VARCHAR},
             </if>
             <if test="menuLink != null">
-                'menu_link' = #{menuLink,jdbcType=VARCHAR},
+                menu_link = #{menuLink,jdbcType=VARCHAR},
             </if>
             <if test="orderNum != null">
-                'order_num' = #{orderNum,jdbcType=INTEGER},
+                order_num = #{orderNum,jdbcType=INTEGER},
             </if>
             <if test="menuIcon != null">
-                'menu_icon' = #{menuIcon,jdbcType=VARCHAR},
+                menu_icon = #{menuIcon,jdbcType=VARCHAR},
             </if>
             <if test="isNewWindow != null">
-                'is_new_window' = #{isNewWindow,jdbcType=BIT},
+                is_new_window = #{isNewWindow,jdbcType=BIT},
             </if>
             <if test="parentId != null">
-                'parent_id' = #{parentId,jdbcType=BIGINT},
+                parent_id = #{parentId,jdbcType=BIGINT},
             </if>
         </set>
-        where 'id' = #{id,jdbcType=BIGINT}
+        where id = #{id,jdbcType=BIGINT}
     </update>
     <update id="updateByPrimaryKey" parameterType="net.renfei.repository.dao.start.model.TStartSysMenu">
         update start_schema.t_start_sys_menu
-        set 'menu_name' = #{menuName,jdbcType=VARCHAR},
-            'menu_link' = #{menuLink,jdbcType=VARCHAR},
-            'order_num' = #{orderNum,jdbcType=INTEGER},
-            'menu_icon' = #{menuIcon,jdbcType=VARCHAR},
-            'is_new_window' = #{isNewWindow,jdbcType=BIT},
-            'parent_id' = #{parentId,jdbcType=BIGINT}
-        where 'id' = #{id,jdbcType=BIGINT}
+        set menu_name     = #{menuName,jdbcType=VARCHAR},
+            menu_link     = #{menuLink,jdbcType=VARCHAR},
+            order_num     = #{orderNum,jdbcType=INTEGER},
+            menu_icon     = #{menuIcon,jdbcType=VARCHAR},
+            is_new_window = #{isNewWindow,jdbcType=BIT},
+            parent_id     = #{parentId,jdbcType=BIGINT}
+        where id = #{id,jdbcType=BIGINT}
     </update>
 </mapper>
