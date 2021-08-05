@@ -1,0 +1,383 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.renfei.repository.dao.start.TStartOperationLogMapper">
+    <resultMap id="BaseResultMap" type="net.renfei.repository.dao.start.model.TStartOperationLog">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="oper_date" jdbcType="TIMESTAMP" property="operDate"/>
+        <result column="oper_user_uuid" jdbcType="VARCHAR" property="operUserUuid"/>
+        <result column="oper_user_name" jdbcType="VARCHAR" property="operUserName"/>
+        <result column="oper_type" jdbcType="VARCHAR" property="operType"/>
+        <result column="oper_model" jdbcType="VARCHAR" property="operModel"/>
+        <result column="oper_ip" jdbcType="VARCHAR" property="operIp"/>
+        <result column="class_name" jdbcType="VARCHAR" property="className"/>
+        <result column="method_name" jdbcType="VARCHAR" property="methodName"/>
+    </resultMap>
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs"
+               type="net.renfei.repository.dao.start.model.TStartOperationLogWithBLOBs">
+        <result column="oper_describe" jdbcType="LONGVARCHAR" property="operDescribe"/>
+        <result column="params" jdbcType="LONGVARCHAR" property="params"/>
+        <result column="returning" jdbcType="LONGVARCHAR" property="returning"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+        'id'
+        , 'oper_date', 'oper_user_uuid', 'oper_user_name', 'oper_type', 'oper_model',
+    'oper_ip', 'class_name', 'method_name'
+    </sql>
+    <sql id="Blob_Column_List">
+        'oper_describe'
+        , 'params', 'returning'
+    </sql>
+    <select id="selectByExampleWithBLOBs"
+            parameterType="net.renfei.repository.dao.start.model.TStartOperationLogExample"
+            resultMap="ResultMapWithBLOBs">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from start_schema.t_start_operation_log
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByExample" parameterType="net.renfei.repository.dao.start.model.TStartOperationLogExample"
+            resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from start_schema.t_start_operation_log
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from start_schema.t_start_operation_log
+        where 'id' = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete
+        from start_schema.t_start_operation_log
+        where 'id' = #{id,jdbcType=BIGINT}
+    </delete>
+    <delete id="deleteByExample" parameterType="net.renfei.repository.dao.start.model.TStartOperationLogExample">
+        delete from start_schema.t_start_operation_log
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="net.renfei.repository.dao.start.model.TStartOperationLogWithBLOBs">
+        insert into start_schema.t_start_operation_log ('id', 'oper_date', 'oper_user_uuid',
+            'oper_user_name', 'oper_type', 'oper_model',
+            'oper_ip', 'class_name', 'method_name',
+            'oper_describe', 'params', 'returning')
+        values (#{id,jdbcType=BIGINT}, #{operDate,jdbcType=TIMESTAMP}, #{operUserUuid,jdbcType=VARCHAR},
+                #{operUserName,jdbcType=VARCHAR}, #{operType,jdbcType=VARCHAR}, #{operModel,jdbcType=VARCHAR},
+                #{operIp,jdbcType=VARCHAR}, #{className,jdbcType=VARCHAR}, #{methodName,jdbcType=VARCHAR},
+                #{operDescribe,jdbcType=LONGVARCHAR}, #{params,jdbcType=LONGVARCHAR}, #{returning,jdbcType=LONGVARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="net.renfei.repository.dao.start.model.TStartOperationLogWithBLOBs">
+        insert into start_schema.t_start_operation_log
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                'id',
+            </if>
+            <if test="operDate != null">
+                'oper_date',
+            </if>
+            <if test="operUserUuid != null">
+                'oper_user_uuid',
+            </if>
+            <if test="operUserName != null">
+                'oper_user_name',
+            </if>
+            <if test="operType != null">
+                'oper_type',
+            </if>
+            <if test="operModel != null">
+                'oper_model',
+            </if>
+            <if test="operIp != null">
+                'oper_ip',
+            </if>
+            <if test="className != null">
+                'class_name',
+            </if>
+            <if test="methodName != null">
+                'method_name',
+            </if>
+            <if test="operDescribe != null">
+                'oper_describe',
+            </if>
+            <if test="params != null">
+                'params',
+            </if>
+            <if test="returning != null">
+                'returning',
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="operDate != null">
+                #{operDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="operUserUuid != null">
+                #{operUserUuid,jdbcType=VARCHAR},
+            </if>
+            <if test="operUserName != null">
+                #{operUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="operType != null">
+                #{operType,jdbcType=VARCHAR},
+            </if>
+            <if test="operModel != null">
+                #{operModel,jdbcType=VARCHAR},
+            </if>
+            <if test="operIp != null">
+                #{operIp,jdbcType=VARCHAR},
+            </if>
+            <if test="className != null">
+                #{className,jdbcType=VARCHAR},
+            </if>
+            <if test="methodName != null">
+                #{methodName,jdbcType=VARCHAR},
+            </if>
+            <if test="operDescribe != null">
+                #{operDescribe,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="params != null">
+                #{params,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="returning != null">
+                #{returning,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="net.renfei.repository.dao.start.model.TStartOperationLogExample"
+            resultType="java.lang.Long">
+        select count(*) from start_schema.t_start_operation_log
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update start_schema.t_start_operation_log
+        <set>
+            <if test="record.id != null">
+                'id' = #{record.id,jdbcType=BIGINT},
+            </if>
+            <if test="record.operDate != null">
+                'oper_date' = #{record.operDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.operUserUuid != null">
+                'oper_user_uuid' = #{record.operUserUuid,jdbcType=VARCHAR},
+            </if>
+            <if test="record.operUserName != null">
+                'oper_user_name' = #{record.operUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.operType != null">
+                'oper_type' = #{record.operType,jdbcType=VARCHAR},
+            </if>
+            <if test="record.operModel != null">
+                'oper_model' = #{record.operModel,jdbcType=VARCHAR},
+            </if>
+            <if test="record.operIp != null">
+                'oper_ip' = #{record.operIp,jdbcType=VARCHAR},
+            </if>
+            <if test="record.className != null">
+                'class_name' = #{record.className,jdbcType=VARCHAR},
+            </if>
+            <if test="record.methodName != null">
+                'method_name' = #{record.methodName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.operDescribe != null">
+                'oper_describe' = #{record.operDescribe,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="record.params != null">
+                'params' = #{record.params,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="record.returning != null">
+                'returning' = #{record.returning,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExampleWithBLOBs" parameterType="map">
+        update start_schema.t_start_operation_log
+        set 'id' = #{record.id,jdbcType=BIGINT},
+        'oper_date' = #{record.operDate,jdbcType=TIMESTAMP},
+        'oper_user_uuid' = #{record.operUserUuid,jdbcType=VARCHAR},
+        'oper_user_name' = #{record.operUserName,jdbcType=VARCHAR},
+        'oper_type' = #{record.operType,jdbcType=VARCHAR},
+        'oper_model' = #{record.operModel,jdbcType=VARCHAR},
+        'oper_ip' = #{record.operIp,jdbcType=VARCHAR},
+        'class_name' = #{record.className,jdbcType=VARCHAR},
+        'method_name' = #{record.methodName,jdbcType=VARCHAR},
+        'oper_describe' = #{record.operDescribe,jdbcType=LONGVARCHAR},
+        'params' = #{record.params,jdbcType=LONGVARCHAR},
+        'returning' = #{record.returning,jdbcType=LONGVARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update start_schema.t_start_operation_log
+        set 'id' = #{record.id,jdbcType=BIGINT},
+        'oper_date' = #{record.operDate,jdbcType=TIMESTAMP},
+        'oper_user_uuid' = #{record.operUserUuid,jdbcType=VARCHAR},
+        'oper_user_name' = #{record.operUserName,jdbcType=VARCHAR},
+        'oper_type' = #{record.operType,jdbcType=VARCHAR},
+        'oper_model' = #{record.operModel,jdbcType=VARCHAR},
+        'oper_ip' = #{record.operIp,jdbcType=VARCHAR},
+        'class_name' = #{record.className,jdbcType=VARCHAR},
+        'method_name' = #{record.methodName,jdbcType=VARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective"
+            parameterType="net.renfei.repository.dao.start.model.TStartOperationLogWithBLOBs">
+        update start_schema.t_start_operation_log
+        <set>
+            <if test="operDate != null">
+                'oper_date' = #{operDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="operUserUuid != null">
+                'oper_user_uuid' = #{operUserUuid,jdbcType=VARCHAR},
+            </if>
+            <if test="operUserName != null">
+                'oper_user_name' = #{operUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="operType != null">
+                'oper_type' = #{operType,jdbcType=VARCHAR},
+            </if>
+            <if test="operModel != null">
+                'oper_model' = #{operModel,jdbcType=VARCHAR},
+            </if>
+            <if test="operIp != null">
+                'oper_ip' = #{operIp,jdbcType=VARCHAR},
+            </if>
+            <if test="className != null">
+                'class_name' = #{className,jdbcType=VARCHAR},
+            </if>
+            <if test="methodName != null">
+                'method_name' = #{methodName,jdbcType=VARCHAR},
+            </if>
+            <if test="operDescribe != null">
+                'oper_describe' = #{operDescribe,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="params != null">
+                'params' = #{params,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="returning != null">
+                'returning' = #{returning,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where 'id' = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs"
+            parameterType="net.renfei.repository.dao.start.model.TStartOperationLogWithBLOBs">
+        update start_schema.t_start_operation_log
+        set 'oper_date' = #{operDate,jdbcType=TIMESTAMP},
+            'oper_user_uuid' = #{operUserUuid,jdbcType=VARCHAR},
+            'oper_user_name' = #{operUserName,jdbcType=VARCHAR},
+            'oper_type' = #{operType,jdbcType=VARCHAR},
+            'oper_model' = #{operModel,jdbcType=VARCHAR},
+            'oper_ip' = #{operIp,jdbcType=VARCHAR},
+            'class_name' = #{className,jdbcType=VARCHAR},
+            'method_name' = #{methodName,jdbcType=VARCHAR},
+            'oper_describe' = #{operDescribe,jdbcType=LONGVARCHAR},
+            'params' = #{params,jdbcType=LONGVARCHAR},
+            'returning' = #{returning,jdbcType=LONGVARCHAR}
+        where 'id' = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="net.renfei.repository.dao.start.model.TStartOperationLog">
+        update start_schema.t_start_operation_log
+        set 'oper_date' = #{operDate,jdbcType=TIMESTAMP},
+            'oper_user_uuid' = #{operUserUuid,jdbcType=VARCHAR},
+            'oper_user_name' = #{operUserName,jdbcType=VARCHAR},
+            'oper_type' = #{operType,jdbcType=VARCHAR},
+            'oper_model' = #{operModel,jdbcType=VARCHAR},
+            'oper_ip' = #{operIp,jdbcType=VARCHAR},
+            'class_name' = #{className,jdbcType=VARCHAR},
+            'method_name' = #{methodName,jdbcType=VARCHAR}
+        where 'id' = #{id,jdbcType=BIGINT}
+    </update>
+</mapper>

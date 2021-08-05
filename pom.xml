@@ -201,6 +201,14 @@
             <artifactId>mysql-connector-java</artifactId>
             <scope>runtime</scope>
         </dependency>
+        <!-- 人大金仓数据库JDBC驱动-->
+        <dependency>
+            <groupId>com.kingbase8</groupId>
+            <artifactId>kingbase8</artifactId>
+            <version>V008R003C002B0320</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/environment/lib/kingbase/kingbase8-8.2.0.jar</systemPath>
+        </dependency>
 
         <dependency>
             <groupId>net.renfei</groupId>

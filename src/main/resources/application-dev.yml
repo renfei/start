@@ -15,6 +15,10 @@ spring:
       driver-class-name: com.mysql.cj.jdbc.Driver
       username: root
       password: root
+      #      url: jdbc:kingbase8://127.0.0.1:54321/ZZJYAK
+      #      driver-class-name: com.kingbase8.Driver
+      #      username: SYSTEM
+      #      password: SYSTEM
       ### 其他数据源
       discuz:
         url: jdbc:mysql://127.0.0.1/discuz?useUnicode=true&characterEncoding=utf8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Asia/Shanghai
